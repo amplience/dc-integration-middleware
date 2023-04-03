@@ -64,7 +64,7 @@ In each of those pages, select the scopes you want access to in each API. Our re
 
 -   `read_customers`
 
-#### StoreAPI Scopes
+#### Storefront API Scopes
 
 -   `unauthenticated_read_product_listings`
 
