@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosStatic } from 'axios'
 import { isEqual } from 'lodash'
 const actualAxios = jest.requireActual('axios')

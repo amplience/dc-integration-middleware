@@ -3,7 +3,7 @@ import { middleware } from './middleware'
 import 'isomorphic-unfetch'
 
 const app = express()
-const port = 3000 // default port to listen
+const port = 3000 // Default port to listen.
 
 /**
  * Wraps middleware in an express handler.
@@ -24,11 +24,11 @@ const wrappedMiddleware = async (req: Request, res: Response, next: any) => {
 	}
 }
 
-// define a route handler for the default home page
+// Define a route handler for the default home page.
 app.post('/api', wrappedMiddleware)
 app.get('/api', wrappedMiddleware)
 
-// start the express server
+// Start the express server.
 app.listen(port, () => {
 	// tslint:disable-next-line:no-console
 	console.log(`server started at http://localhost:${port}`)

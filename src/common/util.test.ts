@@ -36,6 +36,7 @@ describe('isServer', function() {
 	})
 
 	test('false when window is defined', () => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		global.window = {} as any
 		expect(isServer()).toBeFalsy()
 		delete global.window

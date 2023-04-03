@@ -1,4 +1,4 @@
-// initialize codecs
+// Initialize codecs.
 import './codec'
 
 export * from './codec'

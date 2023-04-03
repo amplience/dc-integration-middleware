@@ -22,5 +22,6 @@ export type CommerceAPI = API & {
 	getCategory: (args: GetCommerceObjectArgs) => Promise<Category>
 	getCategoryTree: (args: CommonArgs) => Promise<Category[]>
 	getCustomerGroups: (args: CommonArgs) => Promise<CustomerGroup[]>
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	getRawProducts: (args: GetProductsArgs) => Promise<any[]>
 }

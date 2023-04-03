@@ -31,8 +31,8 @@ const extractID = (id: string): string => {
 }
 
 /**
- * Map a shopify price to the common price type.
- * @param price The shopify price
+ * Map a Shopify price to the common price type.
+ * @param price The Shopify price
  * @returns The common price
  */
 export const mapPrice = (price: ShopifyPrice): string => {
@@ -40,8 +40,8 @@ export const mapPrice = (price: ShopifyPrice): string => {
 }
 
 /**
- * Map a shopify collection to the common category type.
- * @param collection The shopify collection
+ * Map a Shopify collection to the common category type.
+ * @param collection The Shopify collection
  * @returns The common category
  */
 export const mapCategory = (collection: ShopifyCollection): Category => {
@@ -56,8 +56,8 @@ export const mapCategory = (collection: ShopifyCollection): Category => {
 }
 
 /**
- * Map a shopify image to the common image type.
- * @param image The shopify image
+ * Map a Shopify image to the common image type.
+ * @param image The Shopify image
  * @returns The common image
  */
 export const mapImage = (image: ShopifyImage): Image => ({
@@ -67,8 +67,8 @@ export const mapImage = (image: ShopifyImage): Image => ({
 } as Image)
 
 /**
- * Map a shopify product variant to the common product variant type.
- * @param variant The shopify product variant
+ * Map a Shopify product variant to the common product variant type.
+ * @param variant The Shopify product variant
  * @param sharedImages Images shared between each variant
  * @returns The common variant
  */
@@ -90,8 +90,8 @@ export const mapVariant = (variant: ShopifyVariant, sharedImages: ShopifyImage[]
 }
 
 /**
- * Map a shopify product to the common product type.
- * @param product The shopify product
+ * Map a Shopify product to the common product type.
+ * @param product The Shopify product
  * @returns The common product
  */
 export const mapProduct = (product: ShopifyProduct | null): Product | null => {
@@ -113,8 +113,8 @@ export const mapProduct = (product: ShopifyProduct | null): Product | null => {
 }
 
 /**
- * Map a shopify segment to the common customer group type
- * @param segment The shopify segment
+ * Map a Shopify segment to the common customer group type
+ * @param segment The Shopify segment
  * @returns The common customer group
  */
 export const mapCustomerGroup = (segment: ShopifySegment): CustomerGroup => {

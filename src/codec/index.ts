@@ -26,21 +26,25 @@ export const registerCodec = (codec: CodecType) => {
 	}
 }
 
-// create a cache of apis so we can init them once only, assuming some initial load time (catalog etc)
+// Create a cache of apis so we can init them once only, assuming some initial load time (catalog etc)
 const apis = new Map<any, API>()
 
 /**
  * Mask sensitive data in an object.
- * Note: only affects fields called `client_secret`, `api_token`, `password`.
+ * Note: only affects fields containing `secret`, `token` or `password` in their keys.
  * @param obj Object to copy with sensitive fields removed.
  * @returns The object with any sensitive fields removed.
  */
 const maskSensitiveData = (obj: any) => {
-	return {
-		...obj,
-		client_secret: obj.client_secret && '**** redacted ****',
-		api_token: obj.api_token && '**** redacted ****',
-		password: obj.password && '**** redacted ****',
+	const keys = Object.keys(obj)
+
+	for (const key of keys) {
+		const keyLower = key.toLowerCase()
+		if (keyLower.indexOf('password') !== -1 ||
+			keyLower.indexOf('secret') !== -1 ||
+			keyLower.indexOf('token') !== -1) {
+			obj[keyLower] = '**** redacted ****'
+		}
 	}
 }
 
@@ -65,7 +69,7 @@ export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
 			})
 		}
 
-		// check that all required properties are there
+		// Check that all required properties are there.
 		const difference = _.difference(Object.keys(vendorCodec.properties), Object.keys(config))
 		if (difference.length > 0) {
 			throw new IntegrationError({
@@ -102,7 +106,8 @@ export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
  * @returns A new commerce API for the given configuration
  */
 export const getCommerceCodec = async (config: any): Promise<CommerceAPI> => await getCodec(config, CodecTypes.commerce) as CommerceAPI
-// end public interface
+
+// === End public interface ===
 
 import CommerceToolsCodecType from './codecs/commerce/commercetools'
 registerCodec(new CommerceToolsCodecType())
@@ -119,6 +124,6 @@ registerCodec(new BigCommerceCommerceCodecType())
 import ShopifyCommerceCodecType from './codecs/commerce/shopify'
 registerCodec(new ShopifyCommerceCodecType())
 
-// reexport codec common functions
+// Re-export common codec functions.
 export * from './codecs/common'
 export * from './codecs/core'

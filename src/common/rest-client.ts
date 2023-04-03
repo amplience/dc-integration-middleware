@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { sleep } from '../common/util'
-import _ from 'lodash'
 import { logResponse } from '../codec/codecs/common'
 import { CodecPropertyConfig } from '../codec/codecs/core'
 import { StringProperty, StringPatterns } from '../codec/cms-property-types'
@@ -159,18 +158,18 @@ export const OAuthRestClient = (config: CodecPropertyConfig<OAuthCodecConfigurat
 			config = { url: config }
 		}
 
-		// authentication
+		// Authentication.
 		switch (status) {
-			case 'LOGGING_IN':
-				await sleep(100)
-				return await request(method)(config)
+		case 'LOGGING_IN':
+			await sleep(100)
+			return await request(method)(config)
 
-			case 'NOT_LOGGED_IN':
-				status = 'LOGGING_IN'
-				break
+		case 'NOT_LOGGED_IN':
+			status = 'LOGGING_IN'
+			break
 
-			case 'LOGGED_IN':
-				break
+		case 'LOGGED_IN':
+			break
 		}
 
 		authenticatedAxios = await authenticate()
@@ -187,9 +186,10 @@ export const OAuthRestClient = (config: CodecPropertyConfig<OAuthCodecConfigurat
 				return await request(method)(config)
 			}
 			else if (error.response?.status === 404) {
-				// don't throw on a 404 just return an empty result set
+				// Don't throw on a 404, just return an empty result set.
 				return null
 			}
+
 			throw new CodecError(CodecErrorType.ApiError, {
 				status: error.response?.status,
 				message: error.response?.data

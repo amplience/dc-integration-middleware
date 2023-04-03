@@ -152,7 +152,7 @@ export class ShopifyCommerceCodec extends CommerceCodec {
 	}
 
 	/**
-	 * Make a request to the shopify GraphQL API.
+	 * Make a request to the Shopify GraphQL API.
 	 * @param query The GraphQL query string
 	 * @param variables Variables to use with the GraphQL query
 	 * @param isAdmin Whether the admin credentials must be used or not
@@ -184,7 +184,7 @@ export class ShopifyCommerceCodec extends CommerceCodec {
 	}
 
 	/**
-	 * Generate a function that gets a page from the shopify GraphQL API.
+	 * Generate a function that gets a page from the Shopify GraphQL API.
 	 * @param query The GraphQL query string
 	 * @param variables Variables to use with the GraphQL query
 	 * @param getPaginated Function that gets the Paginated<T2> type from the request type T
@@ -226,7 +226,7 @@ export class ShopifyCommerceCodec extends CommerceCodec {
 	}
 
 	/**
-	 * Get a shopify product by ID.
+	 * Get a Shopify product by ID.
 	 * @param id The ID of the product to fetch
 	 * @returns The shopify product
 	 */
@@ -235,7 +235,7 @@ export class ShopifyCommerceCodec extends CommerceCodec {
 	}
 
 	/**
-	 * Get a list of all shopify products that match the given keyword.
+	 * Get a list of all Shopify products that match the given keyword.
 	 * @param keyword Keyword used to search products
 	 * @returns A list of all matching products
 	 */
@@ -249,7 +249,7 @@ export class ShopifyCommerceCodec extends CommerceCodec {
 	}
 
 	/**
-	 * Get a list of all shopify products in the category with the given slug.
+	 * Get a list of all Shopify products in the category with the given slug.
 	 * @param slug The category slug
 	 * @returns A list of all products in the category
 	 */
