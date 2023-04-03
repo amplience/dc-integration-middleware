@@ -5,7 +5,7 @@ To use the integration in an existing project, you can refer to how we're using 
 ## Import the npm package
 
 ```
-$ npm i @amplience/dc-demostore-integration
+$ npm i @amplience/dc-integration-middleware
 ```
 
 ## Export middleware and init
@@ -19,7 +19,7 @@ import {
 	middleware,
 	CommerceAPI,
 	getCommerceAPI as integrationGetCommerceAPI
-} from '@amplience/dc-demostore-integration'
+} from '@amplience/dc-integration-middleware'
 
 // add the /api route
 export default middleware

@@ -1,10 +1,10 @@
-# @amplience/dc-demostore-integration
+# @amplience/dc-integration-middleware
 
-Amplience Demo Store Integration is a service written in `Node.js` that is intended to manage a number of different types of services, including but not limited to:
+Amplience Integration Middleware is a service written in `Node.js` that is intended to manage a number of different types of services, including but not limited to:
 
 -   Commerce Services
 
-`dc-demostore-integration` uses codecs in order to determine how and where to get data from. It currently supports getting e-commerce data from:
+`dc-integration-middleware` uses codecs in order to determine how and where to get data from. It currently supports getting e-commerce data from:
 
 -   Commercetools
 -   BigCommerce
@@ -38,7 +38,7 @@ There are also [Unit Tests](./docs/dev/unit-testing.md) for each method and vend
 
 ## How to use the service
 
-As an example you can check our [eComm Toolkit extension](https://github.com/amplience/dc-extension-ecomm-toolkit) that is built using `dc-demostore-integration` as a middleware in `Next.js`.
+As an example you can check our [eComm Toolkit extension](https://github.com/amplience/dc-extension-ecomm-toolkit) that is built using `dc-integration-middleware` as a middleware in `Next.js`.
 
 ## Quick Start
 

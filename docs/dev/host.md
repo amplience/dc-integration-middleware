@@ -3,7 +3,7 @@
 To host your own version, simply fork the repo and `npm install` your own fork.
 
 ```
-npm i @yourgithub/dc-demostore-integration
+npm i @yourgithub/dc-integration-middleware
 ```
 
 That's really it.
@@ -11,7 +11,7 @@ That's really it.
 Or, if you're using it with our [eComm Toolkit Extension](https://github.com/amplience/dc-extension-ecomm-toolkit), update the dependency in that package.json to point to your fork.
 
 ```
-"@amplience/dc-demostore-integration": "git+https://github.com/yourgithub/dc-demostore-integration.git"
+"@amplience/dc-integration-middleware": "git+https://github.com/yourgithub/dc-integration-middleware.git"
 ```
 
 > Note: we recommend keeping @amplience in the json key above, otherwise you'll need to update any imports referencing @amplience

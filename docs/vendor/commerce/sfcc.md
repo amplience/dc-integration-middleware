@@ -27,13 +27,13 @@ Connects to a Salesforce Commerce Cloud instance.
 
 The SFCC implementation makes OCAPI calls to an SFCC instance.
 
-In order to allow dc-demostore-integration to access the Open Commerce API (OCAPI) on your Salesforce instance, create a new API client and add the client ID to this field. You can add a new API Client from the SFCC Account Manager.
+In order to allow dc-integration-middleware to access the Open Commerce API (OCAPI) on your Salesforce instance, create a new API client and add the client ID to this field. You can add a new API Client from the SFCC Account Manager.
 
 When you create an API Client in the SFCC Account Manager, you will also specify an API Secret. See the [Setting up a Client ID](https://amplience.com/developers/docs/integrations/commerce/salesforce/setup/#ocapi-set-up) in SFCC section for more details.
 
 As such, you'll need to edit the OCAPI settings, which can me found in Business Manager at Administration > Site Development > OCAPI Settings. These settings also handle whitelisting any URLs in the `allowed_origins` array.
 
-> NOTE: The OCAPI Shop & Data endpoints in the following `resources` array covers the methods currently implemented by dc-demostore-integration. Additional methods may require adding additional resources in the OCAPI settings.
+> NOTE: The OCAPI Shop & Data endpoints in the following `resources` array covers the methods currently implemented by dc-integration-middleware. Additional methods may require adding additional resources in the OCAPI settings.
 
 #### Admin > Site Development > OCAPI > Shop settings
 
