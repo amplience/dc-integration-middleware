@@ -90,7 +90,7 @@ export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
 	}
 
 	const configHash = _.values(config).join('')
-	console.log(`[ demostore ] creating codec: ${codec.vendor}...`)
+	console.log(`[ dc-integration-middleware ] creating codec: ${codec.vendor}...`)
 	return apis[configHash] = apis[configHash] || await codec.getApi(config)
 }
 
