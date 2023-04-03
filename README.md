@@ -85,11 +85,11 @@ const product: Product = await commerceApi.getProduct({
 ## Vendor specific information
 
 - **Commerce Services**
-  - [Saleforce Commerce Cloud](./docs/vendor/sfcc.md)
-  - [Shopify](./docs/vendor/shopify.md)
-  - [BigCommerce](./docs/vendor/bigcommerce.md)
-  - [CommerceTools](./docs/vendor/commercetools.md)
-  - [REST](./docs/vendor/rest.md)
+  - [Saleforce Commerce Cloud](./docs/vendor/commerce/sfcc.md)
+  - [Shopify](./docs/vendor/commerce/shopify.md)
+  - [BigCommerce](./docs/vendor/commerce/bigcommerce.md)
+  - [CommerceTools](./docs/vendor/commerce/commercetools.md)
+  - [REST](./docs/vendor/commerce/rest.md)
 
 ## Development
 
@@ -104,6 +104,8 @@ const product: Product = await commerceApi.getProduct({
   - [Add an integration](./docs/dev/add-integration.md)
 - **Testing**
   - [Unit testing guidelines](./docs/dev/unit-testing.md)
+- **Support**
+  - [Support Guidelines](./docs/support.md)
 
 ## License
 

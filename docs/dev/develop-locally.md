@@ -28,5 +28,3 @@ If you have made changes that you don't want to upstream, but want to use in you
 (where `branch-name` is the name of your target branch)
 
 See [Host](./host.md) and [Import](./import.md) for more information.
-
-Note that you need to `npm run build` and commit the changes made to `dest/` for users of the library to see your changes.

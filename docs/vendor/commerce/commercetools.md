@@ -27,7 +27,7 @@ Connects to a commercetools instance.
 
 You can create new API credentials in the `Settings > Developer settings` and then go to `Create new API client`.
 
-![](../media/commercetoolsA.png)
+![](../../media/commercetoolsA.png)
 
 Next you can select the required scopes:
 
@@ -35,8 +35,8 @@ Next you can select the required scopes:
 - `Customer groups`
 - `Products (published)`
 
-![](../media/commercetoolsB.png)
+![](../../media/commercetoolsB.png)
 
 You can then access the credentials (one time) with all the required properties:
 
-![](../media/commercetoolsC.png)
+![](../../media/commercetoolsC.png)

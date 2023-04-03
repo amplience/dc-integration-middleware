@@ -24,7 +24,11 @@ Connects to a Shopify instance.
 
 ## Configuration on the vendor side
 
-The Shopify integration requires both a storefront and an admin token, therefore you'll need to enable custom app development on your store, create a custom app **_and_** install the app in the store to generate those tokens. The steps are as follows:
+The Shopify integration requires both a storefront and an admin token, therefore you'll need to enable custom app development on your store, create a custom app **_and_** install the app in the store to generate those tokens.
+
+> Note: Currently there is no _Amplience specific_ Shopify app so you will need to use another app to gain access to the credentials and 
+
+The steps are as follows:
 
 ### Enable Custom Apps
 
@@ -58,18 +62,18 @@ In each of those pages, select everything you want access to in each API. In the
 
 > Note! The Webhook version highlighted in the Admin API integration screenshot is the `version` for your codec config at the top the page.
 
-![](../media/shopifyD.png)
+![](../../media/shopifyD.png)
 
 ### Get access tokens
 
 At this point, if you go to the API Credentials Tab, you'll see that you already have an API key and secret, however we really need to use access tokens, so you'll need to install the app.
 
-![](../media/shopifyF.png)
+![](../../media/shopifyF.png)
 
 > Note the site/store where you're installing your app (highlighted in the screenshot, yours will be different), that's your `site_id`.
 
-![](../media/shopifyG.png)
+![](../../media/shopifyG.png)
 
 Once you've installed the App, you'll see your Admin and Storefront Access Tokens! Use these in your integration configuration.
 
-![](../media/shopifyH.png)
+![](../../media/shopifyH.png)
