@@ -21,6 +21,6 @@ export class IntegrationError {
 	 * @returns A formatted message
 	 */
 	getMessage(): string {
-		return `[ demostore ] ${this.message}\nsee: ${this.helpUrl}`
+		return `[ dc-integration-middleware ] ${this.message}\nsee: ${this.helpUrl}`
 	}
 }

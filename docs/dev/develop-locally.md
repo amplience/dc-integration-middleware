@@ -1,6 +1,6 @@
 # Develop locally
 
-Developing for `dc-demostore-integration` is as easy as forking the repository, cloning it locally, and then committing and making a pull request back to the main project. 
+Developing for `dc-integration-middleware` is as easy as forking the repository, cloning it locally, and then committing and making a pull request back to the main project. 
 
 For help with specific aspects of development, see the following documents:
 
@@ -10,9 +10,9 @@ For help with specific aspects of development, see the following documents:
 
 ## Testing new integrations and changes
 
-As `dc-demostore-integration` is just a library, there isn't anything in this project that you can use to manually call and test the methods that you've implemented. For this purpose, we've created a tool called [`dc-integration-tester`](https://github.com/amplience/dc-integration-tester), which imports the `dc-demostore-integration` project and provides a command line interface for each of the codec methods you implement in this project.
+As `dc-integration-middleware` is just a library, there isn't anything in this project that you can use to manually call and test the methods that you've implemented. For this purpose, we've created a tool called [`dc-integration-tester`](https://github.com/amplience/dc-integration-tester), which imports the `dc-integration-middleware` project and provides a command line interface for each of the codec methods you implement in this project.
 
-By default, the `dc-integration-tester` project will pull a version of `dc-demostore-integration` from Github. You can make it pull your development version by running `npm i <relative directory to dc-demostore-integration>`, which will allow you to test any changes you make to the integration library.
+By default, the `dc-integration-tester` project will pull a version of `dc-integration-middleware` from Github. You can make it pull your development version by running `npm i <relative directory to dc-integration-middleware>`, which will allow you to test any changes you make to the integration library.
 
 When this project has been changed, you can run `npm run build` to rebuild the contents of the `dist/` folder. Since local directory installs are done via symlink, this will automatically update the package in the projects importing your local copy, so for `dc-integration-tester` you don't need to re-import the library to see your latest changes on the next run of `npm run dev`.
 
@@ -24,7 +24,7 @@ A similar approach can be used on other projects, such as [`dc-extension-ecomm-t
 
 If you have made changes that you don't want to upstream, but want to use in your own application or extension, then you can either import your modified library locally as above, or clone the repository and import it from there. An example way of importing from a repository:
 
-`npm i https://github.com/amplience/dc-demostore-integration.git#branch-name`
+`npm i https://github.com/amplience/dc-integration-middleware.git#branch-name`
 (where `branch-name` is the name of your target branch)
 
 See [Host](./host.md) and [Import](./import.md) for more information.

@@ -1,5 +1,5 @@
 {
-  "name": "@amplience/dc-demostore-integration",
+  "name": "@amplience/dc-integration-middleware",
   "version": "2.0.0",
   "types": "dist/index.d.ts",
   "typings": "dist/index.d.ts",
@@ -54,11 +54,11 @@
   "author": "Amplience Innovation Team",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/amplience/dc-demostore-integration/issues"
+    "url": "https://github.com/amplience/dc-integration-middleware/issues"
   },
-  "homepage": "https://github.com/amplience/dc-demostore-integration#readme",
+  "homepage": "https://github.com/amplience/dc-integration-middleware#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amplience/dc-demostore-integration.git"
+    "url": "git+https://github.com/amplience/dc-integration-middleware.git"
   }
 }

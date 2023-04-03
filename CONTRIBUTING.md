@@ -1,6 +1,6 @@
 # Contributing
 
-## Developing for dc-demostore-integration
+## Developing for dc-integration-middleware
 
 Thanks for your interest! We welcome changes of all sizes, from improving existing integrations to adding entirely new ones.
 Please consider these guidelines when filing a pull request:
