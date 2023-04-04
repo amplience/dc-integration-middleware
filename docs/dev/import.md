@@ -1,6 +1,6 @@
 # Importing into a project
 
-To use the integration in an existing project, you can refer to how we're using it in our [Ecomm Toolkit extension](https://github.com/amplience/dc-extension-ecomm-toolkit), but the basic steps are as follows.
+To use the integration in an existing project, you can refer to how we're using it in our [eComm Toolkit Extension](https://github.com/amplience/dc-extension-ecomm-toolkit), but the basic steps are as follows.
 
 ## Import the npm package
 
