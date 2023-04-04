@@ -65,7 +65,7 @@ export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
 		if (!vendorCodec) {
 			throw new IntegrationError({
 				message: `codec not found for vendor [ ${config.vendor} ]`,
-				helpUrl: 'https://help.dc-demostore.com/codec-error'
+				helpUrl: 'https://github.com/amplience/dc-integration-middleware'
 			})
 		}
 
@@ -74,7 +74,7 @@ export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
 		if (difference.length > 0) {
 			throw new IntegrationError({
 				message: `configuration missing properties required for vendor [ ${config.vendor} ]: [ ${difference.join(', ')} ]`,
-				helpUrl: 'https://help.dc-demostore.com/codec-error'
+				helpUrl: 'https://github.com/amplience/dc-integration-middleware'
 			})
 		}
 
@@ -87,7 +87,7 @@ export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
 		if (codecsMatchingConfig.length === 0 || codecsMatchingConfig.length > 1) {
 			throw new IntegrationError({
 				message: `[ ${codecsMatchingConfig.length} ] codecs found (expecting 1) matching schema:\n${JSON.stringify(maskSensitiveData(config), undefined, 4)}`,
-				helpUrl: 'https://help.dc-demostore.com/codec-error'
+				helpUrl: 'https://github.com/amplience/dc-integration-middleware'
 			})
 		}
 		codec = codecsMatchingConfig.pop()
