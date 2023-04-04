@@ -3,8 +3,6 @@
 ## `commerceToolsCodec`
 Location: `src/codec/codecs/commercetools`
 
-Schema: `https://demostore.amplience.com/site/integration/commercetools`
-
 Connects to a commercetools instance.
 
 ### Configuration

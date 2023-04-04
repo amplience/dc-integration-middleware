@@ -3,8 +3,6 @@
 ## `bigCommerceCodec`
 Location: `src/codec/codecs/bigcommerce`
 
-Schema: `https://demostore.amplience.com/site/integration/bigcommerce`
-
 Connects to a BigCommerce instance.
 
 ### Configuration

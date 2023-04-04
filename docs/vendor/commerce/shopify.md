@@ -4,8 +4,6 @@
 
 Location: `src/codec/codecs/shopify`
 
-Schema: `https://demostore.amplience.com/site/integration/shopify`
-
 Connects to a Shopify instance.
 
 ### Configuration
