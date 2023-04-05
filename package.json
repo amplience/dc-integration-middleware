@@ -16,8 +16,7 @@
     "version:major": "standard-version --release-as major",
     "prepare-patch-release": "run-s build version:patch",
     "prepare-minor-release": "run-s build version:minor",
-    "prepare-major-release": "run-s build version:major",
-    "standard-version": "^9.5.0"
+    "prepare-major-release": "run-s build version:major"
   },
   "exports": {
     ".": "./dist/index.js"
@@ -56,7 +55,8 @@
     "ts-jest": "^29.0.5",
     "ts-node": "^10.8.1",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "standard-version": "^9.5.0"
   },
   "author": "Amplience Innovation Team",
   "license": "Apache-2.0",
