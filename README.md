@@ -12,14 +12,14 @@ Amplience Integration Middleware is a service written in `Node.js` that is inten
 -   Salesforce Commerce Cloud
 -   REST
 
-## Pre-requisites
+## 📝 Pre-requisites
 
 This extension was developed and tested with:
 
 -   Node version `14.x`
 -   NPM version `6.x`
 
-## Features
+## ⚙️ Features
 
 The `CommerceAPI` interface exposes these methods:
 
@@ -40,7 +40,7 @@ There are also [Unit Tests](./docs/dev/unit-testing.md) for each method and vend
 
 As an example you can check our [eComm Toolkit extension](https://github.com/amplience/dc-extension-ecomm-toolkit) that is built using `dc-integration-middleware` as a middleware in `Next.js`.
 
-## Quick Start
+## 🏁 Quick Start
 
 Using the `config` object for one of the commerce vendors, you can get the Commerce API:
 
@@ -78,11 +78,11 @@ const product: Product = await commerceApi.getProduct({
 })
 ```
 
-## Architecture Diagram
+## 📐 Architecture Diagram
 
 ![](./docs/media/architecture.png)
 
-## Vendor specific information
+## 🏢 Vendor specific information
 
 - **Commerce Services**
   - [Saleforce Commerce Cloud](./docs/vendor/commerce/sfcc.md)
@@ -91,7 +91,7 @@ const product: Product = await commerceApi.getProduct({
   - [CommerceTools](./docs/vendor/commerce/commercetools.md)
   - [REST](./docs/vendor/commerce/rest.md)
 
-## Development
+## 🧩 Development
 
 - **Types and methods**
   - [Commerce Codecs](./docs/dev/commerce-codec.md)
@@ -107,7 +107,7 @@ const product: Product = await commerceApi.getProduct({
 - **Support**
   - [Support Guidelines](./docs/support.md)
 
-## License
+## 📄 License
 
 This software is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 
