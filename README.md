@@ -36,11 +36,10 @@ There is a separate project called [`dc-integration-tester`](https://github.com/
 
 There are also [Unit Tests](./docs/dev/unit-testing.md) for each method and vendor.
 
-## How to use the service
-
-As an example you can check our [eComm Toolkit extension](https://github.com/amplience/dc-extension-ecomm-toolkit) that is built using `dc-integration-middleware` as a middleware in `Next.js`.
-
 ## 🏁 Quick Start
+
+
+> Note: as an example you can check our [eComm Toolkit extension](https://github.com/amplience/dc-extension-ecomm-toolkit) that is built using `dc-integration-middleware` as a middleware in `Next.js`.
 
 Using the `config` object for one of the commerce vendors, you can get the Commerce API:
 
