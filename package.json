@@ -10,7 +10,14 @@
     "build": "eslint && npm run clean && tsc",
     "prepare": "eslint && npm run clean && tsc",
     "server": "nodemon src/server.ts",
-    "test": "jest --silent --verbose"
+    "test": "jest --silent --verbose",
+    "version:patch": "standard-version --release-as patch",
+    "version:minor": "standard-version --release-as minor",
+    "version:major": "standard-version --release-as major",
+    "prepare-patch-release": "run-s build version:patch",
+    "prepare-minor-release": "run-s build version:minor",
+    "prepare-major-release": "run-s build version:major",
+    "standard-version": "^9.5.0"
   },
   "exports": {
     ".": "./dist/index.js"
