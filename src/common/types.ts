@@ -102,8 +102,30 @@ export type GetCommerceObjectArgs = CommonArgs & {
 /**
  * Method arguments for fetching products.
  */
-export type GetProductsArgs = CommonArgs & {
+export type GetProductsArgs = CommonArgs & PaginationArgs & {
 	keyword?: string
 	productIds?: string
 	category?: Category
+}
+
+/**
+ * Method arguments for pagination. These are also returned with paginated results, and should be used when requesting future pages.
+ * 
+ * If the pageNum is undefined, it will be 0.
+ * If the cursor is undefined, the desired page number will still be fetched but this cursor will be used to fetch it faster.
+ * If the cursorPage is undefined, cursor cannot be used and will be treated as undefined.
+ * If pageSize is undefined, it will select a default value.
+ * If pageCount is undefined, all items will be fetched.
+ * 
+ * The following fields are only returned by the request:
+ * Total may be undefined. It is always defined if the requested page is the last.
+ */
+export type PaginationArgs = {
+	pageNum?: number
+	cursor?: string
+	cursorPage?: number
+	pageSize?: number
+	pageCount?: number
+
+	total?: number
 }

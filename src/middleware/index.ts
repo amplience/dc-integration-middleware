@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { CommerceAPI, getCodecs, getCommerceCodec } from '../index'
+import { CommerceAPI, PaginationArgs, getCodecs, getCommerceCodec } from '../index'
 import { flattenConfig, isServer } from '../common/util'
 import { CodecError, CodecErrorType } from '../codec/codecs/codec-error'
 import { IntegrationError } from '../common/errors'
@@ -63,7 +63,7 @@ const toApiError = (error: Error | CodecError | IntegrationError): MiddlewareErr
 	} else {
 		return {
 			type: 'Generic',
-			message: error.message,
+			message: error.message + '\n' + error.stack,
 		}
 	}
 }
@@ -116,7 +116,12 @@ export const getCommerceAPI = async (params: any = undefined): Promise<CommerceA
 						? 'https://core.dc-demostore.com/api'
 						: '/api'
 
-					const response = (await axios.get(apiUrl, { params: { ...args, ...codec, operation } })).data
+					const response = (await axios.post(apiUrl, { ...args, ...codec, operation })).data
+
+					if (response.pageInfo) {
+						// Feed back pagination info into the arguments object
+						Object.assign(args, response.pageInfo)
+					}
 
 					if (response.error) {
 						throw fromApiError(response.error)
@@ -134,6 +139,25 @@ export const getCommerceAPI = async (params: any = undefined): Promise<CommerceA
 			getRawProducts: getResponse('getRawProducts')
 		}
 	}
+}
+
+const createMiddlewareResponse = (config: PaginationArgs, result: any): any => {
+	const response = {
+		result
+	} as any
+
+	const pageInfo = {} as PaginationArgs
+
+	if (config.pageSize != null) pageInfo.pageSize = config.pageSize
+	if (config.cursor != null) pageInfo.cursor = config.cursor
+	if (config.cursorPage != null) pageInfo.cursorPage = config.cursorPage
+	if (config.total != null) pageInfo.total = config.total
+
+	if (Object.keys(pageInfo).length > 0) {
+		response.pageInfo = pageInfo
+	}
+
+	return response
 }
 
 /**
@@ -155,7 +179,7 @@ export const middleware = async (req, res) => {
 	case 'get':
 	case 'post':
 		try {
-			return res.status(200).json({result: await commerceAPI[config.operation](config)})
+			return res.status(200).json(createMiddlewareResponse(config, await commerceAPI[config.operation](config)))
 		} catch (e) {
 			return res.status(200).json({error: toApiError(e)})
 		}

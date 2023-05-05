@@ -3,6 +3,7 @@ import {
 	CommonArgs, 
 	CustomerGroup, 
 	GetProductsArgs, 
+	PaginationArgs, 
 	Product, 
 } from '../../../../common'
 import { 
@@ -37,9 +38,9 @@ import {
 import { 
 	mapCategory, 
 	mapCustomerGroup, 
-	mapProduct 
+	mapProduct
 } from './mappers'
-import { GetPageResultCursor, paginateCursor } from '../../pagination'
+import { GetPageResultCursor, paginateCursor, paginateCursorArgs } from '../../pagination'
 
 const PAGE_SIZE = 100
 
@@ -237,12 +238,14 @@ export class ShopifyCommerceCodec extends CommerceCodec {
 	/**
 	 * Get a list of all Shopify products that match the given keyword.
 	 * @param keyword Keyword used to search products
+	 * @param args Pagination arguments, new cursor and offset is written back into the object.
 	 * @returns A list of all matching products
 	 */
-	async getProductsByKeyword(keyword: string): Promise<ShopifyProduct[]> {
+	async getProductsByKeyword(keyword: string, args: PaginationArgs): Promise<ShopifyProduct[]> {
 		const query = keyword
-		const shopifyProducts = await paginateCursor(
+		const shopifyProducts = await paginateCursorArgs(
 			this.getPageGql<ShopifyProductsByQuery, ShopifyProduct>(productsByQuery, {query}, response => response.products),
+			args,
 			PAGE_SIZE)
 
 		return shopifyProducts.data
@@ -251,12 +254,14 @@ export class ShopifyCommerceCodec extends CommerceCodec {
 	/**
 	 * Get a list of all Shopify products in the category with the given slug.
 	 * @param slug The category slug
+	 * * @param args Pagination arguments, new cursor and offset is written back into the object.
 	 * @returns A list of all products in the category
 	 */
-	async getProductsByCategory(slug: string): Promise<ShopifyProduct[]> {
+	async getProductsByCategory(slug: string, args: PaginationArgs): Promise<ShopifyProduct[]> {
 		const handle = slug
-		const shopifyProducts = await paginateCursor(
+		const shopifyProducts = await paginateCursorArgs(
 			this.getPageGql<ShopifyProductsByCollection, ShopifyProduct>(productsByCategory, {handle}, response => response.collection.products),
+			args,
 			PAGE_SIZE)
 
 		return shopifyProducts.data
@@ -282,9 +287,9 @@ export class ShopifyCommerceCodec extends CommerceCodec {
 				args.productIds.split(',').map(this.getProductById.bind(this))
 			)
 		} else if (args.keyword) {
-			products = await this.getProductsByKeyword(args.keyword)
+			products = await this.getProductsByKeyword(args.keyword, args)
 		} else if (args.category) {
-			products = await this.getProductsByCategory(args.category.slug)
+			products = await this.getProductsByCategory(args.category.slug, args)
 		} else {
 			throw getProductsArgError('getRawProducts')
 		}

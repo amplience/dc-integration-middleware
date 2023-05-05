@@ -1,8 +1,8 @@
-import { OAuthRestClientInterface } from '@/common'
+import { OAuthRestClientInterface, PaginationArgs } from '@/common'
 import { AxiosRequestConfig, AxiosStatic } from 'axios'
 import { logResponse } from './common'
 
-export type GetPageResultCursor<T> = { data: T[], hasNext: boolean, nextCursor: string }
+export type GetPageResultCursor<T> = { data: T[], hasNext: boolean, nextCursor: string, total?: number }
 
 type GetPageResult<T> = { data: T[], total: number }
 type PropMapper = <T>(data: any) => T
@@ -126,6 +126,36 @@ export function getPageByQueryAxios(offsetQuery: string, countQuery: string, tot
 /**
  * Iterate through fetching pages and build an array out of the results.
  * @param requestPage Method to use to request pages. Takes page number and size. Must return at least one page-size worth of items if the total allows it.
+ * @param args Pagination arguments, new cursor and offset is written back into the object.
+ * @returns List of items fetched from the paginated endpoint
+ */
+export async function paginateArgs<T>(
+	requestPage: (page: number, pageSize: number) => Promise<GetPageResult<T>>,
+	args: PaginationArgs,
+	defaultPageSize = 20
+): Promise<T[]> {
+	const pageSize = Number(args.pageSize ?? defaultPageSize)
+	const pageNum = Number(args.pageNum ?? 0)
+	const pageCount = args.pageCount == null ? args.pageCount : Number(args.pageCount)
+
+	const {result, total} = await paginate(
+		requestPage,
+		pageSize,
+		pageNum,
+		pageCount
+	)
+
+	args.pageSize = pageSize
+	args.pageNum = pageNum
+	args.pageCount = pageCount
+	args.total = total
+
+	return result
+}
+
+/**
+ * Iterate through fetching pages and build an array out of the results.
+ * @param requestPage Method to use to request pages. Takes page number and size. Must return at least one page-size worth of items if the total allows it.
  * @param pageSize Page size (default: 20)
  * @param pageNum Page number to start at (default: 0)
  * @param pageCount Number of pages to fetch (default: all)
@@ -136,7 +166,7 @@ export async function paginate<T>(
 	pageSize = 20,
 	pageNum = 0,
 	pageCount?: number
-): Promise<T[]> {
+): Promise<{result: T[], total: number}> {
 	const result: T[] = []
 
 	if (pageCount === undefined) {
@@ -146,12 +176,20 @@ export async function paginate<T>(
 	const startOffset = pageNum * pageSize
 	const targetCount = pageCount * pageSize
 
+	let finalTotal = 0
+
 	for (let i = 0; i < pageCount; i++) {
 		const {data, total} = await requestPage(pageNum + i, pageSize)
+		finalTotal = total
 		
 		// There's a possibility that the implementation has returned more than one page.
 		// Allow multiple pages to be completed at a time.
-		const pagesReturned = Math.floor(data.length / pageSize)
+		let pagesReturned: number
+		try {
+			pagesReturned = Math.floor(data.length / pageSize)
+		} catch (e) {
+			throw new Error(`${pageNum} ${i} ${pageSize}`)
+		}
 
 		let dataCount = data.length
 
@@ -171,7 +209,53 @@ export async function paginate<T>(
 		}
 	}
 
-	return result
+	return { result, total: finalTotal }
+}
+
+/**
+ * Iterate through fetching pages and build an array out of the results.
+ * @param requestPage Method to use to request pages. Takes cursor and page size.
+ * @param pageSize Page size (default: 20)
+ * @param cursor Start cursor (default: null)
+ * @param pageCount Number of pages to fetch (default: all)
+ * @returns List of items fetched from the paginated endpoint
+ */
+export async function paginateCursorArgs<T>(
+	requestPage: (cursor: string, pageSize: number) => Promise<GetPageResultCursor<T>>,
+	args: PaginationArgs,
+	defaultPageSize = 20
+): Promise<GetPageResultCursor<T>> {
+	const pageSize = Number(args.pageSize ?? defaultPageSize)
+	const pageNum = Number(args.pageNum ?? 0)
+	const argsPageCount = args.pageCount == null ? args.pageCount : Number(args.pageCount)
+
+	// Find the quickest way to get to the desired offset.
+
+	if (args.cursor === undefined || args.cursorPage === undefined || Number(args.cursorPage) > pageNum) {
+		// If the cursor is from a previous page, we have to start from the beginning.
+		args.cursor = undefined
+		args.cursorPage = undefined
+	}
+
+	const cursor = args.cursor
+	const cursorPage = Number(args.cursorPage ?? 0)
+
+	// We might need to get additional pages to catch up to the requested page.
+	const fetchedExtra = cursorPage < pageNum
+	const pageCount = fetchedExtra ? (pageNum - cursorPage) + argsPageCount : argsPageCount
+	
+	const resultCursor = await paginateCursor(requestPage, pageSize, cursor, pageCount)
+
+	if (fetchedExtra) {
+		resultCursor.data = resultCursor.data.slice((pageNum - cursorPage) * pageSize)
+	}
+
+	args.total = resultCursor.total ?? (resultCursor.hasNext ? undefined : (pageNum * pageSize + resultCursor.data.length))
+	args.pageSize = pageSize
+	args.cursor = resultCursor.nextCursor
+	args.cursorPage = pageSize * (pageNum + pageCount)
+
+	return resultCursor
 }
 
 /**
@@ -196,8 +280,11 @@ export async function paginateCursor<T>(
 
 	const targetCount = pageCount * pageSize
 
+	let finalTotal: number | undefined = undefined
+
 	for (let i = 0; i < pageCount; i++) {
-		const {data, hasNext, nextCursor} = await requestPage(cursor, pageSize)
+		const {data, hasNext, nextCursor, total} = await requestPage(cursor, pageSize)
+		finalTotal = total
 
 		const dataCount = data.length
 
@@ -212,7 +299,8 @@ export async function paginateCursor<T>(
 			return {
 				data: result,
 				hasNext: false,
-				nextCursor: cursor
+				nextCursor: cursor,
+				total
 			}
 		}
 		else if (result.length === targetCount)
@@ -224,6 +312,7 @@ export async function paginateCursor<T>(
 	return {
 		data: result,
 		hasNext: true,
-		nextCursor: cursor
+		nextCursor: cursor,
+		total: finalTotal
 	}
 }
