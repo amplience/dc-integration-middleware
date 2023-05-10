@@ -242,7 +242,7 @@ export async function paginateCursorArgs<T>(
 
 	// We might need to get additional pages to catch up to the requested page.
 	const fetchedExtra = cursorPage < pageNum
-	const pageCount = fetchedExtra ? (pageNum - cursorPage) + argsPageCount : argsPageCount
+	const pageCount = argsPageCount == null ? null : (fetchedExtra ? (pageNum - cursorPage) + argsPageCount : argsPageCount)
 	
 	const resultCursor = await paginateCursor(requestPage, pageSize, cursor, pageCount)
 
@@ -253,7 +253,7 @@ export async function paginateCursorArgs<T>(
 	args.total = resultCursor.total ?? (resultCursor.hasNext ? undefined : (pageNum * pageSize + resultCursor.data.length))
 	args.pageSize = pageSize
 	args.cursor = resultCursor.nextCursor
-	args.cursorPage = pageSize * (pageNum + pageCount)
+	args.cursorPage = pageNum + 1
 
 	return resultCursor
 }

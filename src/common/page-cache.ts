@@ -49,6 +49,7 @@ export class PageCache<T> {
 			if (this.cache[i] != null) {
 				requestArgs.cursor = this.cache[i].cursor
 				requestArgs.cursorPage = this.cache[i].cursorPage
+				break
 			}
 		}
 
