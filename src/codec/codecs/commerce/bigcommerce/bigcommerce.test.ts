@@ -33,21 +33,31 @@ const commerceRequests: MockFixture = {
 				]
 			}
 		},
-		'https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?keyword=keyword&include=images,variants': {
+		'https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?include=images%2Cvariants&keyword=keyword&page=1&limit=20': {
 			data: {
 				data: [
 					...bigcommerceProduct(2),
 					...bigcommerceProduct(3),
 					...bigcommerceProduct(4)
-				]
+				],
+				meta: {
+					pagination: {
+						total: 3
+					}
+				}
 			}
 		},
-		'https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?categories:in=1&include=images,variants': {
+		'https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?include=images%2Cvariants&categories%3Ain=1&page=1&limit=20': {
 			data: {
 				data: [
 					...bigcommerceProduct(1),
 					...bigcommerceProduct(3)
-				]
+				],
+				meta: {
+					pagination: {
+						total: 2
+					}
+				}
 			}
 		},
 		'https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?id:in=-1&include=images,variants': {

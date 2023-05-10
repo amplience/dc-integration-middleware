@@ -138,7 +138,7 @@ describe('paginate', function() {
 		const result = await paginate(getPage, 20, 0)
 
 		expect(getPage).toHaveBeenCalledWith(0, 20)
-		expect(result).toEqual([])
+		expect(result).toEqual({result: [], total: 0})
 	})
 
 	test('paginate 1 item', async () => {
@@ -147,7 +147,7 @@ describe('paginate', function() {
 		const result = await paginate(getPage, 20, 0)
 
 		expect(getPage).toHaveBeenCalledWith(0, 20)
-		expect(result).toEqual([1])
+		expect(result).toEqual({result: [1], total: 1})
 	})
 
 	test('paginate 2 pages', async () => {
@@ -158,7 +158,7 @@ describe('paginate', function() {
 
 		expect(getPage).toHaveBeenCalledWith(0, 20)
 		expect(getPage).toHaveBeenCalledWith(1, 20)
-		expect(result).toEqual(Array.from({length: total}).map((_, index) => index))
+		expect(result).toEqual({result: Array.from({length: total}).map((_, index) => index), total})
 	})
 
 	test('paginate 20 pages', async () => {
@@ -171,7 +171,7 @@ describe('paginate', function() {
 			expect(getPage).toHaveBeenCalledWith(i, 20)
 		}
 
-		expect(result).toEqual(Array.from({length: total}).map((_, index) => index))
+		expect(result).toEqual({result: Array.from({length: total}).map((_, index) => index), total})
 	})
 
 	test('paginate 10 items from last page', async () => {
@@ -182,7 +182,7 @@ describe('paginate', function() {
 
 		expect(getPage).toHaveBeenCalledWith(19, 20)
 
-		expect(result).toEqual(Array.from({length: 10}).map((_, index) => index + 380))
+		expect(result).toEqual({result: Array.from({length: 10}).map((_, index) => index + 380), total})
 	})
 
 	test('paginate page 10-20 of 30', async () => {
@@ -195,7 +195,7 @@ describe('paginate', function() {
 			expect(getPage).toHaveBeenCalledWith(i, 20)
 		}
 
-		expect(result).toEqual(Array.from({length: 200}).map((_, index) => index + 200))
+		expect(result).toEqual({result: Array.from({length: 200}).map((_, index) => index + 200), total})
 	})
 })
 

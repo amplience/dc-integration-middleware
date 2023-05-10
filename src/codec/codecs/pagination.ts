@@ -96,9 +96,10 @@ export function getPageByQuery(offsetQuery: string, countQuery: string, totalPro
  * @param countQuery Query key to use for page size
  * @param totalProp Property to extract total assets from
  * @param resultProp Property to extract result items from
+ * @param offsetFunc Function for getting the offset from the page number and size
  * @returns A generator that takes a client, url and base params and generates a function that gets a page.
  */
-export function getPageByQueryAxios(offsetQuery: string, countQuery: string, totalProp: StringPropMapper, resultProp: StringPropMapper) {
+export function getPageByQueryAxios(offsetQuery: string, countQuery: string, totalProp: StringPropMapper, resultProp: StringPropMapper, offsetFunc?: (page: number, pageSize: number) => number) {
 	const totalPropMap = getPropMapper(totalProp)
 	const resultPropMap = getPropMapper(resultProp)
 
@@ -106,7 +107,7 @@ export function getPageByQueryAxios(offsetQuery: string, countQuery: string, tot
 		async (page: number, pageSize: number): Promise<GetPageResult<T>> => {
 			const allParams = {
 				...params,
-				[offsetQuery]: page * pageSize,
+				[offsetQuery]: offsetFunc ? offsetFunc(page, pageSize) : page * pageSize,
 				[countQuery]: pageSize
 			}
 
@@ -243,7 +244,7 @@ export async function paginateCursorArgs<T>(
 	// We might need to get additional pages to catch up to the requested page.
 	const fetchedExtra = cursorPage < pageNum
 	const pageCount = argsPageCount == null ? null : (fetchedExtra ? (pageNum - cursorPage) + argsPageCount : argsPageCount)
-	
+
 	const resultCursor = await paginateCursor(requestPage, pageSize, cursor, pageCount)
 
 	if (fetchedExtra) {
@@ -274,7 +275,7 @@ export async function paginateCursor<T>(
 ): Promise<GetPageResultCursor<T>> {
 	const result: T[] = []
 
-	if (pageCount === undefined) {
+	if (pageCount == null) {
 		pageCount = Infinity
 	}
 
@@ -315,4 +316,35 @@ export async function paginateCursor<T>(
 		nextCursor: cursor,
 		total: finalTotal
 	}
+}
+
+/**
+ * Generate a method to paginate through a list of resources with the given arguments.
+ * @param items List of items to paginate
+ * @returns A method to paginate through a list of resources
+ */
+export function getListPage<T>(list: T[]) {
+	return async (pageNum: number, pageSize: number): Promise<GetPageResult<T>> => {
+		return {
+			data: list.slice(pageNum * pageSize, (pageNum + 1) * pageSize),
+			total: list.length
+		}
+	}
+}
+
+/**
+ * Handle pagination as if the result list were empty.
+ * @param args Pagination arguments, new cursor and offset is written back into the object.
+ * @returns Empty list
+ */
+export function paginateBlankArgs<T>(args: PaginationArgs): T[] {
+	args.pageSize = Number(args.pageSize ?? 0)
+	args.pageNum = Number(args.pageNum ?? 0)
+	args.pageCount = args.pageCount == null ? args.pageCount : Number(args.pageCount)
+
+	args.total = 0
+	delete args.cursor
+	delete args.cursorPage
+
+	return []
 }

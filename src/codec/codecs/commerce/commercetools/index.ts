@@ -228,9 +228,9 @@ export class CommercetoolsCodec extends CommerceCodec {
 			const ids = args.productIds.split(',')
 			products = mapIdentifiers(ids, await paginateArgs(this.getPage(this.rest, `/product-projections/search?filter=id:${quoteProductIdString(args.productIds)}`), args))
 		} else if (args.keyword) {
-			products = (await paginate<CTProduct>(this.getPage(this.rest, `/product-projections/search?text.en="${args.keyword}"`, args))).result
+			products = (await paginateArgs<CTProduct>(this.getPage(this.rest, `/product-projections/search?text.en="${args.keyword}"`), args))
 		} else if (args.category) {
-			products = (await paginate<CTProduct>(this.getPage(this.rest, `/product-projections/search?filter=categories.id: subtree("${args.category.id}")`, args))).result
+			products = (await paginateArgs<CTProduct>(this.getPage(this.rest, `/product-projections/search?filter=categories.id: subtree("${args.category.id}")`), args))
 		} else {
 			throw getProductsArgError(method)
 		}

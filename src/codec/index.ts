@@ -6,6 +6,25 @@ import { API, CommerceAPI } from '../common'
 const codecs = new Map<CodecTypes, CodecType[]>()
 codecs[CodecTypes.commerce] = []
 
+const hashExcludedConfig = [
+	'locale',
+	'language',
+	'country',
+	'currency',
+	'segment',
+	'id',
+	'slug',
+	'keyword',
+	'productIds',
+	'category',
+
+	'pageNum',
+	'pageSize',
+	'pageCount',
+	'cursor',
+	'cursorPage'
+]
+
 /**
  * Get all the codecs with a given type
  * @param type Codec type
@@ -93,7 +112,7 @@ export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
 		codec = codecsMatchingConfig.pop()
 	}
 
-	const configHash = _.values(config).join('')
+	const configHash = Object.keys(config).filter(key => hashExcludedConfig.indexOf(key) === -1).map(key => config[key]).join('')
 	console.log(`[ dc-integration-middleware ] creating codec: ${codec.vendor}...`)
 	return apis[configHash] = apis[configHash] || await codec.getApi(config)
 }

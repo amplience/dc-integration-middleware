@@ -38,9 +38,9 @@ export const searchRequest = (filter: string) => ({
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
-		url: `/v3/catalog/products?keyword=${filter}&include=images,variants`
+		url: `/v3/catalog/products?include=images%2Cvariants&keyword=${filter}&page=1&limit=20`
 	},
-	url: `https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?keyword=${filter}&include=images,variants`
+	url: `https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?include=images%2Cvariants&keyword=${filter}&page=1&limit=20`
 })
 
 // BigCommerce Product request
@@ -68,7 +68,7 @@ export const productCategoryRequest = (id: number) => ({
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
-		url: `/v3/catalog/products?categories:in=${id}&include=images,variants`
+		url: `/v3/catalog/products?include=images%2Cvariants&categories%3Ain=${id}&page=1&limit=20`
 	},
-	url: `https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?categories:in=${id}&include=images,variants`
+	url: `https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?include=images%2Cvariants&categories%3Ain=${id}&page=1&limit=20`
 })
