@@ -7,6 +7,7 @@ import { exampleCustomerGroups, exampleCategoryTree, exampleProduct } from './te
 import { categoriesRequest, customerGroupsRequest, searchRequest, productRequest, productCategoryRequest } from './test/requests'
 import { config } from './test/config'
 import { flattenConfig } from '../../../../common/util'
+import { PaginationArgs } from '@/common/types'
 
 jest.mock('axios')
 
@@ -56,6 +57,32 @@ const commerceRequests: MockFixture = {
 				meta: {
 					pagination: {
 						total: 2
+					}
+				}
+			}
+		},
+		'https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?include=images%2Cvariants&keyword=keyword&page=2&limit=1': {
+			/* Pagination test */
+			data: {
+				data: [
+					...bigcommerceProduct(2),
+				],
+				meta: {
+					pagination: {
+						total: 3
+					}
+				}
+			}
+		},
+		'https://api.bigcommerce.com/stores/store_hash/v3/catalog/products?include=images%2Cvariants&categories%3Ain=1&page=2&limit=1': {
+			/* Pagination test */
+			data: {
+				data: [
+					...bigcommerceProduct(2),
+				],
+				meta: {
+					pagination: {
+						total: 3
 					}
 				}
 			}
@@ -143,6 +170,54 @@ describe('bigcommerce integration', function () {
 		expect(products).toEqual([
 			exampleProduct('1'),
 			exampleProduct('3')
+		])
+	})
+
+	// Get BigCommerce Products (filter by keyword in name or sku, paginated)
+	test('getProducts paginated (keyword)', async () => {
+		const args = {
+			keyword: 'keyword',
+
+			pageNum: 1,
+			pageSize: 1,
+			pageCount: 1
+		} as PaginationArgs
+
+		const result = await codec.getProducts(args)
+		expect(requests).toEqual([
+			searchRequest('keyword', 2, 1)
+		])
+
+		expect(args.total).toEqual(3)
+		expect(result).toEqual([
+			exampleProduct('2')
+		])
+	})
+
+	// Get BigCommerce Products (from category, paginated)
+	test('getProducts paginated (category)', async () => {
+		const args = {
+			category: {
+				children: [],
+				products: [],
+				id: '1',
+				name: 'Category',
+				slug: 'category',
+			},
+
+			pageNum: 1,
+			pageSize: 1,
+			pageCount: 1
+		} as PaginationArgs
+
+		const products = await codec.getProducts(args)
+		expect(requests).toEqual([
+			productCategoryRequest(1, 2, 1)
+		])
+
+		expect(args.total).toEqual(3)
+		expect(products).toEqual([
+			exampleProduct('2')
 		])
 	})
 

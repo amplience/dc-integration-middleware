@@ -2,7 +2,7 @@ import { OAuthRestClientInterface, PaginationArgs } from '@/common'
 import { AxiosRequestConfig, AxiosStatic } from 'axios'
 import { logResponse } from './common'
 
-export type GetPageResultCursor<T> = { data: T[], hasNext: boolean, nextCursor: string, total?: number }
+export type GetPageResultCursor<T> = { data: T[], hasNext: boolean, nextCursor?: string, total?: number }
 
 type GetPageResult<T> = { data: T[], total: number }
 type PropMapper = <T>(data: any) => T
@@ -162,12 +162,12 @@ export async function paginateArgs<T>(
  * @param pageCount Number of pages to fetch (default: all)
  * @returns List of items fetched from the paginated endpoint
  */
-export async function paginate<T>(
+export const paginate = async <T>(
 	requestPage: (page: number, pageSize: number) => Promise<GetPageResult<T>>,
 	pageSize = 20,
 	pageNum = 0,
 	pageCount?: number
-): Promise<{result: T[], total: number}> {
+): Promise<{result: T[], total: number}> => {
 	const result: T[] = []
 
 	if (pageCount === undefined) {
@@ -254,7 +254,7 @@ export async function paginateCursorArgs<T>(
 	args.total = resultCursor.total ?? (resultCursor.hasNext ? undefined : (pageNum * pageSize + resultCursor.data.length))
 	args.pageSize = pageSize
 	args.cursor = resultCursor.nextCursor
-	args.cursorPage = pageNum + 1
+	args.cursorPage = (argsPageCount != null) ? pageNum + argsPageCount : undefined
 
 	return resultCursor
 }
@@ -267,12 +267,12 @@ export async function paginateCursorArgs<T>(
  * @param pageCount Number of pages to fetch (default: all)
  * @returns List of items fetched from the paginated endpoint
  */
-export async function paginateCursor<T>(
+export const paginateCursor = async <T>(
 	requestPage: (cursor: string, pageSize: number) => Promise<GetPageResultCursor<T>>,
 	pageSize = 20,
 	cursor?: string,
 	pageCount?: number
-): Promise<GetPageResultCursor<T>> {
+): Promise<GetPageResultCursor<T>> => {
 	const result: T[] = []
 
 	if (pageCount == null) {
@@ -325,6 +325,13 @@ export async function paginateCursor<T>(
  */
 export function getListPage<T>(list: T[]) {
 	return async (pageNum: number, pageSize: number): Promise<GetPageResult<T>> => {
+		if (pageNum < 0 || pageNum * pageSize > list.length) {
+			return {
+				data: [],
+				total: list.length
+			}
+		}
+
 		return {
 			data: list.slice(pageNum * pageSize, (pageNum + 1) * pageSize),
 			total: list.length
