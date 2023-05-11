@@ -164,6 +164,8 @@ Missing products must return undefined entries in the list, so that the length o
 
 Get multiple products by keyword.
 
+See [pagination.ts](../../src/codec/codecs/pagination.ts) for helpful code and [Pagination](../../docs/dev/pagination.md) for docs.
+
 ##### Edge Cases
 
 -   Vendors that don't support keyword filtering should implement it by fetching all products and filtering them in the codec.
@@ -171,6 +173,8 @@ Get multiple products by keyword.
 #### `getProducts` (category)
 
 Get multiple products by category.
+
+See [pagination.ts](../../src/codec/codecs/pagination.ts) for helpful code and [Pagination](../../docs/dev/pagination.md) for docs.
 
 ##### Edge Cases
 

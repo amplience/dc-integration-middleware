@@ -16,8 +16,8 @@ Amplience Integration Middleware is a service written in `Node.js` that is inten
 
 This extension was developed and tested with:
 
--   Node version `14.x`
--   NPM version `6.x`
+-   Node version `16.x`
+-   NPM version `8.x`
 
 ## ⚙️ Features
 
@@ -94,6 +94,7 @@ const product: Product = await commerceApi.getProduct({
 
 - **Types and methods**
   - [Commerce Codecs](./docs/dev/commerce-codec.md)
+  - [Pagination](./docs/dev/pagination.md)
 - **Project**
   - [Import into project](./docs/dev/import.md)
   - [Host the service](./docs/dev/host.md)
