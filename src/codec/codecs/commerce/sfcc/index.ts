@@ -115,8 +115,8 @@ const mapProduct = (product: SFCCProduct | null): Product => {
 	if (!product) {
 		return null
 	}
-	const largeImages = product.image_groups.find((group) => group.view_type === 'large')
-	const images = largeImages.images.map((image) => ({ url: image.dis_base_link }))
+	const largeImages = product.image_groups?.find((group) => group.view_type === 'large')
+	const images = largeImages?.images?.map((image) => ({ url: image.dis_base_link || image.link }))
 	return {
 		id: product.id,
 		name: product.name,
