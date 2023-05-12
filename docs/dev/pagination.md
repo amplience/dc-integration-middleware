@@ -46,5 +46,70 @@ Backends *_must_* implement pagination on these methods in the way described abo
 |paginateBlankArgs|properly handle pagination arguments for cases where there is always no result data| | |
 
 
+## Examples
+
+### paginateArgs()
+
+```javascript
+await paginateArgs(exampleMethod, args, 123)
+```
+
+Example response:
+```javascript
+{
+    pageCount: 2,
+    pageNum: 1,
+    pageSize: 20,
+    total: 23
+}
+```
+
+### paginateCursorArgs()
+Example request:
+```javascript
+await paginateCursorArgs(exampleCursorMethod, args, 123)
+```
+
+Example response:
+```javascript
+{
+    cursor: nextPage,
+    cursorPage: 3,
+    pageCount: 2,
+    pageNum: 1,
+    pageSize: 3,
+    total: 12,
+}
+```
+
+### getListPage()
+Example request:
+```javascript
+getListPage([1, 2, 3, 4, 5, 6, 7, 8, 9])(1, 3))
+```
+
+Example response:
+```javascript
+{ 
+    data: [4, 5, 6], 
+    total: 9 
+}
+```
+
+### paginateBlankArgs()
+Example request:
+```javascript
+paginateBlankArgs(args)
+```
+
+Example response:
+```javascript
+{
+    pageNum: 0,
+    pageSize: 20,
+    total: 0
+}
+```
+
 
 
