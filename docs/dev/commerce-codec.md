@@ -192,7 +192,7 @@ Missing products must return undefined entries in the list, so that the length o
 
 Get multiple products by keyword.
 
-See [pagination.ts](../../src/codec/codecs/pagination.ts) for helpful code and [Pagination](../../docs/dev/pagination.md) for docs.
+This endpoint supports pagination. See [pagination.ts](../../src/codec/codecs/pagination.ts) for helpful code and [Pagination](../../docs/dev/pagination.md) for docs.
 
 ##### Edge Cases
 
@@ -202,7 +202,7 @@ See [pagination.ts](../../src/codec/codecs/pagination.ts) for helpful code and [
 
 Get multiple products by category.
 
-See [pagination.ts](../../src/codec/codecs/pagination.ts) for helpful code and [Pagination](../../docs/dev/pagination.md) for docs.
+This endpoint supports pagination. See [pagination.ts](../../src/codec/codecs/pagination.ts) for helpful code and [Pagination](../../docs/dev/pagination.md) for docs.
 
 ##### Edge Cases
 

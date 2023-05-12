@@ -42,6 +42,7 @@ All codec methods should be implemented to the best of your ability. If some fun
 - If your vendor has certain information in the root product instead of the variants, then it should replicate that information to all variants.
 - If your vendor doesn't have product variants (or the root product is separate), then it should create at least one representing the root product.
 - If your vendor does not support a product search by keyword, it would be confusing if the ecomm toolkit product selector search didn't work at all. You should implement a method that lists all products and filters them manually. 
+- If your vendor does not support pagination for a method that requires it, it should be implemented by fetching everything and using `getListPage` to slice the list appropriately.
 
 #### Unit testing
 

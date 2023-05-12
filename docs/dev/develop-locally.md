@@ -22,7 +22,7 @@ Ensure your codecs implement [pagination](./pagination.md) for performance on la
 
 A similar approach can be used on other projects, such as [`dc-extension-ecomm-toolkit`](https://github.com/amplience/dc-extension-ecomm-toolkit), which you can use to test things such as the commonly used product and category selectors within DC. When hosting that extension locally, it will also host its own instance of the middleware, which will allow the extension to circumvent any CORS restrictions placed by codec vendors.
 
-The eComm Toolkit extension also implements [Page Caching](./page-cache.md).
+The eComm Toolkit extension is a good example of a project that uses [Page Caching](./page-cache.md) to simplify pagination across backends.
 
 ### Custom versions and importing into applications
 
