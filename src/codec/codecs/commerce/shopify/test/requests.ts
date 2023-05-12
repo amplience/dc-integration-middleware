@@ -78,6 +78,25 @@ export const productsByKeywordRequest = {
 	url: 'https://site_id.myshopify.com/api/version/graphql.json'
 }
 
+export const productsByKeywordCursor = {
+	config: {
+		baseURL: 'https://site_id.myshopify.com/api/version',
+		headers: {
+			'X-Shopify-Storefront-Access-Token': 'access_token'
+		},
+		url: 'graphql.json',
+		data: {
+			query: productsByQuery,
+			variables: {
+				pageSize: 20,
+				query: 'fulfilled',
+				after: 'firstpage'
+			}
+		}
+	},
+	url: 'https://site_id.myshopify.com/api/version/graphql.json'
+}
+
 export const productsByCategoryRequest = {
 	config: {
 		baseURL: 'https://site_id.myshopify.com/api/version',
@@ -91,6 +110,25 @@ export const productsByCategoryRequest = {
 				pageSize: 100,
 				handle: 'hydrogen',
 				after: undefined
+			}
+		}
+	},
+	url: 'https://site_id.myshopify.com/api/version/graphql.json'
+}
+
+export const productsByCategoryCursor = {
+	config: {
+		baseURL: 'https://site_id.myshopify.com/api/version',
+		headers: {
+			'X-Shopify-Storefront-Access-Token': 'access_token'
+		},
+		url: 'graphql.json',
+		data: {
+			query: productsByCategory,
+			variables: {
+				pageSize: 20,
+				handle: 'hydrogen',
+				after: 'firstpage'
 			}
 		}
 	},

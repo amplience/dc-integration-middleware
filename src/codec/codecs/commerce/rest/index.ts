@@ -14,6 +14,7 @@ import { StringProperty, StringPatterns } from '../../../cms-property-types'
 import axios from 'axios'
 import { catchAxiosErrors } from '../../codec-error'
 import { getProductsArgError, mapIdentifiers } from '../../common'
+import { getListPage, paginateArgs } from '../../pagination'
 
 /**
  * REST Codec config properties.
@@ -115,11 +116,11 @@ export class RestCommerceCodec extends CommerceCodec {
 			const ids = args.productIds.split(',')
 			return mapIdentifiers(ids, this.products.filter(prod => ids.includes(prod.id)))
 		} else if (args.keyword) {
-			return this.products.filter(prod => prod.name.toLowerCase().indexOf(args.keyword.toLowerCase()) > -1)
+			return paginateArgs(getListPage(this.products.filter(prod => prod.name.toLowerCase().indexOf(args.keyword.toLowerCase()) > -1)), args)
 		} else if (args.category) {
-			return [
+			return paginateArgs(getListPage([
 				..._.filter(this.products, prod => _.includes(_.map(prod.categories, 'id'), args.category.id))
-			]
+			]), args)
 		}
 
 		throw getProductsArgError(raw ? 'getProductsRaw' : 'getProducts')

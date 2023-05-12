@@ -7,6 +7,7 @@ import { BigCommerceProduct } from './types'
 import { mapCategory, mapCustomerGroup, mapProduct } from './mappers'
 import { catchAxiosErrors } from '../../codec-error'
 import { getProductsArgError, logResponse, mapIdentifiers } from '../../common'
+import { getPageByQueryAxios, paginateArgs, paginateBlankArgs } from '../../pagination'
 
 /**
  * BigCommerce Codec config properties
@@ -20,7 +21,6 @@ type CodecConfig = APIConfiguration & {
  * Commerce Codec Type that integrates with BigCommerce.
  */
 export class BigCommerceCommerceCodecType extends CommerceCodecType {
-
 	/**
 	 * @inheritdoc
 	 */
@@ -61,6 +61,8 @@ export class BigCommerceCommerceCodecType extends CommerceCodecType {
 export class BigCommerceCommerceCodec extends CommerceCodec {
 	declare config: CodecPropertyConfig<CodecConfig>
 
+	getPage = getPageByQueryAxios('page', 'limit', (data) => data.meta.pagination.total, 'data', (page) => page + 1)
+
 	/**
 	 * @inheritdoc
 	 */
@@ -75,14 +77,8 @@ export class BigCommerceCommerceCodec extends CommerceCodec {
 	 */
 	async fetch(url: string): Promise<any> {
 		const request = {
-			method: 'get',
-			url,
-			baseURL: `${this.config.api_url}/stores/${this.config.store_hash}`,
-			headers: {
-				'X-Auth-Token': this.config.api_token,
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			}
+			...this.getAxiosConfig(),
+			url
 		}
 		const response = await catchAxiosErrors(async () => await axios.request(request))
 		if (url.indexOf('customer_groups') > -1) {
@@ -99,6 +95,22 @@ export class BigCommerceCommerceCodec extends CommerceCodec {
 	}
 
 	/**
+	 * Get the axios config for making BigCommerce API requests.
+	 * @returns Axios config for making BigCommerce API requests
+	 */
+	getAxiosConfig() {
+		return {
+			method: 'get',
+			baseURL: `${this.config.api_url}/stores/${this.config.store_hash}`,
+			headers: {
+				'X-Auth-Token': this.config.api_token,
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			}
+		}
+	}
+
+	/**
 	 * @inheritdoc
 	 */
 	async getRawProducts(args: GetProductsArgs, method = 'getRawProducts'): Promise<BigCommerceProduct[]> {
@@ -109,11 +121,11 @@ export class BigCommerceCommerceCodec extends CommerceCodec {
 			const ids = args.productIds.split(',')
 			products = mapIdentifiers<BigCommerceProduct>(ids, await this.fetch(`/v3/catalog/products?id:in=${args.productIds}&include=images,variants`))
 		} else if (args.keyword) {
-			products = await this.fetch(`/v3/catalog/products?keyword=${args.keyword}&include=images,variants`)
+			products = await paginateArgs(this.getPage(axios, '/v3/catalog/products?include=images,variants', this.getAxiosConfig(), { keyword: args.keyword }), args)
 		} else if (args.category && args.category.id === '') {
-			products = []
+			products = paginateBlankArgs(args)
 		} else if (args.category) {
-			products = await this.fetch(`/v3/catalog/products?categories:in=${args.category.id}&include=images,variants`)
+			products = await paginateArgs(this.getPage(axios, '/v3/catalog/products?include=images,variants', this.getAxiosConfig(), { 'categories:in': args.category.id }), args)
 		} else {
 			throw getProductsArgError(method)
 		}

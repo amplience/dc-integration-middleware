@@ -15,6 +15,7 @@ Connects to a Salesforce Commerce Cloud instance.
         "api_url": "<sfcc api url>",
         "auth_url": "<sfcc auth url>",
         "site_id": "<sfcc site id>",
+        "version": "<sfcc api version>",
         "client_id": "<sfcc client id>",
         "client_secret": "<sfcc site secret>"
     }

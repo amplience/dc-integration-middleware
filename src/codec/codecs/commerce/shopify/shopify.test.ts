@@ -10,14 +10,17 @@ import {
 	exampleCustomerGroups, 
 	exampleCategoryTree, 
 	exampleProduct, 
-	exampleProductsByKeyword 
+	exampleProductsByKeyword, 
+	exampleProductsByKeywordCursor
 } from './test/results'
 import { 
 	collectionsRequest, 
 	segmentsRequest, 
 	productRequest, 
 	productsByKeywordRequest, 
-	productsByCategoryRequest 
+	productsByCategoryRequest, 
+	productsByKeywordCursor,
+	productsByCategoryCursor
 } from './test/requests'
 import { config } from './test/config'
 import { flattenConfig } from '../../../../common/util'
@@ -25,10 +28,13 @@ import {
 	commerceCollectionsRequests, 
 	commerceProductMissingRequests, 
 	commerceProductRequests, 
+	commerceProductsByCategoryCursorRequests, 
 	commerceProductsByCategoryRequests, 
+	commerceProductsByKeywordCursorRequests, 
 	commerceProductsByKeywordRequests, 
 	commerceSegmentsRequests 
 } from './fixtures'
+import { PaginationArgs } from '@/common'
 
 jest.mock('axios')
 
@@ -113,6 +119,72 @@ describe('shopify integration', function () {
 
 		expect(requests).toEqual([
 			productsByCategoryRequest
+		])
+	})
+
+	test('getProducts paginated (keyword)', async () => {
+		// Setup with the right fixture
+		massMock(axios, requests, commerceProductsByKeywordCursorRequests)
+		codec = new ShopifyCommerceCodec(flattenConfig(config))
+		await codec.init(new ShopifyCodecType())
+
+		const args = {
+			keyword: 'fulfilled',
+
+			pageNum: 1,
+			pageSize: 20,
+			pageCount: 1,
+			cursor: 'firstpage',
+			cursorPage: 1
+		} as PaginationArgs
+
+		// Test
+		const products = await codec.getProducts(args)
+
+		expect(args.cursor).toEqual('cursor19')
+		expect(args.cursorPage).toEqual(2)
+		expect(args.total).toBeUndefined()
+
+		expect(products).toEqual(exampleProductsByKeywordCursor)
+		expect(requests).toEqual([
+			productsByKeywordCursor
+		])
+	})
+
+	test('getProducts paginated (category)', async () => {
+		// Setup with the right fixture
+		massMock(axios, requests, commerceProductsByCategoryCursorRequests)
+		codec = new ShopifyCommerceCodec(flattenConfig(config))
+		await codec.init(new ShopifyCodecType())
+
+		const args = {
+			category: {
+				id: '439038837024',
+				slug: 'hydrogen',
+				name: 'Hydrogen',
+				image: null,
+				children: [],
+				products: []
+			},
+
+			pageNum: 1,
+			pageSize: 20,
+			pageCount: 1,
+			cursor: 'firstpage',
+			cursorPage: 1
+		} as PaginationArgs
+
+		// Test
+		const products = await codec.getProducts(args)
+
+		expect(args.cursor).toEqual('cursor19')
+		expect(args.cursorPage).toEqual(2)
+		expect(args.total).toBeUndefined()
+
+		expect(products).toEqual(exampleProductsByKeywordCursor)
+
+		expect(requests).toEqual([
+			productsByCategoryCursor
 		])
 	})
 

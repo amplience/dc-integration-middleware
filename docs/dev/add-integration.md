@@ -4,7 +4,7 @@
 
 Commerce Codecs are focused on accessing commerce focused entities, such as products, categories and customer groups. Currently, they are the only codec type supported by this project, though that may change in the future.
 
-You can find a detailed description of all types and methods shared by Commerce Codecs [here](./commerce-codec.md). You should reference this closely when implementing the commerce codec methods for your vendor.
+You can find a detailed description of all types and methods shared by Commerce Codecs [here](./commerce-codec.md). You should reference this closely when implementing the commerce codec methods for your vendor as well as implementing [pagination](./pagination.md) for your API requests.
 
 ### Template Codec
 There is a [template commerce codec](../../src/codec/codecs/commerce/template.ts) that can be used as a starting point when making a new commerce codec. Copy this file into a new folder for your codec (with name `<vendor>/`) and rename it to `index.ts`. You can then begin implementing each commerce codec method.
@@ -13,9 +13,9 @@ There are two components to a codec - its codec type, which describes how it is 
 
 The most important thing you should change is the vendor string that the codec type returns:
 ```ts
-    get vendor(): string {
-        return 'template'
-    }
+get vendor(): string {
+    return 'template'
+}
 ```
 This will let users find your integration. `get properties()` describes what properties should be present in the vendor-specific config in JSON schema format.
 
@@ -42,6 +42,7 @@ All codec methods should be implemented to the best of your ability. If some fun
 - If your vendor has certain information in the root product instead of the variants, then it should replicate that information to all variants.
 - If your vendor doesn't have product variants (or the root product is separate), then it should create at least one representing the root product.
 - If your vendor does not support a product search by keyword, it would be confusing if the ecomm toolkit product selector search didn't work at all. You should implement a method that lists all products and filters them manually. 
+- If your vendor does not support pagination for a method that requires it, it should be implemented by fetching everything and using `getListPage` to slice the list appropriately.
 
 #### Unit testing
 

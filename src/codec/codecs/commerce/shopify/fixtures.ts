@@ -4,11 +4,14 @@ import {
 	shopifySegments, 
 	shopifyProduct, 
 	shopifyProductsByKeyword, 
-	shopifyCategoryProducts 
+	shopifyCategoryProducts, 
+	shopifyProductsByKeywordCursor,
+	shopifyCategoryProductsCursor
 } from './test/responses'
 import { 
 	collectionsRequest, 
 	productRequest, 
+	productsByCategoryCursor, 
 	productsByCategoryRequest 
 } from './test/requests'
 
@@ -61,6 +64,14 @@ export const commerceProductsByKeywordRequests: MockFixture = {
 	}
 }
 
+export const commerceProductsByKeywordCursorRequests: MockFixture = {
+	post: {
+		'https://site_id.myshopify.com/api/version/graphql.json': {
+			data: shopifyProductsByKeywordCursor
+		}
+	}
+}
+
 export const commerceProductsByCategoryRequests: MockFixture = {
 	post: {
 		'https://site_id.myshopify.com/api/version/graphql.json': dataToResponse([
@@ -74,6 +85,25 @@ export const commerceProductsByCategoryRequests: MockFixture = {
 				data: productsByCategoryRequest.config.data,
 				response: {
 					data: shopifyCategoryProducts
+				}
+			}
+		])
+	}
+}
+
+export const commerceProductsByCategoryCursorRequests: MockFixture = {
+	post: {
+		'https://site_id.myshopify.com/api/version/graphql.json': dataToResponse([
+			{
+				data: collectionsRequest.config.data,
+				response: {
+					data: shopifyCategories
+				}
+			}, 
+			{
+				data: productsByCategoryCursor.config.data,
+				response: {
+					data: shopifyCategoryProductsCursor
 				}
 			}
 		])
