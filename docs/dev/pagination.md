@@ -30,6 +30,7 @@ total?: number (only returned)
 |pageCount|the number of pages to fetch (starting at `pageNum`)|If `pageCount` is `undefined`, all items will be fetched.|
 |cursor|the cursor string of the closet previously known page.|Used to speed up pagination on cursor based APIs. If the `cursor` is `undefined`, the desired page number will still be fetched but this `cursor` will be used to fetch it faster.|
 |cursorPage|the page that he cursor string corresponds to.|If it is less than or equal to the requested page, time can be saved fetching the page with the `cursor`, rather than having to iterate the list up to the requested point. If the `cursorPage` is `undefined`, cursor cannot be used and will be treated as undefined.|
+|total|the total number of pages.| This cannot be set and is returned if available as a number|
 
 ### Usage
 Paginated methods return updated information about the page in the arguments object that was originally provided. For example, cursor and cursorPage will be updated to match the 'after' cursor for the next page when making a cursor pagination request. When the total number of items is known, it is returned in total, otherwise it is left undefined. When an undefined pageCount is provided, the backend should return the pageCount it decided to use.
