@@ -80,7 +80,7 @@ export class PageCache<T> {
 
 	/**
 	 * Gets the page size. This must be either defined on creation or is provided by the backend on getting any page.
-	 * @returns 
+	 * @returns The page size
 	 */
 	getPageSize(): number | undefined {
 		return this.pageSize
@@ -88,7 +88,7 @@ export class PageCache<T> {
 
 	/**
 	 * Gets the highest page number that has been cached.
-	 * @returns 
+	 * @returns The highest page number
 	 */
 	getMaxPage(): number | undefined {
 		return this.cache.length

@@ -128,6 +128,7 @@ export function getPageByQueryAxios(offsetQuery: string, countQuery: string, tot
  * Iterate through fetching pages and build an array out of the results.
  * @param requestPage Method to use to request pages. Takes page number and size. Must return at least one page-size worth of items if the total allows it.
  * @param args Pagination arguments, new cursor and offset is written back into the object.
+ * @param defaultPageSize Default page size if not provided by the arguments (default: 20)
  * @returns List of items fetched from the paginated endpoint
  */
 export async function paginateArgs<T>(
@@ -185,12 +186,7 @@ export const paginate = async <T>(
 		
 		// There's a possibility that the implementation has returned more than one page.
 		// Allow multiple pages to be completed at a time.
-		let pagesReturned: number
-		try {
-			pagesReturned = Math.floor(data.length / pageSize)
-		} catch (e) {
-			throw new Error(`${pageNum} ${i} ${pageSize}`)
-		}
+		const pagesReturned = Math.floor(data.length / pageSize)
 
 		let dataCount = data.length
 
@@ -216,9 +212,8 @@ export const paginate = async <T>(
 /**
  * Iterate through fetching pages and build an array out of the results.
  * @param requestPage Method to use to request pages. Takes cursor and page size.
- * @param pageSize Page size (default: 20)
- * @param cursor Start cursor (default: null)
- * @param pageCount Number of pages to fetch (default: all)
+ * @param args Pagination arguments, new cursor and offset is written back into the object.
+ * @param defaultPageSize Default page size if not provided by the arguments (default: 20)
  * @returns List of items fetched from the paginated endpoint
  */
 export async function paginateCursorArgs<T>(

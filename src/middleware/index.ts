@@ -63,7 +63,7 @@ const toApiError = (error: Error | CodecError | IntegrationError): MiddlewareErr
 	} else {
 		return {
 			type: 'Generic',
-			message: error.message + '\n' + error.stack,
+			message: error.message,
 		}
 	}
 }
