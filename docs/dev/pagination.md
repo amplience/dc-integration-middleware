@@ -4,7 +4,7 @@ As this project deals with multiple API sources (Rest, GraphQL etc) from differe
 
 See [Pagination](./../../src/codec/codecs/pagination.ts) for code.
 
-## Where Pagination used?
+## Where is Pagination used?
 
 The Pagination arguments are present in the following methods:
 

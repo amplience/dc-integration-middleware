@@ -24,8 +24,8 @@ This extension was developed and tested with:
 The `CommerceAPI` interface exposes these methods:
 
 -   `getProduct` (by ID or slug)
--   `getProducts` (by IDs or keyword)
--   `getCategory` (by ID or slug)
+-   `getProducts` (by IDs, keyword, or category ID)
+-   `getCategory` (by ID)
 -   `getCategoryTree` (category structure)
 -   `getCustomerGroups` (customer segmentation)
 
