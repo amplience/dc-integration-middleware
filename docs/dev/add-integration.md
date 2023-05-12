@@ -13,9 +13,9 @@ There are two components to a codec - its codec type, which describes how it is 
 
 The most important thing you should change is the vendor string that the codec type returns:
 ```ts
-    get vendor(): string {
-        return 'template'
-    }
+get vendor(): string {
+    return 'template'
+}
 ```
 This will let users find your integration. `get properties()` describes what properties should be present in the vendor-specific config in JSON schema format.
 
