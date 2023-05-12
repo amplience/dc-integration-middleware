@@ -85,7 +85,7 @@ export const mapVariant = (variant: ShopifyVariant, sharedImages: ShopifyImage[]
 		listPrice: mapPrice(variant.price ?? variant.unitPrice),
 		salePrice: mapPrice(variant.compareAtPrice ?? variant.price ?? variant.unitPrice),
 		attributes: attributes,
-		images: [variant.image, ...sharedImages].map(mapImage)
+		images: (variant.image ? [variant.image, ...sharedImages] : sharedImages).map(mapImage)
 	}
 }
 

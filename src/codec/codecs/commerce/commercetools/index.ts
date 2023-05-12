@@ -15,7 +15,7 @@ import { CodecPropertyConfig, CommerceCodecType, CommerceCodec } from '../../cor
 import { StringProperty } from '../../../cms-property-types'
 import { Attribute, CTCategory, CTProduct, CTVariant, Localizable } from './types'
 import { formatMoneyString, quoteProductIdString } from '../../../../common/util'
-import { getPageByQuery, paginate } from '../../pagination'
+import { getPageByQuery, paginate, paginateArgs } from '../../pagination'
 import { catchAxiosErrors } from '../../codec-error'
 import { getProductsArgError, mapIdentifiers } from '../../common'
 
@@ -202,7 +202,7 @@ export class CommercetoolsCodec extends CommerceCodec {
 	 * @inheritdoc
 	 */
 	async cacheCategoryTree(): Promise<void> {
-		const categories: CTCategory[] = await paginate(this.getPage(this.rest, '/categories'), 500)
+		const categories: CTCategory[] = (await paginate<CTCategory>(this.getPage(this.rest, '/categories'), 500)).result
 		const mapped: Category[] = categories.map(cat => mapCategory(cat, categories, {}))
 		this.categoryTree = mapped.filter(cat => cats.includes(cat.slug))
 	}
@@ -226,11 +226,11 @@ export class CommercetoolsCodec extends CommerceCodec {
 			products = []
 		} else if (args.productIds) {
 			const ids = args.productIds.split(',')
-			products = mapIdentifiers<CTProduct>(ids, await paginate(this.getPage(this.rest, `/product-projections/search?filter=id:${quoteProductIdString(args.productIds)}`)))
+			products = mapIdentifiers(ids, await paginateArgs(this.getPage(this.rest, `/product-projections/search?filter=id:${quoteProductIdString(args.productIds)}`), args))
 		} else if (args.keyword) {
-			products = await paginate(this.getPage(this.rest, `/product-projections/search?text.en="${args.keyword}"`))
+			products = (await paginateArgs<CTProduct>(this.getPage(this.rest, `/product-projections/search?text.en="${args.keyword}"`), args))
 		} else if (args.category) {
-			products = await paginate(this.getPage(this.rest, `/product-projections/search?filter=categories.id: subtree("${args.category.id}")`))
+			products = (await paginateArgs<CTProduct>(this.getPage(this.rest, `/product-projections/search?filter=categories.id: subtree("${args.category.id}")`), args))
 		} else {
 			throw getProductsArgError(method)
 		}
@@ -249,7 +249,7 @@ export class CommercetoolsCodec extends CommerceCodec {
 	 * @inheritdoc
 	 */
 	async getCustomerGroups(args: CommonArgs): Promise<Identifiable[]> {
-		return await paginate(this.getPage(this.rest, '/customer-groups'))
+		return (await paginate<Identifiable>(this.getPage(this.rest, '/customer-groups'))).result
 	}
 }
 

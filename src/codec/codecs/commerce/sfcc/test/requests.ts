@@ -47,26 +47,26 @@ export const customerGroupsRequest = {
 	url: 'https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/-/dw/data/v22_4/sites/TestSite/customer_groups?start=0&count=1000'
 }
 
-export const productIdRequests = (id: string, total: number) => Array.from({length: total}).map((_, index) => productIdRequest(id + index))
+export const productIdRequests = (id: string, total: number, offset = 0) => Array.from({length: total}).map((_, index) => productIdRequest(id + (index + offset)))
 
-export const keywordSearch = (start: number) => ({
+export const keywordSearch = (start: number, count = 200) => ({
 	config: {
 		baseURL: 'https://test.sandbox.us03.dx.commercecloud.salesforce.com',
 		params: {
 			client_id: 'test-client',
 		},
-		url: `/s/TestSite/dw/shop/v22_4/product_search?q=Hit&start=${start}&count=200`,
+		url: `/s/TestSite/dw/shop/v22_4/product_search?q=Hit&start=${start}&count=${count}`,
 	},
-	url: `https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/TestSite/dw/shop/v22_4/product_search?q=Hit&start=${start}&count=200`,
+	url: `https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/TestSite/dw/shop/v22_4/product_search?q=Hit&start=${start}&count=${count}`,
 })
 
-export const categorySearch = (start: number) => ({
+export const categorySearch = (start: number, count = 200) => ({
 	config: {
 		baseURL: 'https://test.sandbox.us03.dx.commercecloud.salesforce.com',
 		params: {
 			client_id: 'test-client',
 		},
-		url: `/s/TestSite/dw/shop/v22_4/product_search?refine_1=cgid%3Dnewarrivals-womens&start=${start}&count=200`,
+		url: `/s/TestSite/dw/shop/v22_4/product_search?refine_1=cgid%3Dnewarrivals-womens&start=${start}&count=${count}`,
 	},
-	url: `https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/TestSite/dw/shop/v22_4/product_search?refine_1=cgid%3Dnewarrivals-womens&start=${start}&count=200`,
+	url: `https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/TestSite/dw/shop/v22_4/product_search?refine_1=cgid%3Dnewarrivals-womens&start=${start}&count=${count}`,
 })

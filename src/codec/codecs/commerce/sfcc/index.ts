@@ -8,7 +8,8 @@ import {
 	OAuthRestClient,
 	OAuthRestClientInterface,
 	Product,
-	CustomerGroup
+	CustomerGroup,
+	PaginationArgs
 } from '../../../../common'
 import _ from 'lodash'
 import { CodecPropertyConfig, CommerceCodecType, CommerceCodec } from '../../core'
@@ -18,7 +19,7 @@ import { SFCCCategory, SFCCCustomerGroup, SFCCProduct } from './types'
 import { formatMoneyString } from '../../../../common/util'
 import slugify from 'slugify'
 import btoa from 'btoa'
-import { getPageByQuery, getPageByQueryAxios, paginate } from '../../pagination'
+import { getPageByQuery, getPageByQueryAxios, paginate, paginateArgs } from '../../pagination'
 import { getProductsArgError, logResponse } from '../../common'
 import { CodecErrorType, catchAxiosErrors } from '../../codec-error'
 
@@ -114,8 +115,8 @@ const mapProduct = (product: SFCCProduct | null): Product => {
 	if (!product) {
 		return null
 	}
-	const largeImages = product.image_groups.find((group) => group.view_type === 'large')
-	const images = largeImages.images.map((image) => ({ url: image.dis_base_link }))
+	const largeImages = product.image_groups?.find((group) => group.view_type === 'large')
+	const images = largeImages?.images?.map((image) => ({ url: image.dis_base_link || image.link }))
 	return {
 		id: product.id,
 		name: product.name,
@@ -259,10 +260,11 @@ export class SFCCCommerceCodec extends CommerceCodec {
 	/**
 	 * Lists SFCC products for a given search query.
 	 * @param query Search query
+	 * @param args Pagination arguments, new cursor and offset is written back into the object.
 	 * @returns List of SFCC products
 	 */
-	async search(query: string): Promise<SFCCProduct[]> {
-		const searchResults = await paginate<any>(this.getPageAxios(axios, `${this.shopApi}/product_search?${query}`, this.axiosConfig(), {}), 200)
+	async search(query: string, args: PaginationArgs): Promise<SFCCProduct[]> {
+		const searchResults = await paginateArgs<any>(this.getPageAxios(axios, `${this.shopApi}/product_search?${query}`, this.axiosConfig(), {}), args, 200)
 
 		if (searchResults) {
 			return await Promise.all(
@@ -287,9 +289,9 @@ export class SFCCCommerceCodec extends CommerceCodec {
 				args.productIds.split(',').map(this.getProductById.bind(this))
 			)
 		} else if (args.keyword) {
-			products = await this.search(`q=${args.keyword}`)
+			products = await this.search(`q=${args.keyword}`, args)
 		} else if (args.category) {
-			products = await this.search(`refine_1=cgid=${args.category.id}`)
+			products = await this.search(`refine_1=cgid=${args.category.id}`, args)
 		} else {
 			throw getProductsArgError(method)
 		}
@@ -309,7 +311,7 @@ export class SFCCCommerceCodec extends CommerceCodec {
 	 */
 	async getCustomerGroups(args: CommonArgs): Promise<CustomerGroup[]> {
 		return (
-			await paginate<SFCCCustomerGroup>(this.getPage(this.rest, `${this.sitesApi}/customer_groups`), 1000)
+			(await paginate<SFCCCustomerGroup>(this.getPage(this.rest, `${this.sitesApi}/customer_groups`), 1000)).result
 		).map(mapCustomerGroup)
 	}
 }

@@ -6,6 +6,7 @@ import { categoryRequest, categorySearch, customerGroupsRequest, keywordSearch, 
 import { exampleCustomerGroups, exampleCategoryTree, exampleProduct } from './test/results'
 import { config } from './test/config'
 import { flattenConfig } from '../../../../common/util'
+import { PaginationArgs } from '@/common'
 
 jest.mock('axios')
 
@@ -27,11 +28,17 @@ const sfccRequests: MockFixture = {
 		'https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/TestSite/dw/shop/v22_4/product_search?refine_1=cgid%3Dnewarrivals-womens&start=200&count=200': {
 			data: sfccSearchResult(300, 200, 1, 'newarrivals-womens')
 		},
+		'https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/TestSite/dw/shop/v22_4/product_search?refine_1=cgid%3Dnewarrivals-womens&start=20&count=20': {
+			data: sfccSearchResult(60, 20, 1, 'Hit')
+		},
 		'https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/TestSite/dw/shop/v22_4/product_search?q=Hit&start=0&count=200': {
 			data: sfccSearchResult(300, 200, 0, 'Hit')
 		},
 		'https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/TestSite/dw/shop/v22_4/product_search?q=Hit&start=200&count=200': {
 			data: sfccSearchResult(300, 200, 1, 'Hit')
+		},
+		'https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/TestSite/dw/shop/v22_4/product_search?q=Hit&start=20&count=20': {
+			data: sfccSearchResult(60, 20, 1, 'Hit')
 		},
 		'https://test.sandbox.us03.dx.commercecloud.salesforce.com/s/-/dw/data/v22_4/sites/TestSite/customer_groups?start=0&count=1000': {
 			data: sfccCustomerGroups
@@ -127,6 +134,55 @@ describe('sfcc integration', function() {
 		expect(products.length).toEqual(300)
 
 		expect(products).toEqual(Array.from({length: 300}).map((_, index) => exampleProduct('Hit' + index)))
+	})
+
+	test('getProducts paginated (keyword)', async () => {
+		const args = {
+			keyword: 'Hit',
+			pageNum: 1,
+			pageSize: 20,
+			pageCount: 1
+		} as PaginationArgs
+
+		const products = await sfccCodec.getProducts(args)
+
+		expect(requests).toEqual([
+			keywordSearch(20, 20),
+			...productIdRequests('Hit', 20, 20)
+		])
+
+		expect(args.total).toEqual(60)
+		expect(products.length).toEqual(20)
+
+		expect(products).toEqual(Array.from({length: 20}).map((_, index) => exampleProduct('Hit' + (index + 20))))
+	})
+
+	test('getProducts paginated (category)', async () => {
+		const args = {
+			category: {
+				children: [],
+				products: [],
+				id: 'newarrivals-womens',
+				name: 'Womens',
+				slug: 'newarrivals-womens',
+			},
+
+			pageNum: 1,
+			pageSize: 20,
+			pageCount: 1
+		} as PaginationArgs
+
+		const products = await sfccCodec.getProducts(args)
+
+		expect(requests).toEqual([
+			categorySearch(20, 20),
+			...productIdRequests('Hit', 20, 20)
+		])
+
+		expect(args.total).toEqual(60)
+		expect(products.length).toEqual(20)
+
+		expect(products).toEqual(Array.from({length: 20}).map((_, index) => exampleProduct('Hit' + (index + 20))))
 	})
 
 	test('getProduct (missing)', async () => {

@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { getPageByQuery, getPageByQueryAxios, paginate, paginateCursor } from './pagination'
+import { getListPage, getPageByQuery, getPageByQueryAxios, paginate, paginateArgs, paginateBlankArgs, paginateCursor, paginateCursorArgs } from './pagination'
+import * as pagination from './pagination'
 
 jest.mock('axios')
 
@@ -138,7 +139,7 @@ describe('paginate', function() {
 		const result = await paginate(getPage, 20, 0)
 
 		expect(getPage).toHaveBeenCalledWith(0, 20)
-		expect(result).toEqual([])
+		expect(result).toEqual({result: [], total: 0})
 	})
 
 	test('paginate 1 item', async () => {
@@ -147,7 +148,7 @@ describe('paginate', function() {
 		const result = await paginate(getPage, 20, 0)
 
 		expect(getPage).toHaveBeenCalledWith(0, 20)
-		expect(result).toEqual([1])
+		expect(result).toEqual({result: [1], total: 1})
 	})
 
 	test('paginate 2 pages', async () => {
@@ -158,7 +159,7 @@ describe('paginate', function() {
 
 		expect(getPage).toHaveBeenCalledWith(0, 20)
 		expect(getPage).toHaveBeenCalledWith(1, 20)
-		expect(result).toEqual(Array.from({length: total}).map((_, index) => index))
+		expect(result).toEqual({result: Array.from({length: total}).map((_, index) => index), total})
 	})
 
 	test('paginate 20 pages', async () => {
@@ -171,7 +172,7 @@ describe('paginate', function() {
 			expect(getPage).toHaveBeenCalledWith(i, 20)
 		}
 
-		expect(result).toEqual(Array.from({length: total}).map((_, index) => index))
+		expect(result).toEqual({result: Array.from({length: total}).map((_, index) => index), total})
 	})
 
 	test('paginate 10 items from last page', async () => {
@@ -182,7 +183,7 @@ describe('paginate', function() {
 
 		expect(getPage).toHaveBeenCalledWith(19, 20)
 
-		expect(result).toEqual(Array.from({length: 10}).map((_, index) => index + 380))
+		expect(result).toEqual({result: Array.from({length: 10}).map((_, index) => index + 380), total})
 	})
 
 	test('paginate page 10-20 of 30', async () => {
@@ -195,7 +196,7 @@ describe('paginate', function() {
 			expect(getPage).toHaveBeenCalledWith(i, 20)
 		}
 
-		expect(result).toEqual(Array.from({length: 200}).map((_, index) => index + 200))
+		expect(result).toEqual({result: Array.from({length: 200}).map((_, index) => index + 200), total})
 	})
 })
 
@@ -274,5 +275,201 @@ describe('paginateCursor', function() {
 		}
 
 		expect(result).toEqual({data: Array.from({length: 200}).map((_, index) => index + 200), hasNext: true, nextCursor: 'C400'})
+	})
+})
+
+describe('getListPage', function() {
+	test('get a page containing the whole input array', async () => {
+		expect(getListPage([1, 2, 3])(0, 5)).resolves.toEqual({ data: [1, 2, 3], total: 3 })
+	})
+
+	test('get the second page of a 3 page spanning input array', async () => {
+		expect(getListPage([1, 2, 3, 4, 5, 6, 7, 8, 9])(1, 3)).resolves.toEqual({ data: [4, 5, 6], total: 9 })
+	})
+
+	test('get a page from an empty array', async () => {
+		expect(getListPage([])(0, 5)).resolves.toEqual({ data: [], total: 3 })
+	})
+
+	test('get an out of bounds page', async () => {
+		expect(getListPage([1, 2, 3])(5, 5)).resolves.toEqual({ data: [], total: 3 })
+		expect(getListPage([1, 2, 3])(-1, 5)).resolves.toEqual({ data: [], total: 3 })
+	})
+})
+
+const exampleMethod = async () => ({data: [], total: 0})
+const exampleCursorMethod = async () => ({data: [], hasNext: false, nextCursor: null})
+
+describe('paginateArgs', function() {
+	afterEach(() => {
+		jest.restoreAllMocks()
+	})
+
+	test('no pagination arguments', async () => {
+		const args = {}
+
+		const spy = jest.spyOn(pagination, 'paginate').mockResolvedValue({result: [1, 2, 3], total: 3})
+
+		await paginateArgs(exampleMethod, args, 123)
+
+		expect(args).toMatchInlineSnapshot(`
+{
+  "pageCount": undefined,
+  "pageNum": 0,
+  "pageSize": 123,
+  "total": 3,
+}
+`)
+
+		expect(spy).toHaveBeenCalledWith(exampleMethod, 123, 0, undefined)
+	})
+
+	test('with pagination arguments', async () => {
+		const args = {
+			pageNum: 1,
+			pageSize: 20,
+			pageCount: 2
+		}
+
+		const spy = jest.spyOn(pagination, 'paginate').mockResolvedValue({result: [21, 22, 23], total: 23})
+
+		await paginateArgs(exampleMethod, args)
+
+		expect(args).toMatchInlineSnapshot(`
+{
+  "pageCount": 2,
+  "pageNum": 1,
+  "pageSize": 20,
+  "total": 23,
+}
+`)
+
+		expect(spy).toHaveBeenCalledWith(exampleMethod, 20, 1, 2)
+	})
+})
+
+describe('paginateCursorArgs', function() {
+
+	test('no pagination arguments', async () => {
+		const args = {}
+
+		const spy = jest.spyOn(pagination, 'paginateCursor').mockResolvedValue({data: [1, 2, 3], hasNext: false, total: 3})
+
+		await paginateCursorArgs(exampleCursorMethod, args, 123)
+
+		expect(args).toMatchInlineSnapshot(`
+{
+  "cursor": undefined,
+  "cursorPage": undefined,
+  "pageSize": 123,
+  "total": 3,
+}
+`)
+
+		expect(spy).toHaveBeenCalledWith(exampleCursorMethod, 123, undefined, null)
+	})
+
+	test('with precise cursor', async () => {
+		const args = {
+			pageNum: 1,
+			pageSize: 3,
+			pageCount: 2,
+			cursor: 'prevPage',
+			cursorPage: 1
+		}
+
+		const spy = jest.spyOn(pagination, 'paginateCursor').mockResolvedValue({data: [4, 5, 6, 7, 8, 9], hasNext: true, nextCursor: 'nextPage', total: 12})
+
+		await paginateCursorArgs(exampleCursorMethod, args, 123)
+
+		expect(args).toMatchInlineSnapshot(`
+{
+  "cursor": "nextPage",
+  "cursorPage": 3,
+  "pageCount": 2,
+  "pageNum": 1,
+  "pageSize": 3,
+  "total": 12,
+}
+`)
+
+		expect(spy).toHaveBeenCalledWith(exampleCursorMethod, 3, 'prevPage', 2)
+	})
+
+	test('with distant cursor', async () => {
+		const args = {
+			pageNum: 3,
+			pageSize: 3,
+			pageCount: 2,
+			cursor: 'prevPage',
+			cursorPage: 1
+		}
+
+		const spy = jest.spyOn(pagination, 'paginateCursor').mockResolvedValue({data: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], hasNext: true, nextCursor: 'nextPage', total: 15})
+
+		const result = await paginateCursorArgs(exampleCursorMethod, args, 123)
+
+		expect(result).toEqual({ data: [10, 11, 12, 13, 14, 15], hasNext: true, nextCursor: 'nextPage', total: 15 })
+
+		expect(args).toMatchInlineSnapshot(`
+{
+  "cursor": "nextPage",
+  "cursorPage": 5,
+  "pageCount": 2,
+  "pageNum": 3,
+  "pageSize": 3,
+  "total": 15,
+}
+`)
+
+		expect(spy).toHaveBeenCalledWith(exampleCursorMethod, 3, 'prevPage', 4)
+	})
+
+	test('with unusable cursor (after requested page)', async () => {
+		const args = {
+			pageNum: 3,
+			pageSize: 3,
+			pageCount: 2,
+			cursor: 'nextPage',
+			cursorPage: 5
+		}
+
+		const spy = jest.spyOn(pagination, 'paginateCursor').mockResolvedValue({data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], hasNext: true, nextCursor: 'nextPage', total: 15})
+
+		const result = await paginateCursorArgs(exampleCursorMethod, args, 123)
+
+		expect(result).toEqual({ data: [10, 11, 12, 13, 14, 15], hasNext: true, nextCursor: 'nextPage', total: 15 })
+
+		expect(args).toMatchInlineSnapshot(`
+{
+  "cursor": "nextPage",
+  "cursorPage": 5,
+  "pageCount": 2,
+  "pageNum": 3,
+  "pageSize": 3,
+  "total": 15,
+}
+`)
+
+		expect(spy).toHaveBeenCalledWith(exampleCursorMethod, 3, undefined, 5)
+	})
+})
+
+describe('paginateBlankArgs', function() {
+	test('properly set arguments for empty pagination', async () => {
+		const args = {
+			pageSize: '20',
+			cursor: 'delete',
+			cursorPage: 2,
+			total: 234
+		} as any
+
+		paginateBlankArgs(args)
+
+		expect(args).toEqual({
+			pageNum: 0,
+			pageSize: 20,
+			total: 0
+		})
 	})
 })

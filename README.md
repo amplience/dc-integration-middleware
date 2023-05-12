@@ -16,16 +16,16 @@ Amplience Integration Middleware is a service written in `Node.js` that is inten
 
 This extension was developed and tested with:
 
--   Node version `14.x`
--   NPM version `6.x`
+-   Node version `16.x`
+-   NPM version `8.x`
 
 ## ⚙️ Features
 
 The `CommerceAPI` interface exposes these methods:
 
 -   `getProduct` (by ID or slug)
--   `getProducts` (by IDs or keyword)
--   `getCategory` (by ID or slug)
+-   `getProducts` (by IDs, keyword, or category ID)
+-   `getCategory` (by ID)
 -   `getCategoryTree` (category structure)
 -   `getCustomerGroups` (customer segmentation)
 
@@ -94,6 +94,8 @@ const product: Product = await commerceApi.getProduct({
 
 - **Types and methods**
   - [Commerce Codecs](./docs/dev/commerce-codec.md)
+  - [Pagination](./docs/dev/pagination.md)
+  - [Page Cache](./docs/dev/page-cache.md)
 - **Project**
   - [Import into project](./docs/dev/import.md)
   - [Host the service](./docs/dev/host.md)

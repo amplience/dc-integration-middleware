@@ -87,10 +87,12 @@ All codecs should have the following tests:
   - Get multiple products by ID. Returned data must be in the same order as the request, missing products come back as undefined.
 - `getProducts` (keyword)
   - Get multiple products by keyword.
-  - Should fetch more than one page of products to test pagination.
+  - Should fetch more than one page of products to test pagination (when getting all products).
+  - Should be able to fetch a single page of products, ideally at an offset of one page.
 - `getProducts` (category)
   - Get multiple products by category.
-  - Should fetch more than one page of products to test pagination.
+  - Should fetch more than one page of products to test pagination (when getting all products).
+  - Should be able to fetch a single page of products, ideally at an offset of one page.
 - `getProduct` (missing)
   - Get a single product by ID, but the service doesn't find a match. Should return undefined.
 - `getRawProducts`

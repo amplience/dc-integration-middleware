@@ -6,6 +6,7 @@ import { config } from './test/config'
 import { categories, childCategories, groups, products, restProduct, rootCategory } from './test/responses'
 import { categoryRequest, customerGroupRequest, productRequest, translationsRequest } from './test/requests'
 import { flattenConfig } from '../../../../common/util'
+import { PaginationArgs } from '@/common'
 
 jest.mock('axios')
 
@@ -107,6 +108,56 @@ describe('rest integration', function() {
 			restProduct('cat2Product1', 'A product in the second category', childCategories[1]),
 			restProduct('cat2Product2', 'A second product in the second category', childCategories[1]),
 			restProduct('cat2Product3', 'A third product in the second category', childCategories[1])
+		])
+	})
+
+	test('getProducts paginated (keyword)', async () => {
+		const args = {
+			keyword: 'second product',
+
+			pageNum: 1,
+			pageSize: 1,
+			pageCount: 1
+		} as PaginationArgs
+
+		const result = await codec.getProducts(args)
+
+		expect(requests).toEqual([
+			categoryRequest,
+			productRequest,
+			customerGroupRequest,
+			translationsRequest
+		])
+
+		expect(args.total).toEqual(2)
+
+		expect(result).toEqual([
+			restProduct('cat2Product2', 'A second product in the second category', childCategories[1])
+		])
+	})
+
+	test('getProducts paginated (category)', async () => {
+		const args = {
+			category: childCategories[1],
+
+			pageNum: 1,
+			pageSize: 1,
+			pageCount: 1
+		} as PaginationArgs
+
+		const products = await codec.getProducts(args)
+
+		expect(requests).toEqual([
+			categoryRequest,
+			productRequest,
+			customerGroupRequest,
+			translationsRequest
+		])
+
+		expect(args.total).toEqual(3)
+
+		expect(products).toEqual([
+			restProduct('cat2Product2', 'A second product in the second category', childCategories[1])
 		])
 	})
 

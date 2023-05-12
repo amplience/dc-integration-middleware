@@ -7,6 +7,7 @@ import { exampleCustomerGroups, exampleCategoryTree, exampleProduct } from './te
 import { categoriesRequest, customerGroupsRequest, oauthRequest, searchRequest } from './test/requests'
 import { config } from './test/config'
 import { flattenConfig } from '../../../../common/util'
+import { PaginationArgs } from '../../../../common/types'
 
 jest.mock('axios')
 
@@ -131,6 +132,54 @@ describe('commercetools integration', function() {
 		expect(products.length).toEqual(30)
 
 		expect(products).toEqual(Array.from({length: 30}).map((_, index) => exampleProduct('Hit' + index)))
+	})
+
+	test('getProducts paginated (keyword)', async () => {
+		const args = {
+			keyword: 'Hit',
+
+			pageNum: 1,
+			pageSize: 20,
+			pageCount: 1
+		} as PaginationArgs
+
+		const result = await codec.getProducts(args)
+
+		expect(requests).toEqual([
+			oauthRequest,
+			searchRequest('text.en=%22Hit%22&offset=20&limit=20')
+		])
+
+		expect(args.total).toEqual(30)
+		expect(result).toEqual(Array.from({length: 10}).map((_, index) => exampleProduct('Hit' + (index + 20))))
+	})
+
+	test('getProducts paginated (category)', async () => {
+		const args = {
+			category: {
+				children: [],
+				products: [],
+				id: 'men-id',
+				name: 'Men',
+				slug: 'men',
+			},
+
+			pageNum: 1,
+			pageSize: 20,
+			pageCount: 1
+		} as PaginationArgs
+
+		const products = await codec.getProducts(args)
+
+		expect(requests).toEqual([
+			oauthRequest,
+			searchRequest('filter=categories.id%3A+subtree%28%22men-id%22%29&offset=20&limit=20')
+		])
+
+		expect(products.length).toEqual(10)
+
+		expect(args.total).toEqual(30)
+		expect(products).toEqual(Array.from({length: 10}).map((_, index) => exampleProduct('Hit' + (index + 20))))
 	})
 
 	test('getProduct (missing)', async () => {
