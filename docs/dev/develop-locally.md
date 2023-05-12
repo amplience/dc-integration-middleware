@@ -22,6 +22,8 @@ Ensure your codecs implement [pagination](./pagination.md) for performance and a
 
 A similar approach can be used on other projects, such as [`dc-extension-ecomm-toolkit`](https://github.com/amplience/dc-extension-ecomm-toolkit), which you can use to test things such as the commonly used product and category selectors within DC. When hosting that extension locally, it will also host its own instance of the middleware, which will allow the extension to circumvent any CORS restrictions placed by codec vendors.
 
+The eComm Toolkit extension also implements [Page Caching](./page-cache.md).
+
 ### Custom versions and importing into applications
 
 If you have made changes that you don't want to upstream, but want to use in your own application or extension, then you can either import your modified library locally as above, or clone the repository and import it from there. An example way of importing from a repository:

@@ -95,6 +95,7 @@ const product: Product = await commerceApi.getProduct({
 - **Types and methods**
   - [Commerce Codecs](./docs/dev/commerce-codec.md)
   - [Pagination](./docs/dev/pagination.md)
+  - [Page Cache](./docs/dev/page-cache.md)
 - **Project**
   - [Import into project](./docs/dev/import.md)
   - [Host the service](./docs/dev/host.md)
