@@ -140,6 +140,9 @@ registerCodec(new SFCCCodecType())
 import BigCommerceCommerceCodecType from './codecs/commerce/bigcommerce'
 registerCodec(new BigCommerceCommerceCodecType())
 
+import BigCommerceCorsCommerceCodecType from './codecs/commerce/bigcommerce-cors'
+registerCodec(new BigCommerceCorsCommerceCodecType())
+
 import ShopifyCommerceCodecType from './codecs/commerce/shopify'
 registerCodec(new ShopifyCommerceCodecType())
 

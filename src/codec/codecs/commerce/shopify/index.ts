@@ -12,13 +12,16 @@ import {
 	CommerceCodec 
 } from '../../core'
 import { getProductsArgError, logResponse } from '../../common'
+import {
+	GqlError,
+	GqlResponse, 
+	Paginated,
+	fromGqlErrors
+} from '../../../../common/graphql'
 import { StringProperty } from '../../../cms-property-types'
 import axios, { AxiosInstance } from 'axios'
 import { CodecError, CodecErrorType, catchAxiosErrors } from '../../codec-error'
-import { 
-	GqlError,
-	GqlResponse, 
-	Paginated, 
+import {
 	ShopifyCollection, 
 	ShopifyCollections, 
 	ShopifyProduct, 
@@ -139,20 +142,6 @@ export class ShopifyCommerceCodec extends CommerceCodec {
 	}
 
 	/**
-	 * Converts GraphQL errors to CodecError info.
-	 * @param errors GraphQL errors
-	 * @returns CodecError info
-	 */
-	fromGqlErrors(errors: GqlError[]) {
-		const message = errors.map(error => error.message).join(', ')
-
-		return {
-			message,
-			errors
-		}
-	}
-
-	/**
 	 * Make a request to the Shopify GraphQL API.
 	 * @param query The GraphQL query string
 	 * @param variables Variables to use with the GraphQL query
@@ -178,7 +167,7 @@ export class ShopifyCommerceCodec extends CommerceCodec {
 		)).data)
 
 		if (result.data == null && result.errors) {
-			throw new CodecError(CodecErrorType.ApiGraphQL, this.fromGqlErrors(result.errors))
+			throw new CodecError(CodecErrorType.ApiGraphQL, fromGqlErrors(result.errors))
 		}
 
 		return result.data

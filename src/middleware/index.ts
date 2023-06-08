@@ -106,7 +106,7 @@ export const getCommerceAPI = async (params: any = undefined): Promise<CommerceA
 	const codec = flattenConfig(params)
 
 	//const codec = params.codec_params ?? params // merge in vendor with params
-	if (isServer()) {
+	if (true) {
 		return await getAPI(codec)
 	} else {
 		const getResponse =
