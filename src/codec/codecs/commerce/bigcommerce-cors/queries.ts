@@ -255,11 +255,11 @@ fragment Prices on Prices {
  * GraphQL request to fetch products by query. (paginated)
  */
 export const productsByQuery = `
-query ProductsByQuery($query: String!, $after: String, $pageSize: Int!) {
+query ProductsByQuery($query: String!, $after: String, $pageSize: Int!, $currencyCode: currencyCode!) {
   site {
 		search {
 			searchProducts(filters: {searchTerm: $query}) {
-				products {
+				products(first: $pageSize, after: $after) {
 					collectionInfo {
 						totalItems
 					}
@@ -308,7 +308,7 @@ ${sharedProductFragments}`
  * GraphQL request to fetch products by category. (paginated)
  */
 export const productsByCategory = `
-query ProductsByCategory($id: Int!, $after: String, $pageSize: Int!) {
+query ProductsByCategory($id: Int!, $after: String, $pageSize: Int!, $currencyCode: currencyCode!) {
   site {
     category(entityId: $id) {
       entityId

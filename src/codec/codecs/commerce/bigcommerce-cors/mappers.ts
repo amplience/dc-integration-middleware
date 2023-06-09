@@ -32,11 +32,12 @@ export const mapImage = (image: BigCommerceCorsImage): Image => {
  * @returns The common variant
  */
 export const mapVariant = (variant: BigCommerceCorsVariant, product: BigCommerceCorsProduct): Variant => {
+	const listPrice = formatMoneyString(variant.prices.price.value, { currency: variant.prices.price.currencyCode });
 	return {
 		id: `${variant.entityId}`,
 		sku: `${variant.sku}`,
-		listPrice: formatMoneyString(variant.prices.price.value, { currency: variant.prices.price.currencyCode }),
-		salePrice: formatMoneyString(variant.prices.salePrice.value, { currency: variant.prices.salePrice.currencyCode }),
+		listPrice: listPrice,
+		salePrice: variant.prices.salePrice ? formatMoneyString(variant.prices.salePrice.value, { currency: variant.prices.salePrice.currencyCode }) : listPrice,
 		// attributesx: variant.option_values.map(opt => ({
 		//     name: opt.option_display_name.toLowerCase(),
 		//     value: opt.label

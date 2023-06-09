@@ -140,7 +140,9 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 			products = []
 		} else if (args.productIds) {
 			const ids = args.productIds.split(',')
-			const response = await this.gqlRequest<BigCommerceProductIdsResponse>(productsByIds, { ids })
+			const response = await this.gqlRequest<BigCommerceProductIdsResponse>(
+				productsByIds, 
+				{ ids: ids.map(id => Number(id)), currencyCode: args.currency || 'USD' })
 
 			products = this.mapIdentifiers(ids, response.site.products.edges.map(edge => edge.node))
 		} else if (args.keyword) {
@@ -149,7 +151,7 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 				getPageGql<BigCommerceProductQueryResponse, BigCommerceCorsProduct>(
 					this.gqlRequest.bind(this),
 					productsByQuery,
-					{query},
+					{query, currencyCode: args.currency || 'USD'},
 					response => response.site.search.searchProducts.products),
 				args,
 				PAGE_SIZE)
@@ -162,7 +164,7 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 				getPageGql<BigCommerceProductCategoryResponse, BigCommerceCorsProduct>(
 					this.gqlRequest.bind(this),
 					productsByQuery,
-					{id: args.category.id},
+					{id: args.category.id, currencyCode: args.currency || 'USD'},
 					response => response.site.category.products),
 				args,
 				PAGE_SIZE)
