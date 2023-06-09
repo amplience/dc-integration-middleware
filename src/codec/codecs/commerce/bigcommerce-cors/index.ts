@@ -1,4 +1,4 @@
-import { APIConfiguration, APIProperties, CommerceAPI, CommonArgs, GetProductsArgs, Identifiable, Product } from '../../../../common'
+import { CommerceAPI, CommonArgs, GetProductsArgs, Identifiable, Product } from '../../../../common'
 import _ from 'lodash'
 import { CodecPropertyConfig, CommerceCodecType, CommerceCodec } from '../../core'
 import { StringProperty } from '../../../cms-property-types'
@@ -8,7 +8,7 @@ import { CodecError, CodecErrorType, catchAxiosErrors } from '../../codec-error'
 import { getProductsArgError, logResponse } from '../../common'
 import { getPageByQueryAxios, getPageGql, paginateBlankArgs, paginateCursorArgs } from '../../pagination'
 import { GqlResponse, fromGqlErrors } from '../../../../common/graphql'
-import { BigCommerceCategoryTreeResponse, BigCommerceProductCategoryResponse, BigCommerceProductIdsResponse, BigCommerceProductQueryResponse, categories, productsByIds, productsByQuery } from './queries'
+import { BigCommerceCategoryTreeResponse, BigCommerceProductCategoryResponse, BigCommerceProductIdsResponse, BigCommerceProductQueryResponse, categories, productsByCategory, productsByIds, productsByQuery } from './queries'
 import { BigCommerceCorsProduct } from './types'
 
 const PAGE_SIZE = 50
@@ -163,8 +163,8 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 			const shopifyProducts = await paginateCursorArgs(
 				getPageGql<BigCommerceProductCategoryResponse, BigCommerceCorsProduct>(
 					this.gqlRequest.bind(this),
-					productsByQuery,
-					{id: args.category.id, currencyCode: args.currency || 'USD'},
+					productsByCategory,
+					{id: Number(args.category.id), currencyCode: args.currency || 'USD'},
 					response => response.site.category.products),
 				args,
 				PAGE_SIZE)

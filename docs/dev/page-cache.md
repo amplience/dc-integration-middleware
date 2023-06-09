@@ -1,5 +1,5 @@
 # Page Cache
-When implementing this middleware into an application (either on your own front end or via an [Amplience Extension](https://amplience.com/developers/docs/integrations/extensions/)), we would recommend taking advantage of the page cache interface so that you do not have to reload data that is already fetched.
+When implementing this middleware into an application (either on your own frontend or via an [Amplience Extension](https://amplience.com/developers/docs/integrations/extensions/)), we would recommend taking advantage of the included page cache class so that you do not have to reload data that is already fetched, and to avoid complicated logic when paginating through cursor based APIs.
 
 Location: `src/common/page-cache.ts`
 
