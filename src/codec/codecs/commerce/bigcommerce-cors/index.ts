@@ -147,7 +147,7 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 			products = this.mapIdentifiers(ids, response.site.products.edges.map(edge => edge.node))
 		} else if (args.keyword) {
 			const query = args.keyword
-			const shopifyProducts = await paginateCursorArgs(
+			const bcProducts = await paginateCursorArgs(
 				getPageGql<BigCommerceProductQueryResponse, BigCommerceCorsProduct>(
 					this.gqlRequest.bind(this),
 					productsByQuery,
@@ -156,11 +156,11 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 				args,
 				PAGE_SIZE)
 	
-			return shopifyProducts.data
+			return bcProducts.data
 		} else if (args.category && args.category.id === '') {
 			products = paginateBlankArgs(args)
 		} else if (args.category) {
-			const shopifyProducts = await paginateCursorArgs(
+			const bcProducts = await paginateCursorArgs(
 				getPageGql<BigCommerceProductCategoryResponse, BigCommerceCorsProduct>(
 					this.gqlRequest.bind(this),
 					productsByCategory,
@@ -169,7 +169,7 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 				args,
 				PAGE_SIZE)
 	
-			return shopifyProducts.data
+			return bcProducts.data
 		} else {
 			throw getProductsArgError(method)
 		}
@@ -180,7 +180,7 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 	 * @inheritdoc 
 	 */
 	async getCustomerGroups(args: CommonArgs): Promise<Identifiable[]> {
-		return [] //(await this.fetch('/v2/customer_groups')).map(mapCustomerGroup)
+		return []
 	}
 }
 

@@ -1,6 +1,6 @@
 import { formatMoneyString } from '../../../../common/util'
 import slugify from 'slugify'
-import { Category, CustomerGroup, Image, Product, Variant } from '../../../../common/types'
+import { Category, Image, Product, Variant } from '../../../../common/types'
 import { BigCommerceCorsCategoryTreeItem, BigCommerceCorsImage, BigCommerceCorsProduct, BigCommerceCorsVariant } from './types'
 import _ from 'lodash'
 
@@ -32,7 +32,7 @@ export const mapImage = (image: BigCommerceCorsImage): Image => {
  * @returns The common variant
  */
 export const mapVariant = (variant: BigCommerceCorsVariant, product: BigCommerceCorsProduct): Variant => {
-	const listPrice = formatMoneyString(variant.prices.price.value, { currency: variant.prices.price.currencyCode });
+	const listPrice = formatMoneyString(variant.prices.price.value, { currency: variant.prices.price.currencyCode })
 	return {
 		id: `${variant.entityId}`,
 		sku: `${variant.sku}`,

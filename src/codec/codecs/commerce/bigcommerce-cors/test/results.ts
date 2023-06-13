@@ -1,32 +1,40 @@
-// BigCommerce Customer Groups result
-export const exampleCustomerGroups = [
-	{
-		id: '1',
-		name: 'High Value'
-	}
-]
-
 // BigCommerce Category Hierarchy result
 export const exampleCategoryTree = [
 	{
-		id: '1',
-		name: 'Men',
-		slug: 'men',
-		children: [],
-		products: [],
-	},
-	{
 		id: '23',
-		name: 'Browse all',
-		slug: 'browse-all',
+		name: 'Shop All',
+		slug: 'shop-all',
 		children: [],
 		products: []
 	},
 	{
 		id: '18',
-		name: 'Bathroom',
-		slug: 'bathroom',
-		children: [],
+		name: 'Bath',
+		slug: 'bath',
+		children: [
+			{
+				id: '24',
+				name: 'Bath Utilities',
+				slug: 'bath-utilities',
+				children: [],
+				products: []
+			},
+			{
+				id: '25',
+				name: 'Toothbrushes',
+				slug: 'toothbrushes',
+				children: [
+					{
+						id: '26',
+						name: 'Electric',
+						slug: 'electric',
+						children: [],
+						products: []
+					}
+				],
+				products: []
+			}
+		],
 		products: []
 	},
 	{
@@ -52,8 +60,8 @@ export const exampleCategoryTree = [
 	},
 	{
 		id: '22',
-		name: 'Maintenance',
-		slug: 'maintenance',
+		name: 'Utility',
+		slug: 'utility',
 		children: [],
 		products: []
 	}
@@ -62,23 +70,46 @@ export const exampleCategoryTree = [
 // BigCommerce Product result
 export const exampleProduct = (id: string) => ({
 	id: id,
-	shortDescription: '<p>La cafetière Chemex a été mise au point en 1939 par son célèbre inventeur, Peter J. Schlumbohm.</p>\n<p>Fort de ses connaissances en filtration et extraction, M. Schlumbohm a créé une cafetière qui touche à la perfection. Les angles de la partie entonnoir, l\'épaisseur du filtre papier et le compartiment d\'aération permettent au café d\'infuser en un temps voulu et de libérer ses arômes, alors qu\'ils sont généralement inhibés dans les autres modes de préparation. Le résultat ? Une tasse de café soyeux et sans amertume, en moins de 4 minutes.</p>\n<p>Fabriqué dans du verre borosilicate résistant à la chaleur et équipé d\'une simple poignée en bois, le design de la cafetière Chemex fait partie de la collection permanente du Musée d\'art moderne.</p>\n<p>Dimensions en cm : 21 (h) × 7,6 (dia)</p>\n<p>Capacité : 473 ml</p>',
-	longDescription: '<p>La cafetière Chemex a été mise au point en 1939 par son célèbre inventeur, Peter J. Schlumbohm.</p>\n<p>Fort de ses connaissances en filtration et extraction, M. Schlumbohm a créé une cafetière qui touche à la perfection. Les angles de la partie entonnoir, l\'épaisseur du filtre papier et le compartiment d\'aération permettent au café d\'infuser en un temps voulu et de libérer ses arômes, alors qu\'ils sont généralement inhibés dans les autres modes de préparation. Le résultat ? Une tasse de café soyeux et sans amertume, en moins de 4 minutes.</p>\n<p>Fabriqué dans du verre borosilicate résistant à la chaleur et équipé d\'une simple poignée en bois, le design de la cafetière Chemex fait partie de la collection permanente du Musée d\'art moderne.</p>\n<p>Dimensions en cm : 21 (h) × 7,6 (dia)</p>\n<p>Capacité : 473 ml</p>',
-	slug: 'sample-cafetiere-chemex-3-tasses',
-	name: '[Sample] Cafetière Chemex 3 tasses',
+	shortDescription: '<div class="s-row">\n<div class="s-column">\n<p class="s-text">Rib knit wool beanie in navy. Embroidered patch in pink at rolled brim.<br /><br />Supplier color: Navy/Pink</p>\n</div>\n</div>\n<div class="s-row">\n<div class="s-column">\n<p class="s-text">100% wool.</p>\n<p class="s-text">Imported.</p>\n</div>\n</div>\n<p class="s-text">&nbsp;</p>',
+	longDescription: '<div class="s-row">\n<div class="s-column">\n<p class="s-text">Rib knit wool beanie in navy. Embroidered patch in pink at rolled brim.<br /><br />Supplier color: Navy/Pink</p>\n</div>\n</div>\n<div class="s-row">\n<div class="s-column">\n<p class="s-text">100% wool.</p>\n<p class="s-text">Imported.</p>\n</div>\n</div>\n<p class="s-text">&nbsp;</p>',
+	slug: 'beanie',
+	name: 'Beanie',
 	categories: [],
-	variants: [
-		{
-			id: '67',
-			sku: 'CC3C',
-			listPrice: '$49.50',
-			salePrice: '$0.00',
-			attributes: {},
-			images: [
-				{
-					url: 'https://cdn11.bigcommerce.com/s-85ttsow7dj/products/88/images/292/3cupchemex5.1677080507.386.513.jpg?c=1'
-				}
-			]
-		}
-	]
+	variants: [{
+		id: String(Number(id) + 1000),
+		sku: id + 'Mvariant',
+		listPrice: '$22.00',
+		salePrice: '$22.00',
+		attributes: {},
+		images: [
+			{
+				url: 'https://cdn11.bigcommerce.com/s-ivhpe1uqls/images/stencil/original/products/132/446/Hat-front-black__34181__49124.1603822817.png'
+			},
+			{
+				url: 'https://cdn11.bigcommerce.com/s-ivhpe1uqls/images/stencil/original/products/132/452/Hat-left-black__86563__42762.1603822817.png'
+			},
+			{
+				url: 'https://cdn11.bigcommerce.com/s-ivhpe1uqls/images/stencil/original/products/132/456/Hat-back-black__73249__27210.1603822817.png'
+			},
+			{
+				url: 'https://cdn11.bigcommerce.com/s-ivhpe1uqls/images/stencil/original/products/132/459/Hat-right-black__47486__46151.1603822817.png'
+			},
+			{
+				url: 'https://cdn11.bigcommerce.com/s-ivhpe1uqls/images/stencil/original/products/132/448/Hat-front-white__62014__04169.1603822817.png'
+			},
+			{
+				url: 'https://cdn11.bigcommerce.com/s-ivhpe1uqls/images/stencil/original/products/132/450/Hat-left-white__24819__61058.1603822817.png'
+			},
+			{
+				url: 'https://cdn11.bigcommerce.com/s-ivhpe1uqls/images/stencil/original/products/132/454/Hat-back-white__89051__65142.1603822817.png'
+			},
+			{
+				url: 'https://cdn11.bigcommerce.com/s-ivhpe1uqls/images/stencil/original/products/132/458/Hat-right-white__01475__34887.1603822817.png'
+			}
+		]
+	}]
 })
+
+export const exampleProducts = (count: number, start = 0) => {
+	return Array.from({length: count}).map((_, index) => exampleProduct((start + index).toString()))
+}

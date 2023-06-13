@@ -373,6 +373,7 @@ export function getPageGql<T, T2>(gqlRequest: GqlRequestMethod, query: string, v
 			return {
 				data: paginated.edges.map(edge => edge.node),
 				nextCursor: paginated.edges[paginated.edges.length - 1].cursor,
+				total: paginated.collectionInfo?.totalItems,
 				hasNext: true
 			}
 		}
@@ -380,7 +381,8 @@ export function getPageGql<T, T2>(gqlRequest: GqlRequestMethod, query: string, v
 		return {
 			data: paginated.edges.map(edge => edge.node),
 			nextCursor: paginated.pageInfo.endCursor,
-			hasNext: paginated.pageInfo.hasNextPage
+			hasNext: paginated.pageInfo.hasNextPage,
+			total: paginated.collectionInfo?.totalItems
 		}
 	}
 }
