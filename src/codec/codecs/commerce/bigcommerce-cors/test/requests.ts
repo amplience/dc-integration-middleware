@@ -1,8 +1,9 @@
 import { 
 	categories, 
-	productsByIds, 
-	productsByCategory, 
-	productsByQuery,
+	productsByIds,
+	productsByCategoryMin,
+	productsByQueryMin,
+	productsByIdsMin,
 } from '../queries'
 
 export const categoriesRequest = {
@@ -38,6 +39,24 @@ export const productRequest = (ids: number[]) => ({
 	url: 'https://site_id.mybigcommerce.com/graphql'
 })
 
+export const productRequestMin = (ids: number[]) => ({
+	config: {
+		baseURL: 'https://site_id.mybigcommerce.com',
+		headers: {
+			'Authorization': 'Bearer api_token'
+		},
+		url: 'graphql',
+		data: {
+			query: productsByIdsMin,
+			variables: {
+				ids: ids,
+				currencyCode: 'USD'
+			}
+		}
+	},
+	url: 'https://site_id.mybigcommerce.com/graphql'
+})
+
 export const productsByKeywordRequest = {
 	config: {
 		baseURL: 'https://site_id.mybigcommerce.com',
@@ -46,7 +65,7 @@ export const productsByKeywordRequest = {
 		},
 		url: 'graphql',
 		data: {
-			query: productsByQuery,
+			query: productsByQueryMin,
 			variables: {
 				pageSize: 50,
 				query: 'fulfilled',
@@ -66,7 +85,7 @@ export const productsByKeywordCursor = {
 		},
 		url: 'graphql',
 		data: {
-			query: productsByQuery,
+			query: productsByQueryMin,
 			variables: {
 				pageSize: 20,
 				query: 'fulfilled',
@@ -86,7 +105,7 @@ export const productsByKeywordCursor2 = {
 		},
 		url: 'graphql',
 		data: {
-			query: productsByQuery,
+			query: productsByQueryMin,
 			variables: {
 				pageSize: 20,
 				query: 'fulfilled',
@@ -106,7 +125,7 @@ export const productsByCategoryRequest = {
 		},
 		url: 'graphql',
 		data: {
-			query: productsByCategory,
+			query: productsByCategoryMin,
 			variables: {
 				id: 23,
 				pageSize: 50,
@@ -126,7 +145,7 @@ export const productsByCategoryCursor = {
 		},
 		url: 'graphql',
 		data: {
-			query: productsByCategory,
+			query: productsByCategoryMin,
 			variables: {
 				pageSize: 20,
 				id: 23,
@@ -146,7 +165,7 @@ export const productsByCategoryCursor2 = {
 		},
 		url: 'graphql',
 		data: {
-			query: productsByCategory,
+			query: productsByCategoryMin,
 			variables: {
 				pageSize: 20,
 				id: 23,

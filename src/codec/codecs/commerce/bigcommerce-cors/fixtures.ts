@@ -8,6 +8,7 @@ import {
 import { 
 	categoriesRequest, 
 	productRequest, 
+	productRequestMin, 
 	productsByCategoryCursor, 
 	productsByCategoryCursor2, 
 	productsByCategoryRequest, 
@@ -34,6 +35,27 @@ export const commerceProductRequests: MockFixture = {
 			},
 			{
 				data: productRequest([0, 3, 1]).config.data,
+				response:
+				{
+					data: bigcommerceCorsProductsByIDs([0, 1])
+				}
+			},
+			{
+				data: productRequestMin([0]).config.data,
+				response:
+				{
+					data: bigcommerceCorsProductsByIDs([0])
+				}
+			},
+			{
+				data: productRequestMin([0, 1]).config.data,
+				response:
+				{
+					data: bigcommerceCorsProductsByIDs([0, 1])
+				}
+			},
+			{
+				data: productRequestMin([0, 3, 1]).config.data,
 				response:
 				{
 					data: bigcommerceCorsProductsByIDs([0, 1])

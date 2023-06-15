@@ -212,6 +212,64 @@ export const productShared = `
          width { ...Measurement }
 `
 
+/**
+ * Product query that contains the minimum set of fields required for the mappers.
+ */
+export const productSharedMin = `
+          defaultImage {
+            ...MinImage
+          }
+          description
+          entityId
+          id
+          images(first: 50) {
+            pageInfo { ...MinPageInfo }
+            edges {
+              node {
+                ...MinImage
+              }
+              cursor
+            }
+          }
+         name
+         variants(first: 100) {
+           pageInfo { ...MinPageInfo }
+           edges {
+             node {
+               defaultImage {
+                 ...MinImage
+               }
+               entityId
+               id
+               options(first: 50) {
+                 pageInfo { ...MinPageInfo }
+                 edges {
+                   node {
+                     displayName
+                     entityId
+                     isRequired
+                     values(first: 50) {
+                       pageInfo { ...MinPageInfo }
+                       edges {
+                         node {
+                           entityId
+                           label
+                         }
+                         cursor
+                       }
+                     }
+                   }
+                   cursor
+                 }
+               }
+               prices { ...PricesMin }
+               sku
+             }
+             cursor
+           }
+         }
+`
+
 const sharedProductFragments = `
 fragment MinPageInfo on PageInfo {
   hasNextPage
@@ -248,6 +306,29 @@ fragment Prices on Prices {
   retailPriceRange { ...MoneyRange }
   salePrice { ...Money }
   saved { ...Money }
+}
+`
+
+const sharedProductFragmentsMin = `
+fragment MinPageInfo on PageInfo {
+  hasNextPage
+  endCursor
+}
+
+fragment MinImage on Image {
+  altText
+  isDefault
+  urlOriginal
+}
+
+fragment Money on Money {
+  currencyCode
+  value
+}
+
+fragment PricesMin on Prices {
+  price { ...Money }
+  salePrice { ...Money }
 }
 `
 
@@ -331,3 +412,87 @@ query ProductsByCategory($id: Int!, $after: String, $pageSize: Int!, $currencyCo
 }
 
 ${sharedProductFragments}`
+
+/**
+ * GraphQL request to fetch products by query. (paginated)
+ * Fetches the minimum set of fields required by the mappers.
+ */
+export const productsByQueryMin = `
+query ProductsByQuery($query: String!, $after: String, $pageSize: Int!) {
+  site {
+		search {
+			searchProducts(filters: {searchTerm: $query}) {
+				products(first: $pageSize, after: $after) {
+					collectionInfo {
+						totalItems
+					}
+					pageInfo {
+						...MinPageInfo
+					}
+					edges {
+						node {
+							${productSharedMin}
+						}
+						cursor
+					}
+				}
+			}
+		}
+  }
+}
+
+${sharedProductFragmentsMin}`
+
+/**
+ * GraphQL request to fetch products by a list of IDs.
+ * Fetches the minimum set of fields required by the mappers.
+ */
+export const productsByIdsMin = `
+query ProductsById($ids: [Int!]) {
+  site {
+    products(entityIds: $ids) {
+      collectionInfo {
+        totalItems
+      }
+      pageInfo {
+        ...MinPageInfo
+      }
+      edges {
+        node {
+		      ${productSharedMin}
+        }
+      }
+    }
+  }
+}
+
+${sharedProductFragmentsMin}`
+
+/**
+ * GraphQL request to fetch products by category. (paginated)
+ * Fetches the minimum set of fields required by the mappers.
+ */
+export const productsByCategoryMin = `
+query ProductsByCategory($id: Int!, $after: String, $pageSize: Int!) {
+  site {
+    category(entityId: $id) {
+      entityId
+      products(first: $pageSize, after: $after) {
+        collectionInfo {
+          totalItems
+        }
+        pageInfo {
+          ...MinPageInfo
+        }
+        edges {
+          node {
+            ${productSharedMin}
+          }
+          cursor
+        }
+      }
+    }
+  }
+}
+
+${sharedProductFragmentsMin}`

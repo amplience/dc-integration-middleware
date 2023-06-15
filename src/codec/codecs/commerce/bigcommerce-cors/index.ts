@@ -8,7 +8,7 @@ import { CodecError, CodecErrorType, catchAxiosErrors } from '../../codec-error'
 import { getProductsArgError, logResponse } from '../../common'
 import { getPageByQueryAxios, getPageGql, paginateBlankArgs, paginateCursorArgs } from '../../pagination'
 import { GqlResponse, fromGqlErrors } from '../../../../common/graphql'
-import { BigCommerceCategoryTreeResponse, BigCommerceProductCategoryResponse, BigCommerceProductIdsResponse, BigCommerceProductQueryResponse, categories, productsByCategory, productsByIds, productsByQuery } from './queries'
+import { BigCommerceCategoryTreeResponse, BigCommerceProductCategoryResponse, BigCommerceProductIdsResponse, BigCommerceProductQueryResponse, categories, productsByCategory, productsByCategoryMin, productsByIds, productsByIdsMin, productsByQuery, productsByQueryMin } from './queries'
 import { BigCommerceCorsProduct } from './types'
 
 const PAGE_SIZE = 50
@@ -135,13 +135,15 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 	 * @inheritdoc
 	 */
 	async getRawProducts(args: GetProductsArgs, method = 'getRawProducts'): Promise<BigCommerceCorsProduct[]> {
+		const raw = method === 'getRawProducts'
+
 		let products: BigCommerceCorsProduct[] = []
 		if (args.productIds && args.productIds === '') {
 			products = []
 		} else if (args.productIds) {
 			const ids = args.productIds.split(',')
 			const response = await this.gqlRequest<BigCommerceProductIdsResponse>(
-				productsByIds, 
+				raw ? productsByIds : productsByIdsMin, 
 				{ ids: ids.map(id => Number(id)), currencyCode: args.currency || 'USD' })
 
 			products = this.mapIdentifiers(ids, response.site.products.edges.map(edge => edge.node))
@@ -150,7 +152,7 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 			const bcProducts = await paginateCursorArgs(
 				getPageGql<BigCommerceProductQueryResponse, BigCommerceCorsProduct>(
 					this.gqlRequest.bind(this),
-					productsByQuery,
+					raw ? productsByQuery : productsByQueryMin,
 					{query, currencyCode: args.currency || 'USD'},
 					response => response.site.search.searchProducts.products),
 				args,
@@ -163,7 +165,7 @@ export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 			const bcProducts = await paginateCursorArgs(
 				getPageGql<BigCommerceProductCategoryResponse, BigCommerceCorsProduct>(
 					this.gqlRequest.bind(this),
-					productsByCategory,
+					raw ? productsByCategory : productsByCategoryMin,
 					{id: Number(args.category.id), currencyCode: args.currency || 'USD'},
 					response => response.site.category.products),
 				args,

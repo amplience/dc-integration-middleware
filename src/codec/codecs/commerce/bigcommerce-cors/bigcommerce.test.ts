@@ -20,6 +20,7 @@ import {
 	productsByKeywordCursor2,
 	productsByCategoryCursor2,
 	productsByCategoryCursor,
+	productRequestMin,
 } from './test/requests'
 import { config } from './test/config'
 import { flattenConfig } from '../../../../common/util'
@@ -56,7 +57,7 @@ describe('bigcommerce cors integration', function () {
 		const result = await codec.getProduct({ id: '0' })
 		expect(result).toEqual(exampleProduct('0'))
 		expect(requests).toEqual([
-			productRequest([0])
+			productRequestMin([0])
 		])
 	})
 
@@ -72,7 +73,7 @@ describe('bigcommerce cors integration', function () {
 		})
 
 		expect(requests).toEqual([
-			productRequest([0, 1]),
+			productRequestMin([0, 1]),
 		])
 
 		expect(result).toEqual([
@@ -196,7 +197,7 @@ describe('bigcommerce cors integration', function () {
 		const result = await codec.getProduct({ id: '3' })
 		expect(result).toBeNull()
 		expect(requests).toEqual([
-			productRequest([3])
+			productRequestMin([3])
 		])
 	})
 
@@ -212,7 +213,7 @@ describe('bigcommerce cors integration', function () {
 		})
 
 		expect(requests).toEqual([
-			productRequest([0, 3, 1]),
+			productRequestMin([0, 3, 1]),
 		])
 
 		expect(result).toEqual([
