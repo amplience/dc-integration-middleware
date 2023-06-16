@@ -103,6 +103,6 @@ All codecs should have the following tests:
   - Get a list of root level categories.
   - Sub-categories should be contained in children as a tree, should not appear at root level.
 - `getCustomerGroups`
-  - Get a list of customer groups.
+  - Get a list of customer groups. Some vendors do not support this and will return an empty array. Check the documentation to see which backends are affected.
   
 Additional tests should be added if the vendor has any unusual behaviours that you need to test have been properly handled. If you need an example of the absolute baseline required for codec unit tests, look at the unit tests for the `rest` codec.

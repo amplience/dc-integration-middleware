@@ -87,6 +87,7 @@ const product: Product = await commerceApi.getProduct({
   - [Saleforce Commerce Cloud](./docs/vendor/commerce/sfcc.md)
   - [Shopify](./docs/vendor/commerce/shopify.md)
   - [BigCommerce](./docs/vendor/commerce/bigcommerce.md)
+  - [BigCommerce CORS](./docs/vendor/commerce/bigcommerce-cors.md)
   - [CommerceTools](./docs/vendor/commerce/commercetools.md)
   - [REST](./docs/vendor/commerce/rest.md)
 
