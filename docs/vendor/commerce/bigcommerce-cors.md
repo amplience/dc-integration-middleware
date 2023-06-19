@@ -19,7 +19,11 @@ Connects to a BigCommerce instance via the GraphQL Storefront API. This backend 
 
 ## Configuration on the vendor side
 
-To create a GraphQL API token, you must first create a store-level API account 
+`site_id` is easy to find, just click "View Storefronts" in the sidebar and use the string that appears before `.mybigcommerce.com`.
+
+![](../../media/bigcommerceSiteId.png)
+
+To create a GraphQL API token, you must first create a store-level API account.
 
 ### Create Store-level API account
 
@@ -66,7 +70,7 @@ Body:
 }
 ```
 
-This will return a JSON object containing your GraphQL Storefront API Token, which you can use as the `api_token` in the 
+This will return a JSON object containing your GraphQL Storefront API Token, which you can use as the `api_token` in the vendor config. 
 
 Make sure allowed CORS origins include all areas you may access the API from, such as the URLs for extensions you will use, or localhost (optionally with a port) for testing the extensions locally.
 
