@@ -28,6 +28,7 @@ The `CommerceAPI` interface exposes these methods:
 -   `getCategory` (by ID)
 -   `getCategoryTree` (category structure)
 -   `getCustomerGroups` (customer segmentation)
+  - Customer Groups are not supported when accessing some integrations from a browser.
 
 Concrete implementations of this interface are referred to as `Codec`s and are located in `src/codec/codecs`. Platform-specific e-Commerce implementations are found in `src/codec/codecs/commerce`.
 You can find types and methods [here](./docs/dev/commerce-codec.md).

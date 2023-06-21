@@ -32,6 +32,8 @@ When you create an API Client in the SFCC Account Manager, you will also specify
 
 As such, you'll need to edit the OCAPI settings, which can me found in Business Manager at Administration > Site Development > OCAPI Settings. These settings also handle whitelisting any URLs in the `allowed_origins` array.
 
+You need to specify the URLs of any UI extensions or other webapps in `allowed_origins` for them to be able to use the API without errors.
+
 > NOTE: The OCAPI Shop & Data endpoints in the following `resources` array covers the methods currently implemented by dc-integration-middleware. Additional methods may require adding additional resources in the OCAPI settings.
 
 #### Admin > Site Development > OCAPI > Shop settings

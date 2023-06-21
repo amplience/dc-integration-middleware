@@ -4,6 +4,12 @@ import { flattenConfig, isServer } from '../common/util'
 import { CodecError, CodecErrorType } from '../codec/codecs/codec-error'
 import { IntegrationError } from '../common/errors'
 
+let useMiddleware = !!process.env.INTEGRATION_MIDDLEWARE_SERVER
+
+export function enableMiddleware(enable: boolean) {
+	useMiddleware = enable
+}
+
 /**
  * Get an API for the given configuration.
  * @param config Configuration object
@@ -106,7 +112,7 @@ export const getCommerceAPI = async (params: any = undefined): Promise<CommerceA
 	const codec = flattenConfig(params)
 
 	//const codec = params.codec_params ?? params // merge in vendor with params
-	if (true) {
+	if (isServer() || (!useMiddleware && !params.middleware_url)) {
 		return await getAPI(codec)
 	} else {
 		const getResponse =
@@ -114,7 +120,7 @@ export const getCommerceAPI = async (params: any = undefined): Promise<CommerceA
 				async (args: any): Promise<any> => {
 					const apiUrl = (window as any).isStorybook
 						? 'https://core.dc-demostore.com/api'
-						: '/api'
+						: (params.middleware_url ?? '/api')
 
 					const response = (await axios.post(apiUrl, { ...args, ...codec, operation })).data
 
@@ -172,6 +178,10 @@ export const middleware = async (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*')
 	res.setHeader('Access-Control-Allow-Headers', '*')
 	res.setHeader('Access-Control-Allow-Methods', '*')
+
+	if (!useMiddleware) {
+		return res.status(404).send()
+	}
 
 	const config = req.body || req.query
 	const commerceAPI = await getCommerceAPI(config)
