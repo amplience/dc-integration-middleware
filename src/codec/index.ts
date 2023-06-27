@@ -149,3 +149,4 @@ registerCodec(new ShopifyCommerceCodecType())
 // Re-export common codec functions.
 export * from './codecs/common'
 export * from './codecs/core'
+export * from './codecs/codec-error'
