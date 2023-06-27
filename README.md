@@ -30,6 +30,13 @@ The `CommerceAPI` interface exposes these methods:
 -   `getCustomerGroups` (customer segmentation)
   - Customer Groups are not supported when accessing some integrations from a browser.
 
+### CORS Support Table
+|  |	SFCC | Big Commerce | Commercetools | Shopify | REST |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| products | y | y | y | y | y |
+| categories | y | y | y | y | y |
+| user segments | y | n | y | n | y |
+
 Concrete implementations of this interface are referred to as `Codec`s and are located in `src/codec/codecs`. Platform-specific e-Commerce implementations are found in `src/codec/codecs/commerce`.
 You can find types and methods [here](./docs/dev/commerce-codec.md).
 
