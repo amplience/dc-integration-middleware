@@ -338,24 +338,24 @@ fragment PricesMin on Prices {
 export const productsByQuery = `
 query ProductsByQuery($query: String!, $after: String, $pageSize: Int!, $currencyCode: currencyCode!) {
   site {
-		search {
-			searchProducts(filters: {searchTerm: $query}) {
-				products(first: $pageSize, after: $after) {
-					collectionInfo {
-						totalItems
-					}
-					pageInfo {
-						...MinPageInfo
-					}
-					edges {
-						node {
-							${productShared}
-						}
-						cursor
-					}
-				}
-			}
-		}
+    search {
+      searchProducts(filters: {searchTerm: $query}) {
+        products(first: $pageSize, after: $after) {
+          collectionInfo {
+            totalItems
+          }
+          pageInfo {
+            ...MinPageInfo
+          }
+          edges {
+            node {
+              ${productShared}
+            }
+            cursor
+          }
+        }
+      }
+    }
   }
 }
 
@@ -376,7 +376,7 @@ query ProductsById($ids: [Int!], $currencyCode: currencyCode!) {
       }
       edges {
         node {
-		      ${productShared}
+          ${productShared}
         }
       }
     }
@@ -420,24 +420,24 @@ ${sharedProductFragments}`
 export const productsByQueryMin = `
 query ProductsByQuery($query: String!, $after: String, $pageSize: Int!) {
   site {
-		search {
-			searchProducts(filters: {searchTerm: $query}) {
-				products(first: $pageSize, after: $after) {
-					collectionInfo {
-						totalItems
-					}
-					pageInfo {
-						...MinPageInfo
-					}
-					edges {
-						node {
-							${productSharedMin}
-						}
-						cursor
-					}
-				}
-			}
-		}
+    search {
+      searchProducts(filters: {searchTerm: $query}) {
+        products(first: $pageSize, after: $after) {
+          collectionInfo {
+            totalItems
+          }
+          pageInfo {
+            ...MinPageInfo
+          }
+          edges {
+            node {
+              ${productSharedMin}
+            }
+            cursor
+          }
+        }
+      }
+    }
   }
 }
 
@@ -459,7 +459,7 @@ query ProductsById($ids: [Int!]) {
       }
       edges {
         node {
-		      ${productSharedMin}
+          ${productSharedMin}
         }
       }
     }
