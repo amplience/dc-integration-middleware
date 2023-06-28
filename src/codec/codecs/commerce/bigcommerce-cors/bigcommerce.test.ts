@@ -4,7 +4,6 @@ import { CommerceCodec } from '../../core'
 import BigCommerceCorsCodecType, { BigCommerceCorsCommerceCodec } from '.'
 import { 
 	bigcommerceCorsProduct,
-	//bigcommerceProduct 
 } from './test/responses'
 import {
 	exampleCategoryTree, 

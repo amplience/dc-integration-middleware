@@ -54,6 +54,7 @@ export interface BigCommerceCorsImage {
 	isDefault: boolean
 
 	/** Absolute path to image using store CDN. */
+	/** Could be used in future for thumb url or size parameterized image. */
 	/**url (width: Int!, height: Int): String! */
 
 	/** Absolute path to original image using store CDN. */
@@ -80,9 +81,6 @@ export interface BigCommerceCorsMoneyRange {
 export interface BigCommerceCorsPrices {
 	/** Original price of the product. */
 	basePrice?: BigCommerceCorsMoney
-
-	/** List of bulk pricing tiers applicable to a product or variant. */
-	//bulkPricing: [BulkPricingTier!]!
 
 	/** Minimum advertised price of the product. */
 	mapPrice?: BigCommerceCorsMoney
@@ -187,9 +185,6 @@ export interface BigCommerceCorsVariant {
 	/** Whether the product can be purchased */
 	isPurchasable: boolean
 
-	/** Metafield data related to a variant. */
-	//metafields: MetafieldConnection!
-
 	/** Manufacturer part number. */
 	mpn?: string
 
@@ -198,9 +193,6 @@ export interface BigCommerceCorsVariant {
 
 	/** Variant prices */
 	prices: BigCommerceCorsPrices /** currencyCode, includeTax */
-
-	/** Product options that compose this variant. */
-	//productOptions: Paginated<BigCommerceCorsProductOption>
 
 	/** Sku of the variant. */
 	sku: string
@@ -298,9 +290,6 @@ export interface BigCommerceCorsProduct {
 	/** Product creation date **/
 	createdAt: BigCommerceCorsDateTimeExtended
 
-	/** Custom fields of the product. **/
-	//customFields: CustomFieldConnection!
-
 	/** Default image for a product. **/
 	defaultImage?: BigCommerceCorsImage
 
@@ -334,9 +323,6 @@ export interface BigCommerceCorsProduct {
 	/** Maximum purchasable quantity for this product in a single order. **/
 	maxPurchaseQuantity?: number
 
-	/** Metafield data related to a product. **/
-	//metafields: MetafieldConnection!
-
 	/** Minimum purchasable quantity for this product in a single order. **/
 	minPurchaseQuantity?: number
 
@@ -354,15 +340,6 @@ export interface BigCommerceCorsProduct {
 
 	/** Prices object determined by supplied product ID, variant ID, and selected option IDs. **/
 	prices: BigCommerceCorsPrices
-
-	/** Product options. **/
-	//productOptions: ProductOptionConnection!
-
-	/** Related products for this product. **/
-	//relatedProducts: RelatedProductsConnection!
-
-	/** Reviews associated with the product. **/
-	//reviews: ReviewConnection!
 
 	/** Summary of the product reviews, includes the total number of reviews submitted and summation of the ratings on the reviews (ratings range from 0-5 per review). **/
 	reviewSummary: BigCommerceCorsReviews
