@@ -74,4 +74,4 @@ This will return a JSON object containing your GraphQL Storefront API Token, whi
 
 Make sure allowed CORS origins include all areas you may access the API from, such as the URLs for extensions you will use, or localhost (optionally with a port) for testing the extensions locally.
 
-The expiry date can be rather far in the future, though you should make sure to renew your token before it expires.
+The expiry date can be rather far in the future (such as in a year), though you should make sure to renew your token before it expires.
