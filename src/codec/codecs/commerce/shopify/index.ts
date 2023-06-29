@@ -13,9 +13,7 @@ import {
 } from '../../core'
 import { getProductsArgError, logResponse } from '../../common'
 import {
-	GqlError,
-	GqlResponse, 
-	Paginated,
+	GqlResponse,
 	fromGqlErrors
 } from '../../../../common/graphql'
 import { StringProperty } from '../../../cms-property-types'
@@ -43,7 +41,7 @@ import {
 	mapCustomerGroup, 
 	mapProduct
 } from './mappers'
-import { GetPageResultCursor, paginateCursor, paginateCursorArgs, getPageGql } from '../../pagination'
+import { paginateCursor, paginateCursorArgs, getPageGql } from '../../pagination'
 
 const PAGE_SIZE = 100
 
