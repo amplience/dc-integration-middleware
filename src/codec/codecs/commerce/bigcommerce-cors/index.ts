@@ -14,7 +14,7 @@ import { BigCommerceCorsProduct } from './types'
 const PAGE_SIZE = 50
 
 /**
- * BigCommerce Codec config properties
+ * BigCommerce CORS Codec config properties
  */
 type CodecConfig = {
 	api_token: StringProperty
@@ -22,7 +22,7 @@ type CodecConfig = {
 }
 
 /**
- * Commerce Codec Type that integrates with BigCommerce.
+ * Commerce Codec Type that integrates with BigCommerce and is CORS compatible.
  */
 export class BigCommerceCorsCommerceCodecType extends CommerceCodecType {
 	/**
@@ -59,7 +59,7 @@ export class BigCommerceCorsCommerceCodecType extends CommerceCodecType {
 }
 
 /**
- * Commerce Codec that integrates with BigCommerce.
+ * Commerce Codec that integrates with BigCommerce and is CORS compatible.
  */
 export class BigCommerceCorsCommerceCodec extends CommerceCodec {
 	declare config: CodecPropertyConfig<CodecConfig>

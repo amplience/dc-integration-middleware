@@ -3,7 +3,7 @@
 ## `bigCommerceCodec`
 Location: `src/codec/codecs/bigcommerce-cors`
 
-Connects to a BigCommerce instance via the GraphQL Storefront API, compatible with CORS. This backend does not support listing customer groups.
+Connects to a BigCommerce instance via the GraphQL Storefront API, compatible with CORS. This backend does not support listing customer groups. See [BigCommerce](./bigcommerce-cors.md) for a backend that doesn't supports CORS, but has customer group functionality.
 
 ### Configuration
 
