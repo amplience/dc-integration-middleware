@@ -6,6 +6,8 @@ Location: `src/codec/codecs/sfcc`
 
 Connects to a Salesforce Commerce Cloud instance.
 
+See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README.md#server-support-table) support tables for more information
+
 ### Configuration
 
 ```json

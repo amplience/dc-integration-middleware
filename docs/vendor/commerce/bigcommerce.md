@@ -3,9 +3,9 @@
 ## `bigCommerceCodec`
 Location: `src/codec/codecs/bigcommerce`
 
-Connects to a BigCommerce instance. This backend is not usable under CORS restrictions (on a browser), but does support all commerce methods. See [BigCommerce CORS](./bigcommerce-cors.md) for a backend that supports CORS.
+Connects to a BigCommerce instance via the V3 REST API. This backend is not usable under CORS restrictions (on a browser), but does support all commerce methods. See [BigCommerce CORS](./bigcommerce-cors.md) for a backend that supports CORS.
 
-> Note: This implementation uses the Big Commerce V3 REST API
+See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README.md#server-support-table) support tables for more information
 
 ### Configuration
 
