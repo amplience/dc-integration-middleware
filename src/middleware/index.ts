@@ -184,16 +184,17 @@ export const middleware = async (req, res) => {
 	}
 
 	const config = req.body || req.query
-	const commerceAPI = await getCommerceAPI(config)
 	switch (req.method.toLowerCase()) {
 	case 'get':
 	case 'post':
+	{
+		const commerceAPI = await getCommerceAPI(config)
 		try {
 			return res.status(200).json(createMiddlewareResponse(config, await commerceAPI[config.operation](config)))
 		} catch (e) {
 			return res.status(200).json({error: toApiError(e)})
 		}
-
+	}
 	case 'options':
 		return res.status(200).send()
 
