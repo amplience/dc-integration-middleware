@@ -28,6 +28,14 @@ The `CommerceAPI` interface exposes these methods:
 -   `getCategory` (by ID)
 -   `getCategoryTree` (category structure)
 -   `getCustomerGroups` (customer segmentation)
+  - Customer Groups are not supported when accessing some integrations from a browser.
+
+### CORS Support Table
+|  |	SFCC | Big Commerce (CORS) | Commercetools | Shopify | REST |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| products | ✅ | ✅  | ✅  | ✅  | ✅  |
+| categories | ✅  | ✅  | ✅  | ✅  | ✅  |
+| user segments | ✅  | ❌ | ✅  | ❌ | ✅  |
 
 Concrete implementations of this interface are referred to as `Codec`s and are located in `src/codec/codecs`. Platform-specific e-Commerce implementations are found in `src/codec/codecs/commerce`.
 You can find types and methods [here](./docs/dev/commerce-codec.md).
@@ -35,6 +43,15 @@ You can find types and methods [here](./docs/dev/commerce-codec.md).
 There is a separate project called [`dc-integration-tester`](https://github.com/amplience/dc-integration-tester) which provides a CLI that lets you test the codecs in this project with your configuration, and potentially test new or modified codecs on your own copy of the codebase.
 
 There are also [Unit Tests](./docs/dev/unit-testing.md) for each method and vendor.
+
+### Server Support Table
+If you choose to deploy your use of this middleware in your own hosting, you can change the configuration to interface with commerce API's from the server rather than client side. See [`import`](./docs/dev/import.md)
+
+|  |	SFCC | Big Commerce | Commercetools | Shopify | REST |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| products | ✅ | ✅  | ✅  | ✅  | ✅  |
+| categories | ✅  | ✅  | ✅  | ✅  | ✅  |
+| user segments | ✅  | ✅  | ✅  | ✅  | ✅  |
 
 ## 🏁 Quick Start
 
@@ -87,6 +104,7 @@ const product: Product = await commerceApi.getProduct({
   - [Saleforce Commerce Cloud](./docs/vendor/commerce/sfcc.md)
   - [Shopify](./docs/vendor/commerce/shopify.md)
   - [BigCommerce](./docs/vendor/commerce/bigcommerce.md)
+  - [BigCommerce CORS](./docs/vendor/commerce/bigcommerce-cors.md)
   - [CommerceTools](./docs/vendor/commerce/commercetools.md)
   - [REST](./docs/vendor/commerce/rest.md)
 

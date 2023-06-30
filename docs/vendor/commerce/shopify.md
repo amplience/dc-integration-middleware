@@ -6,6 +6,8 @@ Location: `src/codec/codecs/shopify`
 
 Connects to a Shopify instance.
 
+See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README.md#server-support-table) support tables for more information
+
 ### Configuration
 
 ```json

@@ -1,41 +1,4 @@
-/**
- * GraphQL error.
- */
-export interface GqlError {
-	message: string
-}
-
-/**
- * GraphQL response.
- */
-export interface GqlResponse<T> {
-	data: T
-	errors?: GqlError[]
-}
-
-/**
- * GraphQL edge from a paginated request.
- */
-export interface Edge<T> {
-	node: T,
-	cursor: string
-}
-
-/**
- * GraphQL pagination info.
- */
-export interface PageInfo {
-	hasNextPage: boolean,
-	endCursor: string
-}
-
-/**
- * GraphQL paginated request with edges.
- */
-export interface Paginated<T> {
-	edges: Edge<T>[],
-	pageInfo: PageInfo
-}
+import { Paginated } from '../../../../common/graphql'
 
 /**
  * Shopify collection type.

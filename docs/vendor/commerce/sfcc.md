@@ -6,6 +6,8 @@ Location: `src/codec/codecs/sfcc`
 
 Connects to a Salesforce Commerce Cloud instance.
 
+See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README.md#server-support-table) support tables for more information
+
 ### Configuration
 
 ```json
@@ -31,6 +33,8 @@ In order to allow dc-integration-middleware to access the Open Commerce API (OCA
 When you create an API Client in the SFCC Account Manager, you will also specify an API Secret. See the [Setting up a Client ID](https://amplience.com/developers/docs/integrations/commerce/salesforce/setup/#ocapi-set-up) in SFCC section for more details.
 
 As such, you'll need to edit the OCAPI settings, which can me found in Business Manager at Administration > Site Development > OCAPI Settings. These settings also handle whitelisting any URLs in the `allowed_origins` array.
+
+You need to specify the URLs of any UI extensions or other webapps in `allowed_origins` for them to be able to use the API without errors.
 
 > NOTE: The OCAPI Shop & Data endpoints in the following `resources` array covers the methods currently implemented by dc-integration-middleware. Additional methods may require adding additional resources in the OCAPI settings.
 

@@ -243,7 +243,7 @@ Get a list of customer groups.
 
 ##### Edge Cases
 
--   When no customer groups are present, it should just return [].
+-   When no customer groups are present, or the backend does not support listing customer groups, it should just return [].
 
 ### Special edge cases
 

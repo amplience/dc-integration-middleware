@@ -1,6 +1,7 @@
 import { OAuthRestClientInterface, PaginationArgs } from '@/common'
 import { AxiosRequestConfig, AxiosStatic } from 'axios'
 import { logResponse } from './common'
+import { Paginated } from '../../common/graphql'
 
 export type GetPageResultCursor<T> = { data: T[], hasNext: boolean, nextCursor?: string, total?: number }
 
@@ -349,4 +350,39 @@ export function paginateBlankArgs<T>(args: PaginationArgs): T[] {
 	delete args.cursorPage
 
 	return []
+}
+
+type GqlRequestMethod = <T>(query: string, variables: any, isAdmin?: boolean) => Promise<T>;
+
+/**
+ * Generate a function that gets a page from a GraphQL API.
+ * @param query The GraphQL query string
+ * @param variables Variables to use with the GraphQL query
+ * @param getPaginated Function that gets the Paginated<T2> type from the request type T
+ * @param isAdmin Whether the admin credentials must be used or not
+ * @returns A function that gets a page from a cursor and pageSize.
+ */
+export function getPageGql<T, T2>(gqlRequest: GqlRequestMethod, query: string, variables: any, getPaginated: (response: T) => Paginated<T2>, isAdmin = false) {
+	return async (cursor: string | undefined, pageSize: number): Promise<GetPageResultCursor<T2>> => {
+		const result = await gqlRequest<T>(query, {...variables, pageSize, after: cursor}, isAdmin)
+		const paginated = getPaginated(result)
+
+		if (paginated.edges.length > pageSize) {
+			paginated.edges = paginated.edges.slice(0, pageSize)
+			
+			return {
+				data: paginated.edges.map(edge => edge.node),
+				nextCursor: paginated.edges[paginated.edges.length - 1].cursor,
+				total: paginated.collectionInfo?.totalItems,
+				hasNext: true
+			}
+		}
+
+		return {
+			data: paginated.edges.map(edge => edge.node),
+			nextCursor: paginated.pageInfo.endCursor,
+			hasNext: paginated.pageInfo.hasNextPage,
+			total: paginated.collectionInfo?.totalItems
+		}
+	}
 }
