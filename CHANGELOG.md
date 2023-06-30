@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/amplience/dc-integration-middleware/compare/v1.1.0...v2.0.0) (2023-06-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* prefer cors requests and add bigcommerce-cors backend (#3)
+
+### Features
+
+* prefer cors requests and add bigcommerce-cors backend ([#3](https://github.com/amplience/dc-integration-middleware/issues/3)) ([767c0d9](https://github.com/amplience/dc-integration-middleware/commit/767c0d9873b8c7447044b941c841b4fba09e6266))
+
 ## [1.1.0](https://github.com/amplience/dc-integration-middleware/compare/v1.0.0...v1.1.0) (2023-05-12)
 
 
