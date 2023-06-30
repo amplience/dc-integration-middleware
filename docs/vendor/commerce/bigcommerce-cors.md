@@ -5,6 +5,8 @@ Location: `src/codec/codecs/bigcommerce-cors`
 
 Connects to a BigCommerce instance via the GraphQL Storefront API, compatible with CORS. This backend does not support listing customer groups. See [BigCommerce](./bigcommerce-cors.md) for a backend that doesn't supports CORS, but has customer group functionality.
 
+See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README.md#server-support-table) support tables for more information
+
 ### Configuration
 
 ```json
@@ -75,3 +77,5 @@ This will return a JSON object containing your GraphQL Storefront API Token, whi
 Make sure allowed CORS origins include all areas you may access the API from, such as the URLs for extensions you will use, or localhost (optionally with a port) for testing the extensions locally.
 
 The expiry date can be rather far in the future (such as in a year), though you should make sure to renew your token before it expires.
+
+> Note: At the time of this release there is no way of generating this token from the Big Commerce UI directly or from a CORS request which is why the documentation is reflected to generate this.
