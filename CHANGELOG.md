@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/amplience/dc-integration-middleware/compare/v2.0.0...v2.0.1) (2023-06-30)
+
+
+### Bug Fixes
+
+* fix CORS OPTIONS request for middleware api ([#4](https://github.com/amplience/dc-integration-middleware/issues/4)) ([2b1facf](https://github.com/amplience/dc-integration-middleware/commit/2b1facf93d71fd6034d5199d4188c3a83bf5a44b))
+
 ## [2.0.0](https://github.com/amplience/dc-integration-middleware/compare/v1.1.0...v2.0.0) (2023-06-30)
 
 
