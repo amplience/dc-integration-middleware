@@ -10,7 +10,9 @@ $ npm i @amplience/dc-integration-middleware
 
 ## Export middleware and init
 
-When using something like Next.js, or a similar route-based framework, this should be in `/pages/api/index.js`. This will essentially add the `/api` route to your project.
+The Middleware API is a way to provide access to CORS-limited API methods from a browser. It's not recommended to use this, but the option is there for users who need the functionality.
+
+When using something like Next.js, or a similar route-based framework, this should be in `/pages/api/index.js`. This will essentially add the `/api` route to your project. Whether this route functions depends on if the `INTEGRATION_MIDDLEWARE_SERVER` environment variable is true, though it can also be changed via the `enableMiddleware` method.
 
 You should also export an init function.
 
