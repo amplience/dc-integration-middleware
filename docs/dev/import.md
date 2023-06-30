@@ -14,6 +14,8 @@ The Middleware API is a way to provide access to CORS-limited API methods from a
 
 When using something like Next.js, or a similar route-based framework, this should be in `/pages/api/index.js`. This will essentially add the `/api` route to your project. Whether this route functions depends on if the `INTEGRATION_MIDDLEWARE_SERVER` environment variable is true, though it can also be changed via the `enableMiddleware` method.
 
+By default, clientside uses of the project will not try to contact the middleware API either. If `INTEGRATION_MIDDLEWARE_SERVER` is defined and true _at build time_, the middleware api is assumed to be present at `/api` and will be used. This can be controlled via the `enableMiddleware` method in a similar way. Regardless of any settings, requests can use middleware APIs by providing the property `middleware_url` in the method params.
+
 You should also export an init function.
 
 ```javascript
@@ -32,6 +34,15 @@ const initCommerceApi = async (config: any) => {
 }
 
 export { initCommerceApi }
+```
+
+`enableMiddleware` can be used as follows:
+```typescript
+import {
+	enableMiddleware
+} from '@amplience/dc-integration-middleware'
+
+enableMiddleware(true); // Enables hosting/default access via the middleware API.
 ```
 
 ## Init and use
