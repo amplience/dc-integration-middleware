@@ -74,7 +74,8 @@ export class CommercetoolsCodecType extends CommerceCodecType {
  * @param args Method arguments that contain the language
  */
 const localize = (localizable: Localizable, args: CommonArgs): string => {
-	return localizable[args.language] || localizable.en
+	//TODO: Remove hard coding en-US and make so that it works from installation params in extension (eComm Toolkit)
+	return localizable["en-US"] || localizable[args.language] || localizable.en
 }
 
 /**
@@ -203,8 +204,11 @@ export class CommercetoolsCodec extends CommerceCodec {
 	 */
 	async cacheCategoryTree(): Promise<void> {
 		const categories: CTCategory[] = (await paginate<CTCategory>(this.getPage(this.rest, '/categories'), 500)).result
+		const rootCats:string[] = categories
+			.filter(cat => cat.parent?.typeId !== "category")
+			.map(cat => localize(cat.slug, {}))
 		const mapped: Category[] = categories.map(cat => mapCategory(cat, categories, {}))
-		this.categoryTree = mapped.filter(cat => cats.includes(cat.slug))
+		this.categoryTree = mapped.filter(cat => rootCats.includes(cat.slug))
 	}
 
 	/**
