@@ -51,6 +51,24 @@ export const exampleCategoryTree = [
 	}
 ]
 
+export const exampleCategoryTreeEs = [
+	{
+		children: [
+			{
+				children: [],
+				id: 'mens-accessories-id',
+				name: 'Hombre Accessories',
+				products: [],
+				slug: 'mens-accessories',
+			}
+		],
+		id: 'men-id',
+		name: 'Hombre',
+		products: [],
+		slug: 'root-men',
+	}
+]
+
 export const exampleProduct = (id: string) => ({
 	categories: [],
 	id: id,

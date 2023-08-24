@@ -175,7 +175,7 @@ export const ctoolsCategories = {
 				it: 'Uomo',
 				en: 'Men\'s Accessories',
 				de: 'Männer',
-				es: 'Hombre',
+				es: 'Hombre Accessories',
 			},
 			slug: {
 				en: 'mens-accessories',
