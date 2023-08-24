@@ -19,8 +19,6 @@ import { getPageByQuery, paginate, paginateArgs } from '../../pagination'
 import { catchAxiosErrors } from '../../codec-error'
 import { getProductsArgError, mapIdentifiers } from '../../common'
 
-const cats = ['women', 'men', 'new', 'sale', 'accessories']
-
 /**
  * Commercetools Codec config properties
  */
@@ -74,8 +72,7 @@ export class CommercetoolsCodecType extends CommerceCodecType {
  * @param args Method arguments that contain the language
  */
 const localize = (localizable: Localizable, args: CommonArgs): string => {
-	//TODO: Remove hard coding en-US and make so that it works from installation params in extension (eComm Toolkit)
-	return localizable["en-US"] || localizable[args.language] || localizable.en
+	return localizable[args.language] ?? localizable.en ?? localizable[Object.keys(localizable)[0]]
 }
 
 /**
@@ -204,10 +201,12 @@ export class CommercetoolsCodec extends CommerceCodec {
 	 */
 	async cacheCategoryTree(): Promise<void> {
 		const categories: CTCategory[] = (await paginate<CTCategory>(this.getPage(this.rest, '/categories'), 500)).result
-		const rootCats:string[] = categories
-			.filter(cat => cat.parent?.typeId !== "category")
-			.map(cat => localize(cat.slug, {}))
-		const mapped: Category[] = categories.map(cat => mapCategory(cat, categories, {}))
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const args = this.config as any
+		const rootCats: string[] = categories
+			.filter(cat => cat.parent?.typeId !== 'category')
+			.map(cat => localize(cat.slug, args))
+		const mapped: Category[] = categories.map(cat => mapCategory(cat, categories, args))
 		this.categoryTree = mapped.filter(cat => rootCats.includes(cat.slug))
 	}
 

@@ -8,7 +8,6 @@ codecs[CodecTypes.commerce] = []
 
 const hashExcludedConfig = [
 	'locale',
-	'language',
 	'country',
 	'currency',
 	'segment',
