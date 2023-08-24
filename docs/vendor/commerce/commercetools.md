@@ -41,4 +41,4 @@ You can then access the credentials (one time) with all the required properties:
 
 ![](../../media/commercetoolsC.png)
 
-> Note: This integrations uses the [Product Projection Search API HTTP API](https://docs.commercetools.com/api/projects/products-search) from CommerceTools. Please follow steps in their documentation to ensure that this is enabled (ie indexing enabled)
+> Note: This integration uses the [Product Projection Search API HTTP API](https://docs.commercetools.com/api/projects/products-search) from CommerceTools. Please follow steps in their documentation to ensure that this is enabled (ie indexing enabled)
