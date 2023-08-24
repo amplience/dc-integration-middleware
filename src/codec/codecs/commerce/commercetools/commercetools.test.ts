@@ -243,7 +243,7 @@ describe('commercetools integration', function() {
 	})
 
 	test('getCategory', async () => {
-		const category = await codec.getCategory({ slug: 'men' })
+		const category = await codec.getCategory({ slug: 'root-men' })
 
 		expect(requests).toEqual([
 			oauthRequest,
@@ -255,11 +255,19 @@ describe('commercetools integration', function() {
 		expect(category.products.length).toEqual(30)
 
 		expect(category).toEqual({
-			children: [],
+			children: [
+				{
+					children: [],
+					id: 'mens-accessories-id',
+					name: 'Men\'s Accessories',
+					products: [],
+					slug: 'mens-accessories',
+				}
+			],
 			products: Array.from({length: 30}).map((_, index) => exampleProduct('Hit' + index)),
 			id: 'men-id',
 			name: 'Men',
-			slug: 'men',
+			slug: 'root-men',
 		})
 	})
 
