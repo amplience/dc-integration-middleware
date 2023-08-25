@@ -72,7 +72,7 @@ export class CommercetoolsCodecType extends CommerceCodecType {
  * @param args Method arguments that contain the language
  */
 const localize = (localizable: Localizable, args: CommonArgs): string => {
-	return localizable[args.language] ?? localizable.en ?? localizable[Object.keys(localizable)[0]]
+	return localizable[args.language] ?? localizable.en ?? localizable[Object.keys(localizable).sort()[0]]
 }
 
 /**
