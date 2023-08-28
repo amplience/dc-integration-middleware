@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/amplience/dc-integration-middleware/compare/v2.0.1...v2.1.0) (2023-08-28)
+
+
+### Bug Fixes
+
+* **commercetools:** fix category tree, respect language for category list, select first available language ([#6](https://github.com/amplience/dc-integration-middleware/issues/6)) ([da524b4](https://github.com/amplience/dc-integration-middleware/commit/da524b45338db1973a6bb8704540227dfdc42b98))
+
 ### [2.0.1](https://github.com/amplience/dc-integration-middleware/compare/v2.0.0...v2.0.1) (2023-06-30)
 
 
