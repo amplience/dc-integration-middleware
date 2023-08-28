@@ -3,7 +3,7 @@
 To host your own version, simply fork the repo and `npm install` your own fork.
 
 ```
-npm i @yourgithub/dc-integration-middleware
+npm i github:<your github>/dc-integration-middleware
 ```
 
 That's really it.
