@@ -122,8 +122,8 @@ export const ctoolsSearchResult = (
 export const ctoolsCategories = {
 	limit: 500,
 	offset: 0,
-	count: 1,
-	total: 1,
+	count: 2,
+	total: 2,
 	results: [
 		{
 			id: 'men-id',
@@ -139,7 +139,7 @@ export const ctoolsCategories = {
 				clientId: 'client',
 				isPlatformClient: false,
 			},
-			key: 'men',
+			key: 'root-men',
 			name: {
 				fr: 'Homme',
 				it: 'Uomo',
@@ -148,11 +148,48 @@ export const ctoolsCategories = {
 				es: 'Hombre',
 			},
 			slug: {
-				en: 'men',
+				en: 'root-men',
 			},
 			ancestors: [],
 			orderHint: '0.00001586885896788798824213',
 			externalId: '3',
+			assets: [],
+		},
+		{
+			id: 'mens-accessories-id',
+			version: 5,
+			lastMessageSequenceNumber: 3,
+			createdAt: '2020-04-14T17:38:16.788Z',
+			lastModifiedAt: '2021-11-17T18:04:29.834Z',
+			lastModifiedBy: {
+				clientId: 'client',
+				isPlatformClient: false,
+			},
+			createdBy: {
+				clientId: 'client',
+				isPlatformClient: false,
+			},
+			key: 'mens-accessories',
+			name: {
+				fr: 'Homme',
+				it: 'Uomo',
+				en: 'Men\'s Accessories',
+				de: 'Männer',
+				es: 'Hombre Accessories',
+			},
+			slug: {
+				en: 'mens-accessories',
+			},
+			parent: {
+				typeId: 'category',
+				id: 'men-id'
+			},
+			ancestors: [{
+				typeId: 'category',
+				id: 'men-id'
+			}],
+			orderHint: '0.00003',
+			externalId: '4',
 			assets: [],
 		},
 	],

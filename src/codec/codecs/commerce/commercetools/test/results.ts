@@ -35,11 +35,37 @@ export const exampleCustomerGroups = [
 
 export const exampleCategoryTree = [
 	{
-		children: [],
+		children: [
+			{
+				children: [],
+				id: 'mens-accessories-id',
+				name: 'Men\'s Accessories',
+				products: [],
+				slug: 'mens-accessories',
+			}
+		],
 		id: 'men-id',
 		name: 'Men',
 		products: [],
-		slug: 'men',
+		slug: 'root-men',
+	}
+]
+
+export const exampleCategoryTreeEs = [
+	{
+		children: [
+			{
+				children: [],
+				id: 'mens-accessories-id',
+				name: 'Hombre Accessories',
+				products: [],
+				slug: 'mens-accessories',
+			}
+		],
+		id: 'men-id',
+		name: 'Hombre',
+		products: [],
+		slug: 'root-men',
 	}
 ]
 

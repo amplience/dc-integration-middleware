@@ -5,8 +5,10 @@ To use the integration in an existing project, you can refer to how we're using 
 ## Import the npm package
 
 ```
-$ npm i @amplience/dc-integration-middleware
+$ npm i github:amplience/dc-integration-middleware
 ```
+
+You can specify a specific version with #.
 
 ## Export middleware and init
 

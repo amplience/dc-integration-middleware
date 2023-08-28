@@ -3,7 +3,7 @@ import axios from 'axios'
 import { CommerceCodec } from '../../core'
 import CommercetoolsCodecType, { CommercetoolsCodec } from '.'
 import { ctoolsCategories, ctoolsCustomerGroups, ctoolsProduct, ctoolsSearchResult } from './test/responses'
-import { exampleCustomerGroups, exampleCategoryTree, exampleProduct } from './test/results'
+import { exampleCustomerGroups, exampleCategoryTree, exampleCategoryTreeEs, exampleProduct } from './test/results'
 import { categoriesRequest, customerGroupsRequest, oauthRequest, searchRequest } from './test/requests'
 import { config } from './test/config'
 import { flattenConfig } from '../../../../common/util'
@@ -243,7 +243,7 @@ describe('commercetools integration', function() {
 	})
 
 	test('getCategory', async () => {
-		const category = await codec.getCategory({ slug: 'men' })
+		const category = await codec.getCategory({ slug: 'root-men' })
 
 		expect(requests).toEqual([
 			oauthRequest,
@@ -255,11 +255,19 @@ describe('commercetools integration', function() {
 		expect(category.products.length).toEqual(30)
 
 		expect(category).toEqual({
-			children: [],
+			children: [
+				{
+					children: [],
+					id: 'mens-accessories-id',
+					name: 'Men\'s Accessories',
+					products: [],
+					slug: 'mens-accessories',
+				}
+			],
 			products: Array.from({length: 30}).map((_, index) => exampleProduct('Hit' + index)),
 			id: 'men-id',
 			name: 'Men',
-			slug: 'men',
+			slug: 'root-men',
 		})
 	})
 
@@ -272,6 +280,20 @@ describe('commercetools integration', function() {
 		])
 
 		expect(categoryTree).toEqual(exampleCategoryTree)
+	})
+
+	test('getCategoryTree localized', async () => {
+		const codecLocalized = new CommercetoolsCodec({ ...flattenConfig(config), language: 'es' })
+		await codecLocalized.init(new CommercetoolsCodecType())
+
+		const categoryTree = await codecLocalized.getCategoryTree({})
+
+		expect(requests).toEqual([
+			oauthRequest,
+			categoriesRequest
+		])
+
+		expect(categoryTree).toEqual(exampleCategoryTreeEs)
 	})
 
 	test('getCustomerGroups', async () => {

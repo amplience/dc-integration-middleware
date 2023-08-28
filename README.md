@@ -64,6 +64,8 @@ Using the `config` object for one of the commerce vendors, you can get the Comme
 const commerceApi = await getCommerceAPI(config)
 ```
 
+(NOTE: You should get a new Commerce API whenever you want to use different credentials or a different locale/language)
+
 From there you can use any of the commerce methods:
 
 ```typescript
