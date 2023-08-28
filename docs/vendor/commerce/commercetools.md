@@ -14,6 +14,7 @@ See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README
     "vendor": "commercetools",
     "codec_params": {
         "project": "<ct project key>",
+        "language": "<language to prioritise>",
         "client_id": "<ct client id>",
         "client_secret": "<ct client secret>",
         "auth_url": "<ct auth url",
