@@ -61,6 +61,7 @@ export type Category = CommerceObject & {
 	image?: Image
 	children: Category[]
 	products: Product[]
+	showInMenu: boolean
 }
 
 /**

@@ -162,6 +162,7 @@ describe('bigcommerce integration', function () {
 				id: '1',
 				name: 'Category',
 				slug: 'category',
+				showInMenu: true,
 			}
 		})
 		expect(requests).toEqual([
@@ -291,6 +292,7 @@ describe('bigcommerce integration', function () {
 			id: '1',
 			name: 'Men',
 			slug: 'men',
+			showInMenu: true,
 		})
 	})
 

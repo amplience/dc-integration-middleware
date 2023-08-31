@@ -5,7 +5,8 @@ export const exampleCategoryTree = [
 		name: 'Shop All',
 		slug: 'shop-all',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	},
 	{
 		id: '18',
@@ -17,7 +18,8 @@ export const exampleCategoryTree = [
 				name: 'Bath Utilities',
 				slug: 'bath-utilities',
 				children: [],
-				products: []
+				products: [],
+				showInMenu: true
 			},
 			{
 				id: '25',
@@ -29,41 +31,48 @@ export const exampleCategoryTree = [
 						name: 'Electric',
 						slug: 'electric',
 						children: [],
-						products: []
+						products: [],
+						showInMenu: true
 					}
 				],
-				products: []
+				products: [],
+				showInMenu: true
 			}
 		],
-		products: []
+		products: [],
+		showInMenu: true
 	},
 	{
 		id: '19',
 		name: 'Garden',
 		slug: 'garden',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	},
 	{
 		id: '21',
 		name: 'Kitchen',
 		slug: 'kitchen',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	},
 	{
 		id: '20',
 		name: 'Publications',
 		slug: 'publications',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	},
 	{
 		id: '22',
 		name: 'Utility',
 		slug: 'utility',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	}
 ]
 

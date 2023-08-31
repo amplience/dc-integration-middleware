@@ -108,7 +108,8 @@ describe('bigcommerce cors integration', function () {
 				slug: 'shop-all',
 				id: '23',
 				children: [],
-				products: []
+				products: [],
+				showInMenu: true,
 			}
 		})
 
@@ -277,7 +278,8 @@ describe('bigcommerce cors integration', function () {
 			slug: 'shop-all',
 			id: '23',
 			children: [],
-			products: exampleProducts(15)
+			products: exampleProducts(15),
+			showInMenu: true,
 		})
 
 		expect(requests).toEqual([

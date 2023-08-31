@@ -51,7 +51,8 @@ export const mapCategory = (collection: ShopifyCollection): Category => {
 		name: collection.title,
 		image: collection.image,
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	}
 }
 

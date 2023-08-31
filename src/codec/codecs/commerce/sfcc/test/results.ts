@@ -74,6 +74,7 @@ export const exampleCategoryTree: Category[] = [
 		name: 'Content',
 		products: [],
 		slug: 'content-link',
+		showInMenu: true,
 	},
 	{
 		children: [
@@ -83,6 +84,7 @@ export const exampleCategoryTree: Category[] = [
 				name: 'Womens',
 				products: [],
 				slug: 'newarrivals-womens',
+				showInMenu: true,
 			},
 			{
 				children: [],
@@ -90,12 +92,14 @@ export const exampleCategoryTree: Category[] = [
 				name: 'Mens',
 				products: [],
 				slug: 'newarrivals-mens',
+				showInMenu: true,
 			},
 		],
 		id: 'newarrivals',
 		name: 'New Arrivals',
 		products: [],
 		slug: 'newarrivals',
+		showInMenu: true,
 	},
 ]
 

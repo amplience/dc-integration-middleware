@@ -93,6 +93,16 @@ export class RestCommerceCodec extends CommerceCodec {
 	customerGroups: CustomerGroup[]
 	translations: Dictionary<Dictionary<string>>
 
+	updateCategoriesVersion(categories: Category[]): void {
+		for (const category of categories) {
+			if (!('showInMenu' in category)) {
+				(category as Category).showInMenu = true
+			}
+
+			this.updateCategoriesVersion(category.children)
+		}
+	}
+
 	/**
 	 * @inheritdoc
 	 */
@@ -102,6 +112,8 @@ export class RestCommerceCodec extends CommerceCodec {
 		this.customerGroups = await fetchFromURL(this.config.customerGroupURL, [])
 		this.translations = await fetchFromURL(this.config.translationsURL, {})
 		this.categoryTree = this.categories.filter(cat => !cat.parent)
+		
+		this.updateCategoriesVersion(this.categories)
 	}
 
 	/**

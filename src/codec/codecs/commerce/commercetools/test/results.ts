@@ -42,12 +42,14 @@ export const exampleCategoryTree = [
 				name: 'Men\'s Accessories',
 				products: [],
 				slug: 'mens-accessories',
+				showInMenu: true,
 			}
 		],
 		id: 'men-id',
 		name: 'Men',
 		products: [],
 		slug: 'root-men',
+		showInMenu: true,
 	}
 ]
 
@@ -60,12 +62,14 @@ export const exampleCategoryTreeEs = [
 				name: 'Hombre Accessories',
 				products: [],
 				slug: 'mens-accessories',
+				showInMenu: true,
 			}
 		],
 		id: 'men-id',
 		name: 'Hombre',
 		products: [],
 		slug: 'root-men',
+		showInMenu: true,
 	}
 ]
 

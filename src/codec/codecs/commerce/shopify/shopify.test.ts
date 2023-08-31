@@ -111,7 +111,8 @@ describe('shopify integration', function () {
 				name: 'Hydrogen',
 				image: null,
 				children: [],
-				products: []
+				products: [],
+				showInMenu: true,
 			}
 		})
 
@@ -164,7 +165,8 @@ describe('shopify integration', function () {
 				name: 'Hydrogen',
 				image: null,
 				children: [],
-				products: []
+				products: [],
+				showInMenu: true,
 			},
 
 			pageNum: 1,

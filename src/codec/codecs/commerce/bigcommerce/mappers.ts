@@ -15,7 +15,8 @@ export const mapCategory = (category: BigCommerceCategory): Category => {
 		name: category.name,
 		slug: slugify(category.name, { lower: true }),
 		children: category.children.map(mapCategory),
-		products: []
+		products: [],
+		showInMenu: category.is_visible
 	}
 }
 

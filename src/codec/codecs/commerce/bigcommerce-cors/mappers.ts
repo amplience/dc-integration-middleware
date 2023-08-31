@@ -16,7 +16,8 @@ export const mapCategory = (category: BigCommerceCorsCategoryTreeItem): Category
 		name: category.name,
 		slug: slugify(category.name, { lower: true }),
 		children: category.children.map(mapCategory),
-		products: []
+		products: [],
+		showInMenu: true
 	}
 }
 
