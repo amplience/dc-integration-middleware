@@ -85,8 +85,8 @@ export function getPageByQuery(offsetQuery: string, countQuery: string, totalPro
 			}
 
 			return {
-				data: resultPropMap(response),
-				total: totalPropMap(response)
+				data: resultPropMap(response) ?? [],
+				total: totalPropMap(response) ?? 0
 			}
 		}
 }
@@ -119,8 +119,8 @@ export function getPageByQueryAxios(offsetQuery: string, countQuery: string, tot
 			logResponse('get', newUrl, response.data)
 
 			return {
-				data: resultPropMap(response.data),
-				total: totalPropMap(response.data)
+				data: resultPropMap(response.data) ?? [],
+				total: totalPropMap(response.data) ?? 0
 			}
 		}
 }
