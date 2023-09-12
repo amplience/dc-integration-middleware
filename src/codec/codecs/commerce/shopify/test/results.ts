@@ -25,6 +25,7 @@ export const exampleCategoryTree = [
 		image: null,
 		children: [],
 		products: [],
+		showInMenu: true,
 	},
 	{
 		id: '439038804256',
@@ -33,6 +34,7 @@ export const exampleCategoryTree = [
 		image: null,
 		children: [],
 		products: [],
+		showInMenu: true,
 	},
 	{
 		id: '439038837024',
@@ -41,6 +43,7 @@ export const exampleCategoryTree = [
 		image: null,
 		children: [],
 		products: [],
+		showInMenu: true,
 	},
 ]
 
@@ -56,6 +59,7 @@ export const exampleProduct = (id: string) => ({
 			image: null,
 			children: [],
 			products: [],
+			showInMenu: true,
 		},
 	],
 	variants: [
@@ -99,6 +103,7 @@ export const exampleCategoryProducts = {
 					image: null,
 					children: [],
 					products: [],
+					showInMenu: true,
 				},
 				{
 					id: '439038837024',
@@ -107,6 +112,7 @@ export const exampleCategoryProducts = {
 					image: null,
 					children: [],
 					products: [],
+					showInMenu: true,
 				},
 			],
 			variants: [
@@ -142,6 +148,7 @@ export const exampleCategoryProducts = {
 					image: null,
 					children: [],
 					products: [],
+					showInMenu: true,
 				},
 			],
 			variants: [
@@ -179,6 +186,7 @@ export const exampleCategoryProducts = {
 					image: null,
 					children: [],
 					products: [],
+					showInMenu: true,
 				},
 				{
 					id: '439038837024',
@@ -187,6 +195,7 @@ export const exampleCategoryProducts = {
 					image: null,
 					children: [],
 					products: [],
+					showInMenu: true,
 				},
 			],
 			variants: [
@@ -213,6 +222,7 @@ export const exampleCategoryProducts = {
 				'Snowboard that might explode if you bring a match to it.',
 		},
 	],
+	showInMenu: true,
 }
 
 const snowboardResult = () => ({

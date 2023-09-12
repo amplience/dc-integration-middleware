@@ -128,7 +128,8 @@ const mapCategory = (category: CTCategory, categories: CTCategory[], args: Commo
 		name: localize(category.name, args),
 		slug: localize(category.slug, args),
 		children: categories.filter(cat => cat.parent?.id === category.id).map(cat => mapCategory(cat, categories, args)),
-		products: []
+		products: [],
+		showInMenu: true
 	}
 }
 

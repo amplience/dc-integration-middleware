@@ -121,6 +121,7 @@ describe('commercetools integration', function() {
 			id: 'men-id',
 			name: 'Men',
 			slug: 'men',
+			showInMenu: true,
 		}})
 
 		expect(requests).toEqual([
@@ -262,12 +263,14 @@ describe('commercetools integration', function() {
 					name: 'Men\'s Accessories',
 					products: [],
 					slug: 'mens-accessories',
+					showInMenu: true,
 				}
 			],
 			products: Array.from({length: 30}).map((_, index) => exampleProduct('Hit' + index)),
 			id: 'men-id',
 			name: 'Men',
 			slug: 'root-men',
+			showInMenu: true,
 		})
 	})
 

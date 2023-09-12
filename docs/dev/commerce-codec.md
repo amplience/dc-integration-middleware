@@ -71,6 +71,7 @@ Represents a category of products, with identifiers, an image, tree structure (p
 
 -   Category slug is used to fetch products by category. It is intended to be a user readable ID that you might find in a URL.
 -   `products` does not need to be hydrated unless the user specifically requests the category.
+-   `showInMenu` is if the commerce vendor has a visible flag for a category. If not then default to true.
 
 ```ts
 /**
@@ -84,6 +85,7 @@ export type Category = CommerceObject & {
     image?: Image
     children: Category[]
     products: Product[]
+    showInMenu: boolean
 }
 ```
 
