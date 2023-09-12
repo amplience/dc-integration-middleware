@@ -5,6 +5,8 @@ Location: `src/codec/codecs/commercetools`
 
 Connects to a commercetools instance.
 
+See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README.md#server-support-table) support tables for more information
+
 ### Configuration
 
 ```json
@@ -12,6 +14,7 @@ Connects to a commercetools instance.
     "vendor": "commercetools",
     "codec_params": {
         "project": "<ct project key>",
+        "language": "<language to prioritise>",
         "client_id": "<ct client id>",
         "client_secret": "<ct client secret>",
         "auth_url": "<ct auth url",
@@ -38,3 +41,5 @@ Next you can select the required scopes:
 You can then access the credentials (one time) with all the required properties:
 
 ![](../../media/commercetoolsC.png)
+
+> Note: This integration uses the [Product Projection Search API HTTP API](https://docs.commercetools.com/api/projects/products-search) from CommerceTools. Please follow steps in their documentation to ensure that this is enabled (ie indexing enabled)

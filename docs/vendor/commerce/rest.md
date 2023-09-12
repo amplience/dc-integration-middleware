@@ -10,6 +10,10 @@ The data takes its product catalog, category structure, and translation data fro
 
 Of course, if you point to a real REST API you'll need to implement an auth of some kind and incorporate that into the codec settings.
 
+For this backend to work from within a browser, such as in an extension or webapp, your data should allow the webapp's origin via the appropriate CORS headers.
+
+See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README.md#server-support-table) support tables for more information
+
 ### Configuration
 
 ```json

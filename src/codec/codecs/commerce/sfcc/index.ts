@@ -91,7 +91,8 @@ const mapCategory = (category: SFCCCategory): Category => {
 		slug: category.id,
 		name: category.name,
 		children: category.categories?.map(mapCategory) || [],
-		products: []
+		products: [],
+		showInMenu: category.c_showInMenu
 	}
 }
 

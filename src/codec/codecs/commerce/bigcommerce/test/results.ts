@@ -14,48 +14,55 @@ export const exampleCategoryTree = [
 		slug: 'men',
 		children: [],
 		products: [],
+		showInMenu: true
 	},
 	{
 		id: '23',
 		name: 'Browse all',
 		slug: 'browse-all',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	},
 	{
 		id: '18',
 		name: 'Bathroom',
 		slug: 'bathroom',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	},
 	{
 		id: '19',
 		name: 'Garden',
 		slug: 'garden',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	},
 	{
 		id: '21',
 		name: 'Kitchen',
 		slug: 'kitchen',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	},
 	{
 		id: '20',
 		name: 'Publications',
 		slug: 'publications',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	},
 	{
 		id: '22',
 		name: 'Maintenance',
 		slug: 'maintenance',
 		children: [],
-		products: []
+		products: [],
+		showInMenu: true
 	}
 ]
 

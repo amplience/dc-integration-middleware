@@ -6,6 +6,8 @@ Commerce Codecs are focused on accessing commerce focused entities, such as prod
 
 You can find a detailed description of all types and methods shared by Commerce Codecs [here](./commerce-codec.md). You should reference this closely when implementing the commerce codec methods for your vendor as well as implementing [pagination](./pagination.md) for your API requests.
 
+Most applications using this project will be doing their requests from the browser, so it's recommended that you use APIs that support CORS access, and properly explain how to add it in the vendor specific documentation.
+
 ### Template Codec
 There is a [template commerce codec](../../src/codec/codecs/commerce/template.ts) that can be used as a starting point when making a new commerce codec. Copy this file into a new folder for your codec (with name `<vendor>/`) and rename it to `index.ts`. You can then begin implementing each commerce codec method.
 

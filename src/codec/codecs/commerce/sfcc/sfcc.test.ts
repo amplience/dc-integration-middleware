@@ -123,6 +123,7 @@ describe('sfcc integration', function() {
 			id: 'newarrivals-womens',
 			name: 'Womens',
 			slug: 'newarrivals-womens',
+			showInMenu: true
 		}})
 
 		expect(requests).toEqual([
@@ -263,6 +264,7 @@ describe('sfcc integration', function() {
 			id: 'newarrivals-womens',
 			name: 'Womens',
 			slug: 'newarrivals-womens',
+			showInMenu: true,
 		})
 	})
 

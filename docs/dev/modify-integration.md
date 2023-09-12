@@ -8,6 +8,8 @@ If you've identified a part of an existing codec that needs changing, you should
 
 After your changes are complete, make a pull request to the main repository.
 
+With updates to existing codecs, you should ensure that you specify the server / cors support for the functionality
+
 ## Adding methods and types
 
 The focus of the `dc-integration-middleware` project is providing codecs that translate vendor specific methods and entities into ones that are the same for all vendors, to make it much easier to develop cross-vendor applications. It's for this reason that we suggest implementing a new method for _all_ vendors rather than any specific vendor.

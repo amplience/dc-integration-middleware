@@ -10,6 +10,7 @@ export const rootCategory: Category = {
 	},
 	children: [],
 	products: [],
+	showInMenu: false,
 }
 
 export const childCategories: Category[] = [{
@@ -22,6 +23,7 @@ export const childCategories: Category[] = [{
 	},
 	children: [],
 	products: [],
+	showInMenu: true,
 },
 {
 	id: 'child2',
@@ -33,6 +35,7 @@ export const childCategories: Category[] = [{
 	},
 	children: [],
 	products: [],
+	showInMenu: true,
 }]
 
 rootCategory.children = childCategories

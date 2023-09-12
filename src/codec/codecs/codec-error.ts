@@ -12,7 +12,9 @@ export enum CodecErrorType {
 
 	NotAuthenticated,
 	NotFound,
-	NotSupported
+	NotSupported,
+
+	Cors
 }
 
 /**
@@ -97,6 +99,8 @@ export async function catchAxiosErrors<T>(method: () => Promise<T>, errorType = 
 				errorType = CodecErrorType.NotFound
 			} else if (e.response.status === 401) {
 				errorType = CodecErrorType.NotAuthenticated
+			} else if (e.response.status === 0) {
+				errorType = CodecErrorType.Cors
 			}
 
 			throw new CodecError(errorType, { status: e.response.status, message: e.response.data })
