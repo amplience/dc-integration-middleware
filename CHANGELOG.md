@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/amplience/dc-integration-middleware/compare/v2.1.0...v2.2.0) (2023-09-12)
+
+
+### Features
+
+* added vendor to type ([935d764](https://github.com/amplience/dc-integration-middleware/commit/935d764ccc4f3fc112e0a5dbecda4a8681841d40))
+* property for if categories should show in menu ([320a3b6](https://github.com/amplience/dc-integration-middleware/commit/320a3b6be40267bea0d2a6da108ddd8e3bbbf148))
+
+
+### Bug Fixes
+
+* add failsafe if data or total are undefined in pagination ([47ddbbf](https://github.com/amplience/dc-integration-middleware/commit/47ddbbf27684f38223c48d9c7ab64266615e5364))
+
 ## [2.1.0](https://github.com/amplience/dc-integration-middleware/compare/v2.0.1...v2.1.0) (2023-08-28)
 
 
