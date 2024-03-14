@@ -147,6 +147,7 @@ const mapProduct = (args: CommonArgs) => (product: CTProduct | null): (Product |
 		id: product.id,
 		name: localize(product.name, args),
 		longDescription: product.description && localize(product.description, args),
+		shortDescription: product.description && localize(product.description, args),
 		slug: localize(product.slug, args),
 		variants: _.isEmpty(product.variants) ? [product.masterVariant].map(mapVariant(args)) : product.variants.map(mapVariant(args)),
 		categories: []
