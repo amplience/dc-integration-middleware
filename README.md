@@ -17,7 +17,6 @@ Amplience Integration Middleware is a service written in `Node.js` that is inten
 This extension was developed and tested with:
 
 -   Node version `16.x`
--   NPM version `8.x`
 
 ## ⚙️ Features
 
@@ -132,7 +131,7 @@ const product: Product = await commerceApi.getProduct({
 
 This software is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 
-Copyright 2023 Amplience
+Copyright 2024 Amplience
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
