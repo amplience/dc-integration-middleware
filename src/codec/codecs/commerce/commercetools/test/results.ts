@@ -76,6 +76,8 @@ export const exampleCategoryTreeEs = [
 export const exampleProduct = (id: string) => ({
 	categories: [],
 	id: id,
+	longDescription: 'Example description.\n\n',
+	shortDescription: 'Example description.\n\n',
 	name: 'DECIEM PUMP (FOR HIGHER-VISCOSITY NIOD SERUMS, 30ML BOTTLE) - 1PC (P)',
 	slug: 'pump-for-higher-viscosity-niod-serums-30ml-bottle-1pc-p',
 	variants: [

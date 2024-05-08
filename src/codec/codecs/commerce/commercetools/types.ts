@@ -43,6 +43,7 @@ export interface CTProduct {
 	version: number;
 	productType: CTType;
 	name: Localizable;
+	description: Localizable;
 	categories: CTType[];
 	categoryOrderHints: CategoryOrderHints;
 	slug: Localizable;
