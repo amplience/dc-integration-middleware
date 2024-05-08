@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.1](https://github.com/amplience/dc-integration-middleware/compare/v2.3.0...v2.3.1) (2024-05-08)
+
+
+### Bug Fixes
+
+* adding release please step id ([d1a46a4](https://github.com/amplience/dc-integration-middleware/commit/d1a46a4e789d377a13a2947e8549ae7989d8afa3))
+
 ## [2.3.0](https://github.com/amplience/dc-integration-middleware/compare/v2.2.0...v2.3.0) (2024-05-08)
 
 
