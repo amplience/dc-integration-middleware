@@ -280,20 +280,25 @@ describe('paginateCursor', function() {
 
 describe('getListPage', function() {
 	test('get a page containing the whole input array', async () => {
-		expect(getListPage([1, 2, 3])(0, 5)).resolves.toEqual({ data: [1, 2, 3], total: 3 })
+		const result = await getListPage([1, 2, 3])(0, 5)
+		expect(result).toEqual({ data: [1, 2, 3], total: 3 })
 	})
 
 	test('get the second page of a 3 page spanning input array', async () => {
-		expect(getListPage([1, 2, 3, 4, 5, 6, 7, 8, 9])(1, 3)).resolves.toEqual({ data: [4, 5, 6], total: 9 })
+		const result = await getListPage([1, 2, 3, 4, 5, 6, 7, 8, 9])(1, 3)
+		expect(result).toEqual({ data: [4, 5, 6], total: 9 })
 	})
 
 	test('get a page from an empty array', async () => {
-		expect(getListPage([])(0, 5)).resolves.toEqual({ data: [], total: 3 })
+		const result = await getListPage([])(0, 5)
+		expect(result).toEqual({ data: [], total: 0 })
 	})
 
 	test('get an out of bounds page', async () => {
-		expect(getListPage([1, 2, 3])(5, 5)).resolves.toEqual({ data: [], total: 3 })
-		expect(getListPage([1, 2, 3])(-1, 5)).resolves.toEqual({ data: [], total: 3 })
+		const result = await getListPage([1, 2, 3])(5, 5)
+		expect(result).toEqual({ data: [], total: 3 })
+		const outOfBoundsResult = await getListPage([1, 2, 3])(-1, 5)
+		expect(outOfBoundsResult).toEqual({ data: [], total: 3 })
 	})
 })
 
