@@ -10,7 +10,7 @@
     "build": "eslint && npm run clean && tsc",
     "prepare": "eslint && npm run clean && tsc",
     "server": "nodemon src/server.ts",
-    "test": "jest --silent --verbose"
+    "test": "LANG=en_us jest --silent --verbose"
   },
   "exports": {
     ".": "./dist/index.js"
