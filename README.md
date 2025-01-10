@@ -9,6 +9,7 @@ Amplience Integration Middleware is a service written in `Node.js` that is inten
 -   Commercetools
 -   BigCommerce
 -   Shopify
+-   Scayle
 -   Salesforce Commerce Cloud
 -   REST
 
@@ -16,7 +17,7 @@ Amplience Integration Middleware is a service written in `Node.js` that is inten
 
 This extension was developed and tested with:
 
--   Node version `16.x`
+-   Node version `20.x`
 
 ## ⚙️ Features
 
@@ -30,11 +31,12 @@ The `CommerceAPI` interface exposes these methods:
   - Customer Groups are not supported when accessing some integrations from a browser.
 
 ### CORS Support Table
-|  |	SFCC | Big Commerce (CORS) | Commercetools | Shopify | REST |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| products | ✅ | ✅  | ✅  | ✅  | ✅  |
-| categories | ✅  | ✅  | ✅  | ✅  | ✅  |
-| user segments | ✅  | ❌ | ✅  | ❌ | ✅  |
+
+|  |	SFCC | Big Commerce | Commercetools | Shopify | Scayle |REST |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| products | ✅ | ✅  | ✅  | ✅  | ✅  | ✅  |
+| categories | ✅  | ✅  | ✅  | ✅  | ✅  | ✅  |
+| user segments | ✅  | ❌  | ✅  | ❌   | ❌  | ✅  |
 
 Concrete implementations of this interface are referred to as `Codec`s and are located in `src/codec/codecs`. Platform-specific e-Commerce implementations are found in `src/codec/codecs/commerce`.
 You can find types and methods [here](./docs/dev/commerce-codec.md).
@@ -46,11 +48,11 @@ There are also [Unit Tests](./docs/dev/unit-testing.md) for each method and vend
 ### Server Support Table
 If you choose to deploy your use of this middleware in your own hosting, you can change the configuration to interface with commerce API's from the server rather than client side. See [`import`](./docs/dev/import.md)
 
-|  |	SFCC | Big Commerce | Commercetools | Shopify | REST |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| products | ✅ | ✅  | ✅  | ✅  | ✅  |
-| categories | ✅  | ✅  | ✅  | ✅  | ✅  |
-| user segments | ✅  | ✅  | ✅  | ✅  | ✅  |
+|  |	SFCC | Big Commerce | Commercetools | Shopify | Scayle |REST |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| products | ✅ | ✅  | ✅  | ✅  | ✅  | ✅  |
+| categories | ✅  | ✅  | ✅  | ✅  | ✅  | ✅  |
+| user segments | ✅  | ✅  | ✅  | ✅  | ❌  | ✅  |
 
 ## 🏁 Quick Start
 
@@ -103,6 +105,7 @@ const product: Product = await commerceApi.getProduct({
 
 - **Commerce Services**
   - [Saleforce Commerce Cloud](./docs/vendor/commerce/sfcc.md)
+  - [Scayle](./docs/vendor/commerce/scayle.md)
   - [Shopify](./docs/vendor/commerce/shopify.md)
   - [BigCommerce](./docs/vendor/commerce/bigcommerce.md)
   - [BigCommerce CORS](./docs/vendor/commerce/bigcommerce-cors.md)
@@ -131,7 +134,7 @@ const product: Product = await commerceApi.getProduct({
 
 This software is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 
-Copyright 2024 Amplience
+Copyright 2025 Amplience
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
