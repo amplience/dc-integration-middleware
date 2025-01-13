@@ -58,9 +58,7 @@ const maskSensitiveData = (obj: any) => {
 
 	for (const key of keys) {
 		const keyLower = key.toLowerCase()
-		if (keyLower.indexOf('password') !== -1 ||
-			keyLower.indexOf('secret') !== -1 ||
-			keyLower.indexOf('token') !== -1) {
+		if (keyLower.indexOf('password') !== -1 || keyLower.indexOf('secret') !== -1 || keyLower.indexOf('token') !== -1) {
 			obj[keyLower] = '**** redacted ****'
 		}
 	}
@@ -77,9 +75,9 @@ const maskSensitiveData = (obj: any) => {
 export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
 	const codecs = getCodecs(type)
 	let codec: CodecType
-    
+
 	if ('vendor' in config) {
-		const vendorCodec = codecs.find(codec => codec.vendor === config.vendor)
+		const vendorCodec = codecs.find((codec) => codec.vendor === config.vendor)
 		if (!vendorCodec) {
 			throw new IntegrationError({
 				message: `codec not found for vendor [ ${config.vendor} ]`,
@@ -99,9 +97,10 @@ export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
 		codec = vendorCodec
 	}
 	// end novadev-450
-
 	else {
-		const codecsMatchingConfig: CodecType[] = codecs.filter(c => _.difference(Object.keys(c.properties), Object.keys(config)).length === 0)
+		const codecsMatchingConfig: CodecType[] = codecs.filter(
+			(c) => _.difference(Object.keys(c.properties), Object.keys(config)).length === 0
+		)
 		if (codecsMatchingConfig.length === 0 || codecsMatchingConfig.length > 1) {
 			throw new IntegrationError({
 				message: `[ ${codecsMatchingConfig.length} ] codecs found (expecting 1) matching schema:\n${JSON.stringify(maskSensitiveData(config), undefined, 4)}`,
@@ -111,9 +110,12 @@ export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
 		codec = codecsMatchingConfig.pop()
 	}
 
-	const configHash = Object.keys(config).filter(key => hashExcludedConfig.indexOf(key) === -1).map(key => config[key]).join('')
+	const configHash = Object.keys(config)
+		.filter((key) => hashExcludedConfig.indexOf(key) === -1)
+		.map((key) => config[key])
+		.join('')
 	console.log(`[ dc-integration-middleware ] creating codec: ${codec.vendor}...`)
-	return apis[configHash] = apis[configHash] || await codec.getApi(config)
+	return (apis[configHash] = apis[configHash] || (await codec.getApi(config)))
 }
 
 /**
@@ -123,7 +125,8 @@ export const getCodec = async (config: any, type: CodecTypes): Promise<API> => {
  * @param config Configuration object for the commerce API
  * @returns A new commerce API for the given configuration
  */
-export const getCommerceCodec = async (config: any): Promise<CommerceAPI> => await getCodec(config, CodecTypes.commerce) as CommerceAPI
+export const getCommerceCodec = async (config: any): Promise<CommerceAPI> =>
+	(await getCodec(config, CodecTypes.commerce)) as CommerceAPI
 
 // === End public interface ===
 
@@ -144,6 +147,9 @@ registerCodec(new BigCommerceCorsCommerceCodecType())
 
 import ShopifyCommerceCodecType from './codecs/commerce/shopify'
 registerCodec(new ShopifyCommerceCodecType())
+
+import ScayleCommerceCodecType from './codecs/commerce/scayle'
+registerCodec(new ScayleCommerceCodecType())
 
 // Re-export common codec functions.
 export * from './codecs/common'
