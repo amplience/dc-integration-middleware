@@ -1,11 +1,12 @@
 import { CodecPropertyConfig, CommerceCodec, CommerceCodecType } from '../../core'
 import axios from 'axios'
 import { GetProductsArgs, PaginationArgs, Product } from '../../../../common'
-import { mapProduct } from './mapper'
+import { mapCategory, mapProduct } from './mapper'
 import { ScayleProduct } from './types'
 import { getProductsArgError } from '../../common'
 import { StringProperty } from '../../../../codec/cms-property-types'
 import { getPageByQueryAxios, paginateArgs } from '../../pagination'
+import { catchAxiosErrors } from '../../codec-error'
 
 type CodecConfig = {
 	access_token: StringProperty
@@ -137,6 +138,18 @@ export class ScayleCommerceCodec extends CommerceCodec {
 		)
 
 		return products
+	}
+
+	async cacheCategoryTree(): Promise<void> {
+		const request = {
+			...this.getAxiosConfig(),
+			url: '/categories',
+			params: {
+				shopId: this.config.shop_id
+			}
+		}
+		const response = await catchAxiosErrors(async () => await axios.request(request))
+		this.categoryTree = response.data.map(mapCategory)
 	}
 }
 

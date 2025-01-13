@@ -59,3 +59,20 @@ export interface ScaylaProductVariantPrice {
 		}
 	}
 }
+
+export interface ScayleCategory {
+	id: number
+	path: string
+	name: string
+	slug: string
+	parentId: number
+	rootlineIds: number[]
+	childrenIds: number[]
+	properties: unknown[]
+	isHidden: boolean
+	depth: number
+	supportedFilter: unknown[]
+	shopLevelCustomData: unknown
+	countryLevelCustomData: unknown
+	children: ScayleCategory[]
+}
