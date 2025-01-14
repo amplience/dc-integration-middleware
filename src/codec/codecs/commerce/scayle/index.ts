@@ -3,7 +3,7 @@ import axios from 'axios'
 import { GetProductsArgs, PaginationArgs, Product } from '../../../../common'
 import { mapCategory, mapProduct } from './mapper'
 import { ScayleProduct } from './types'
-import { getProductsArgError } from '../../common'
+import { getProductsArgError, mapIdentifiers } from '../../common'
 import { StringProperty } from '../../../../codec/cms-property-types'
 import { getPageByQueryAxios, paginateArgs } from '../../pagination'
 import { catchAxiosErrors } from '../../codec-error'
@@ -77,9 +77,9 @@ export class ScayleCodec extends CommerceCodec {
 		}
 	}
 
-	getProductRequestParams(shopId) {
+	getProductRequestParams() {
 		return {
-			shopId,
+			shopId: this.config.shop_id,
 			with: 'variants,images,priceRange,attributes:key(description|name|category)'
 		}
 	}
@@ -107,19 +107,19 @@ export class ScayleCodec extends CommerceCodec {
 	async getProductByIds(ids: string, args: PaginationArgs): Promise<ScayleProduct[]> {
 		const products = await paginateArgs<ScayleProduct>(
 			this.getPage(axios, '/products', this.getAxiosConfig(), {
-				...this.getProductRequestParams(this.config.shop_id),
+				...this.getProductRequestParams(),
 				ids
 			}),
 			args
 		)
 
-		return products
+		return mapIdentifiers(ids.split(','), products)
 	}
 
 	async getProductsByKeyword(keyword: string, args: PaginationArgs): Promise<ScayleProduct[]> {
 		const products = await paginateArgs<ScayleProduct>(
 			this.getPage(axios, '/products', this.getAxiosConfig(), {
-				...this.getProductRequestParams(this.config.shop_id),
+				...this.getProductRequestParams(),
 				'filters[term]': keyword
 			}),
 			args
@@ -131,7 +131,7 @@ export class ScayleCodec extends CommerceCodec {
 	async getProductsByCategoryIds(categoryIds: string, args: PaginationArgs): Promise<ScayleProduct[]> {
 		const products = await paginateArgs<ScayleProduct>(
 			this.getPage(axios, '/products', this.getAxiosConfig(), {
-				...this.getProductRequestParams(this.config.shop_id),
+				...this.getProductRequestParams(),
 				'filters[category]': categoryIds
 			}),
 			args

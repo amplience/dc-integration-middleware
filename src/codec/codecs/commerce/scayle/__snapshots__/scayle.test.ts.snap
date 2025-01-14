@@ -1,0 +1,514 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`scayle integration getCategory by slug 1`] = `
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "3",
+          "name": "Shirts",
+          "products": [],
+          "showInMenu": true,
+          "slug": "shirts",
+        },
+      ],
+      "id": "2",
+      "name": "Bekleidung",
+      "products": [],
+      "showInMenu": true,
+      "slug": "bekleidung",
+    },
+    {
+      "children": [],
+      "id": "4",
+      "name": "Hosen",
+      "products": [],
+      "showInMenu": true,
+      "slug": "hosen",
+    },
+    {
+      "children": [],
+      "id": "5",
+      "name": "Schuhe",
+      "products": [],
+      "showInMenu": true,
+      "slug": "schuhe",
+    },
+  ],
+  "id": "1",
+  "name": "Männer",
+  "products": [
+    {
+      "categories": [
+        {
+          "children": [],
+          "id": "3",
+          "image": undefined,
+          "name": "Damen",
+          "products": [],
+          "showInMenu": true,
+          "slug": undefined,
+        },
+      ],
+      "id": "1",
+      "longDescription": "",
+      "name": "Leviz T-Shirt",
+      "shortDescription": "",
+      "slug": "LEV0074002000005",
+      "variants": [
+        {
+          "attributes": undefined,
+          "id": "31",
+          "images": undefined,
+          "listPrice": "€2,990.00",
+          "salePrice": "€2,990.00",
+          "sku": "LEV0074002000005_S",
+        },
+      ],
+    },
+  ],
+  "showInMenu": true,
+  "slug": "maenner",
+}
+`;
+
+exports[`scayle integration getCategoryTree 1`] = `
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [],
+            "id": "3",
+            "name": "Shirts",
+            "products": [],
+            "showInMenu": true,
+            "slug": "shirts",
+          },
+        ],
+        "id": "2",
+        "name": "Bekleidung",
+        "products": [],
+        "showInMenu": true,
+        "slug": "bekleidung",
+      },
+      {
+        "children": [],
+        "id": "4",
+        "name": "Hosen",
+        "products": [],
+        "showInMenu": true,
+        "slug": "hosen",
+      },
+      {
+        "children": [],
+        "id": "5",
+        "name": "Schuhe",
+        "products": [],
+        "showInMenu": true,
+        "slug": "schuhe",
+      },
+    ],
+    "id": "1",
+    "name": "Männer",
+    "products": [],
+    "showInMenu": true,
+    "slug": "maenner",
+  },
+]
+`;
+
+exports[`scayle integration getProduct by ID 1`] = `
+{
+  "categories": [
+    {
+      "children": [],
+      "id": "3",
+      "image": undefined,
+      "name": "Damen",
+      "products": [],
+      "showInMenu": true,
+      "slug": undefined,
+    },
+  ],
+  "id": "1",
+  "longDescription": "",
+  "name": "Leviz T-Shirt",
+  "shortDescription": "",
+  "slug": "LEV0074002000005",
+  "variants": [
+    {
+      "attributes": undefined,
+      "id": "31",
+      "images": undefined,
+      "listPrice": "€2,990.00",
+      "salePrice": "€2,990.00",
+      "sku": "LEV0074002000005_S",
+    },
+  ],
+}
+`;
+
+exports[`scayle integration getProducts by IDs 1`] = `
+[
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "7",
+        "image": undefined,
+        "name": "Herren",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "1",
+    "longDescription": "",
+    "name": "Helfeger Shirt",
+    "shortDescription": "",
+    "slug": "THS0906008000001",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "1",
+        "images": undefined,
+        "listPrice": "€3,990.00",
+        "salePrice": "€3,990.00",
+        "sku": "THS0906008000001_S",
+      },
+    ],
+  },
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "7",
+        "image": undefined,
+        "name": "Herren",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "2",
+    "longDescription": "",
+    "name": "Helfeger Shirt",
+    "shortDescription": "",
+    "slug": "THS0906006000001",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "4",
+        "images": undefined,
+        "listPrice": "€3,990.00",
+        "salePrice": "€3,990.00",
+        "sku": "THS0906006000001_S",
+      },
+    ],
+  },
+]
+`;
+
+exports[`scayle integration getProducts by categories - paginated 1`] = `
+[
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "3",
+        "image": undefined,
+        "name": "Damen",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "1",
+    "longDescription": "",
+    "name": "Liu Jo Sandale CAMELIA",
+    "shortDescription": "",
+    "slug": "LIJ0480001000004",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "40",
+        "images": undefined,
+        "listPrice": "€32,990.00",
+        "salePrice": "€32,990.00",
+        "sku": "LIJ0480001000004_38",
+      },
+    ],
+  },
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "3",
+        "image": undefined,
+        "name": "Damen",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "2",
+    "longDescription": "",
+    "name": "Leviz T-Shirt",
+    "shortDescription": "",
+    "slug": "LEV0031009000002",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "37",
+        "images": undefined,
+        "listPrice": "€2,990.00",
+        "salePrice": "€2,990.00",
+        "sku": "LEV0031009000002_S",
+      },
+    ],
+  },
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "3",
+        "image": undefined,
+        "name": "Damen",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "3",
+    "longDescription": "",
+    "name": "Leviz T-Shirt",
+    "shortDescription": "",
+    "slug": "LEV0031001002000",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "34",
+        "images": undefined,
+        "listPrice": "€2,990.00",
+        "salePrice": "€2,990.00",
+        "sku": "LEV0031001002000_S",
+      },
+    ],
+  },
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "3",
+        "image": undefined,
+        "name": "Damen",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "4",
+    "longDescription": "",
+    "name": "Leviz T-Shirt",
+    "shortDescription": "",
+    "slug": "LEV0074002000005",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "31",
+        "images": undefined,
+        "listPrice": "€2,990.00",
+        "salePrice": "€2,990.00",
+        "sku": "LEV0074002000005_S",
+      },
+    ],
+  },
+]
+`;
+
+exports[`scayle integration getProducts by category id 1`] = `
+[
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "3",
+        "image": undefined,
+        "name": "Damen",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "1",
+    "longDescription": "",
+    "name": "Leviz T-Shirt",
+    "shortDescription": "",
+    "slug": "LEV0074002000005",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "31",
+        "images": undefined,
+        "listPrice": "€2,990.00",
+        "salePrice": "€2,990.00",
+        "sku": "LEV0074002000005_S",
+      },
+    ],
+  },
+]
+`;
+
+exports[`scayle integration getProducts by keyword - paginated 1`] = `
+[
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "3",
+        "image": undefined,
+        "name": "Damen",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "1",
+    "longDescription": "",
+    "name": "Liu Jo Sandale CAMELIA",
+    "shortDescription": "",
+    "slug": "LIJ0480001000004",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "40",
+        "images": undefined,
+        "listPrice": "€32,990.00",
+        "salePrice": "€32,990.00",
+        "sku": "LIJ0480001000004_38",
+      },
+    ],
+  },
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "3",
+        "image": undefined,
+        "name": "Damen",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "2",
+    "longDescription": "",
+    "name": "Leviz T-Shirt",
+    "shortDescription": "",
+    "slug": "LEV0031009000002",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "37",
+        "images": undefined,
+        "listPrice": "€2,990.00",
+        "salePrice": "€2,990.00",
+        "sku": "LEV0031009000002_S",
+      },
+    ],
+  },
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "3",
+        "image": undefined,
+        "name": "Damen",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "3",
+    "longDescription": "",
+    "name": "Leviz T-Shirt",
+    "shortDescription": "",
+    "slug": "LEV0031001002000",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "34",
+        "images": undefined,
+        "listPrice": "€2,990.00",
+        "salePrice": "€2,990.00",
+        "sku": "LEV0031001002000_S",
+      },
+    ],
+  },
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "3",
+        "image": undefined,
+        "name": "Damen",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "4",
+    "longDescription": "",
+    "name": "Leviz T-Shirt",
+    "shortDescription": "",
+    "slug": "LEV0074002000005",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "31",
+        "images": undefined,
+        "listPrice": "€2,990.00",
+        "salePrice": "€2,990.00",
+        "sku": "LEV0074002000005_S",
+      },
+    ],
+  },
+]
+`;
+
+exports[`scayle integration getProducts by keyword 1`] = `
+[
+  {
+    "categories": [
+      {
+        "children": [],
+        "id": "3",
+        "image": undefined,
+        "name": "Damen",
+        "products": [],
+        "showInMenu": true,
+        "slug": undefined,
+      },
+    ],
+    "id": "1",
+    "longDescription": "",
+    "name": "Leviz T-Shirt",
+    "shortDescription": "",
+    "slug": "LEV0074002000005",
+    "variants": [
+      {
+        "attributes": undefined,
+        "id": "31",
+        "images": undefined,
+        "listPrice": "€2,990.00",
+        "salePrice": "€2,990.00",
+        "sku": "LEV0074002000005_S",
+      },
+    ],
+  },
+]
+`;
