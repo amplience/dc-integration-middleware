@@ -11,8 +11,8 @@ export const mapProduct = (product: ScayleProduct): Product | null => {
 		id: String(product.id),
 		name: product.attributes?.name?.values?.label,
 		slug: product.referenceKey,
-		categories: product.attributes?.category?.values?.map(mapProductCategory),
-		variants: product.variants?.map(mapProductVariants),
+		categories: product.attributes?.category?.values?.map(mapProductCategory) || [],
+		variants: product.variants?.map(mapProductVariants) || [],
 		shortDescription: product.attributes?.description?.values?.label,
 		longDescription: product.attributes?.description?.values?.label
 	}
@@ -34,11 +34,11 @@ export const mapProductVariants = (variant: ScaylaProductVariant): Variant => {
 	return {
 		id: String(variant.id),
 		sku: variant.referenceKey,
-		listPrice: formatMoneyString(variant.price.withTax, {
-			currency: variant.price.currencyCode
+		listPrice: formatMoneyString(variant.price?.withTax, {
+			currency: variant.price?.currencyCode
 		}),
-		salePrice: formatMoneyString(variant.price.withTax, {
-			currency: variant.price.currencyCode
+		salePrice: formatMoneyString(variant.price?.withTax, {
+			currency: variant.price?.currencyCode
 		}),
 		attributes: undefined,
 		images: undefined
@@ -50,7 +50,7 @@ export const mapCategory = (category: ScayleCategory): Category => {
 		id: String(category.id),
 		name: category.name,
 		slug: category.slug,
-		children: category.children.map(mapCategory),
+		children: category.children?.map(mapCategory) || [],
 		products: [],
 		showInMenu: !category.isHidden
 	}
