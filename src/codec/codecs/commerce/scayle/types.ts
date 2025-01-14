@@ -3,6 +3,7 @@ export interface ScayleProduct {
 	masterKey: string
 	referenceKey: string
 	attributes: ScayleProductAttibutes
+	variants: ScaylaProductVariant[]
 }
 
 export interface ScayleProductAttibutes {
@@ -10,7 +11,6 @@ export interface ScayleProductAttibutes {
 	description: ScayleProductAttribute
 	category: ScaylaProductCategory
 	images: { hash: string }[]
-	variants: ScaylaProductVariant[]
 	customData: Record<string, unknown>
 }
 

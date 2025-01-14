@@ -148,8 +148,8 @@ registerCodec(new BigCommerceCorsCommerceCodecType())
 import ShopifyCommerceCodecType from './codecs/commerce/shopify'
 registerCodec(new ShopifyCommerceCodecType())
 
-import ScayleCommerceCodecType from './codecs/commerce/scayle'
-registerCodec(new ScayleCommerceCodecType())
+import ScayleCodecType from './codecs/commerce/scayle'
+registerCodec(new ScayleCodecType())
 
 // Re-export common codec functions.
 export * from './codecs/common'

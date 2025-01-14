@@ -8,14 +8,14 @@ import { StringProperty } from '../../../../codec/cms-property-types'
 import { getPageByQueryAxios, paginateArgs } from '../../pagination'
 import { catchAxiosErrors } from '../../codec-error'
 
-type CodecConfig = {
+export type CodecConfig = {
 	access_token: StringProperty
 	shop_id: StringProperty
 	tenant_space: StringProperty
 	api_version: StringProperty
 }
 
-export class ScayleCommerceCodecType extends CommerceCodecType {
+export class ScayleCodecType extends CommerceCodecType {
 	get vendor() {
 		return 'scayle'
 	}
@@ -46,11 +46,11 @@ export class ScayleCommerceCodecType extends CommerceCodecType {
 	}
 
 	async getApi(config: CodecPropertyConfig<CodecConfig>) {
-		return await new ScayleCommerceCodec(config).init(this)
+		return await new ScayleCodec(config).init(this)
 	}
 }
 
-export class ScayleCommerceCodec extends CommerceCodec {
+export class ScayleCodec extends CommerceCodec {
 	declare config: CodecPropertyConfig<CodecConfig>
 
 	getPage = getPageByQueryAxios(
@@ -80,7 +80,7 @@ export class ScayleCommerceCodec extends CommerceCodec {
 	getProductRequestParams(shopId) {
 		return {
 			shopId,
-			with: 'images,priceRange,attributes:key(description|name|category)'
+			with: 'variants,images,priceRange,attributes:key(description|name|category)'
 		}
 	}
 
@@ -153,4 +153,4 @@ export class ScayleCommerceCodec extends CommerceCodec {
 	}
 }
 
-export default ScayleCommerceCodecType
+export default ScayleCodecType

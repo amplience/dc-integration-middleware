@@ -12,7 +12,7 @@ export const mapProduct = (product: ScayleProduct): Product | null => {
 		name: product.attributes?.name?.values?.label,
 		slug: product.referenceKey,
 		categories: product.attributes?.category?.values?.map(mapProductCategory),
-		variants: product.attributes?.variants?.map(mapProductVariants),
+		variants: product.variants?.map(mapProductVariants),
 		shortDescription: product.attributes?.description?.values?.label,
 		longDescription: product.attributes?.description?.values?.label
 	}
@@ -30,15 +30,15 @@ export const mapProductCategory = (categoryValue: ScaylaProductCategoryValue): C
 	}
 }
 
-export const mapProductVariants = ({ referenceKey, price }: ScaylaProductVariant): Variant => {
+export const mapProductVariants = (variant: ScaylaProductVariant): Variant => {
 	return {
-		id: referenceKey,
-		sku: referenceKey,
-		listPrice: formatMoneyString(price.withTax, {
-			currency: price.currencyCode
+		id: String(variant.id),
+		sku: variant.referenceKey,
+		listPrice: formatMoneyString(variant.price.withTax, {
+			currency: variant.price.currencyCode
 		}),
-		salePrice: formatMoneyString(price.withTax, {
-			currency: price.currencyCode
+		salePrice: formatMoneyString(variant.price.withTax, {
+			currency: variant.price.currencyCode
 		}),
 		attributes: undefined,
 		images: undefined
