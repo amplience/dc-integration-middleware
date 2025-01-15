@@ -4,6 +4,7 @@ export interface ScayleProduct {
 	referenceKey: string
 	attributes: ScayleProductAttibutes
 	variants: ScaylaProductVariant[]
+	images: { hash: string }[]
 }
 
 export interface ScayleProductAttibutes {
@@ -45,6 +46,7 @@ export interface ScaylaProductVariant {
 	}
 	price: ScaylaProductVariantPrice
 	appliedReductions: unknown[]
+	images: { hash: string }[]
 }
 
 export interface ScaylaProductVariantPrice {

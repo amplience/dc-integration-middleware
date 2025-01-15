@@ -12,7 +12,7 @@ export const mapProduct = (product: ScayleProduct): Product | null => {
 		name: product.attributes?.name?.values?.label,
 		slug: product.referenceKey,
 		categories: product.attributes?.category?.values?.map(mapProductCategory) || [],
-		variants: product.variants?.map(mapProductVariants) || [],
+		variants: product.variants?.map((variant) => mapProductVariants({ ...variant, images: product.images })) || [],
 		shortDescription: product.attributes?.description?.values?.label,
 		longDescription: product.attributes?.description?.values?.label
 	}
@@ -41,7 +41,7 @@ export const mapProductVariants = (variant: ScaylaProductVariant): Variant => {
 			currency: variant.price?.currencyCode
 		}),
 		attributes: undefined,
-		images: undefined
+		images: [{ url: variant.images[0]?.hash?.split(',')[0] }]
 	}
 }
 

@@ -61,7 +61,11 @@ exports[`scayle integration getCategory by slug 1`] = `
         {
           "attributes": undefined,
           "id": "31",
-          "images": undefined,
+          "images": [
+            {
+              "url": "https://example/file/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg?brightness=0.96&quality=75&trim=1&height=1067&width=800",
+            },
+          ],
           "listPrice": "€2,990.00",
           "salePrice": "€2,990.00",
           "sku": "LEV0074002000005_S",
@@ -143,7 +147,11 @@ exports[`scayle integration getProduct by ID 1`] = `
     {
       "attributes": undefined,
       "id": "31",
-      "images": undefined,
+      "images": [
+        {
+          "url": "https://example/file/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg?brightness=0.96&quality=75&trim=1&height=1067&width=800",
+        },
+      ],
       "listPrice": "€2,990.00",
       "salePrice": "€2,990.00",
       "sku": "LEV0074002000005_S",
@@ -175,7 +183,11 @@ exports[`scayle integration getProducts by IDs 1`] = `
       {
         "attributes": undefined,
         "id": "1",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/cd81a5d37e4241686586812d9e179553?bg=F4F4F5&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€3,990.00",
         "salePrice": "€3,990.00",
         "sku": "THS0906008000001_S",
@@ -203,7 +215,11 @@ exports[`scayle integration getProducts by IDs 1`] = `
       {
         "attributes": undefined,
         "id": "4",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/8de1d6ebb091d7363a05bcf99a0095f3?quality=75&height=1067&width=800",
+          },
+        ],
         "listPrice": "€3,990.00",
         "salePrice": "€3,990.00",
         "sku": "THS0906006000001_S",
@@ -236,7 +252,11 @@ exports[`scayle integration getProducts by categories - paginated 1`] = `
       {
         "attributes": undefined,
         "id": "40",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/images/bc06c53f15b5a6634e10747378fc9eb7.png?bg=F4F4F5&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€32,990.00",
         "salePrice": "€32,990.00",
         "sku": "LIJ0480001000004_38",
@@ -264,7 +284,11 @@ exports[`scayle integration getProducts by categories - paginated 1`] = `
       {
         "attributes": undefined,
         "id": "37",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/38ee8cd16ca9f4e7912ec4df24d1c753?bg=F4F4F5&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€2,990.00",
         "salePrice": "€2,990.00",
         "sku": "LEV0031009000002_S",
@@ -292,7 +316,11 @@ exports[`scayle integration getProducts by categories - paginated 1`] = `
       {
         "attributes": undefined,
         "id": "34",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/6074e8f1a0b1cd81885a1769e5d0cfa1?bg=F4F4F5&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€2,990.00",
         "salePrice": "€2,990.00",
         "sku": "LEV0031001002000_S",
@@ -320,7 +348,11 @@ exports[`scayle integration getProducts by categories - paginated 1`] = `
       {
         "attributes": undefined,
         "id": "31",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg?brightness=0.96&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€2,990.00",
         "salePrice": "€2,990.00",
         "sku": "LEV0074002000005_S",
@@ -353,7 +385,11 @@ exports[`scayle integration getProducts by category id 1`] = `
       {
         "attributes": undefined,
         "id": "31",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg?brightness=0.96&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€2,990.00",
         "salePrice": "€2,990.00",
         "sku": "LEV0074002000005_S",
@@ -386,7 +422,11 @@ exports[`scayle integration getProducts by keyword - paginated 1`] = `
       {
         "attributes": undefined,
         "id": "40",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/images/bc06c53f15b5a6634e10747378fc9eb7.png?bg=F4F4F5&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€32,990.00",
         "salePrice": "€32,990.00",
         "sku": "LIJ0480001000004_38",
@@ -414,7 +454,11 @@ exports[`scayle integration getProducts by keyword - paginated 1`] = `
       {
         "attributes": undefined,
         "id": "37",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/38ee8cd16ca9f4e7912ec4df24d1c753?bg=F4F4F5&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€2,990.00",
         "salePrice": "€2,990.00",
         "sku": "LEV0031009000002_S",
@@ -442,7 +486,11 @@ exports[`scayle integration getProducts by keyword - paginated 1`] = `
       {
         "attributes": undefined,
         "id": "34",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/6074e8f1a0b1cd81885a1769e5d0cfa1?bg=F4F4F5&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€2,990.00",
         "salePrice": "€2,990.00",
         "sku": "LEV0031001002000_S",
@@ -470,7 +518,11 @@ exports[`scayle integration getProducts by keyword - paginated 1`] = `
       {
         "attributes": undefined,
         "id": "31",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg?brightness=0.96&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€2,990.00",
         "salePrice": "€2,990.00",
         "sku": "LEV0074002000005_S",
@@ -503,7 +555,11 @@ exports[`scayle integration getProducts by keyword 1`] = `
       {
         "attributes": undefined,
         "id": "31",
-        "images": undefined,
+        "images": [
+          {
+            "url": "https://example/file/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg?brightness=0.96&quality=75&trim=1&height=1067&width=800",
+          },
+        ],
         "listPrice": "€2,990.00",
         "salePrice": "€2,990.00",
         "sku": "LEV0074002000005_S",
