@@ -1,18 +1,31 @@
 import { Category, Product, Variant } from '../../../../common/types'
 import { ScaylaProductCategoryValue, ScaylaProductVariant, ScayleCategory, ScayleProduct } from './types'
 import { formatMoneyString } from '../../../../common/util'
+import { CodecPropertyConfig } from '../../core'
+import { CodecConfig } from '.'
 
-export const mapProduct = (product: ScayleProduct): Product | null => {
+export const mapProduct = (product: ScayleProduct, config: CodecPropertyConfig<CodecConfig>): Product | null => {
 	if (!product) {
 		return null
 	}
+
+	const images = product.images?.map((image) => {
+		const absUrlRegex = new RegExp('^(?:[a-z+]+:)?//', 'i')
+		const basePath = config.image_base_path
+			? config.image_base_path
+			: `https://${config.tenant_space}.cdn.aboutyou.cloud`
+
+		return {
+			url: absUrlRegex.test(image.hash) ? image.hash : `${basePath}/${image.hash}`
+		}
+	})
 
 	return {
 		id: String(product.id),
 		name: product.attributes?.name?.values?.label,
 		slug: product.referenceKey,
 		categories: product.attributes?.category?.values?.map(mapProductCategory) || [],
-		variants: product.variants?.map((variant) => mapProductVariants({ ...variant, images: product.images })) || [],
+		variants: product.variants?.map((variant) => mapProductVariants({ ...variant, images })) || [],
 		shortDescription: product.attributes?.description?.values?.label,
 		longDescription: product.attributes?.description?.values?.label
 	}
@@ -41,7 +54,7 @@ export const mapProductVariants = (variant: ScaylaProductVariant): Variant => {
 			currency: variant.price?.currencyCode
 		}),
 		attributes: undefined,
-		images: [{ url: variant.images[0]?.hash?.split(',')[0] }]
+		images: variant.images
 	}
 }
 

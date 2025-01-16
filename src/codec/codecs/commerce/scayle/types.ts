@@ -46,7 +46,7 @@ export interface ScaylaProductVariant {
 	}
 	price: ScaylaProductVariantPrice
 	appliedReductions: unknown[]
-	images: { hash: string }[]
+	images: { url: string }[]
 }
 
 export interface ScaylaProductVariantPrice {

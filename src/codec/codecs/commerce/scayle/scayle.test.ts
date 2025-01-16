@@ -14,7 +14,8 @@ const config: CodecPropertyConfig<CodecConfig> = {
 	access_token: 'test_access_token',
 	shop_id: 'test_shop_id',
 	tenant_space: 'dc-integration-middleware-test-demo',
-	api_version: 'v1'
+	api_version: 'v1',
+	image_base_path: ''
 }
 
 const assertIsProduct = (obj) => {
@@ -83,6 +84,57 @@ describe('scayle integration', () => {
 		expect(result.id).toEqual('1')
 		assertIsProduct(result)
 		expect(result).toMatchSnapshot()
+	})
+
+	test('getProduct by ID - map relative and absolute image urls', async () => {
+		nockScope
+			.get('/products')
+			.query({
+				shopId: 'test_shop_id',
+				with: 'variants,images,priceRange,attributes:key(description|name|category)',
+				ids: '1',
+				page: '1',
+				perPage: '20'
+			})
+			.reply(200, productsSingleResponse)
+
+		const result = await codec.getProduct({
+			id: '1'
+		})
+
+		expect(result.variants[0].images[0].url).toEqual(
+			'https://dc-integration-middleware-test-demo.cdn.aboutyou.cloud/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
+		)
+		expect(result.variants[0].images[1].url).toEqual(
+			'https://dc-integration-middleware-test-demo-absolute-url.cdn.aboutyou.cloud/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
+		)
+	})
+
+	test('getProduct by ID - map relative image url with base image url config', async () => {
+		const modifiedConfig: CodecPropertyConfig<CodecConfig> = {
+			...config,
+			image_base_path: 'https://dc-integration-middleware-test-demo-image-base-path.cdn.aboutyou.cloud'
+		}
+		codec = new ScayleCodec(modifiedConfig)
+		await codec.init(new ScayleCodecType())
+		nockScope
+			.get('/products')
+			.query({
+				shopId: 'test_shop_id',
+				with: 'variants,images,priceRange,attributes:key(description|name|category)',
+				ids: '1',
+				page: '1',
+				perPage: '20'
+			})
+			.reply(200, productsSingleResponse)
+
+		const result = await codec.getProduct({
+			id: '1'
+		})
+
+		expect(result.variants[0].images[0].url).toEqual(
+			'https://dc-integration-middleware-test-demo-image-base-path.cdn.aboutyou.cloud/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
+		)
 	})
 
 	test('getProduct by ID - not found', async () => {

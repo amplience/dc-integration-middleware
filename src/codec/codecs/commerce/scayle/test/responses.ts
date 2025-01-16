@@ -63,7 +63,10 @@ export const productsSingleResponse = {
 			},
 			images: [
 				{
-					hash: 'https://example/file/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg?brightness=0.96&quality=75&trim=1&height=1067&width=800,https://example/file/images/5464df73e16e82b6282309eac5588217.jpg?quality=75&height=1067&width=800,https://cdn.'
+					hash: 'images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
+				},
+				{
+					hash: 'https://dc-integration-middleware-test-demo-absolute-url.cdn.aboutyou.cloud/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
 				}
 			],
 			variants: [
@@ -194,7 +197,7 @@ export const productsMultipleResponse = {
 			},
 			images: [
 				{
-					hash: 'https://example/file/cd81a5d37e4241686586812d9e179553?bg=F4F4F5&quality=75&trim=1&height=1067&width=800,https://example/file/1c98f7fc408b9d2cca91abfbf5650df1?bg=F4F4F5&quality=75&height=1067&width=800, https://example/f'
+					hash: 'images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
 				}
 			],
 			variants: [
@@ -310,7 +313,7 @@ export const productsMultipleResponse = {
 			},
 			images: [
 				{
-					hash: 'https://example/file/8de1d6ebb091d7363a05bcf99a0095f3?quality=75&height=1067&width=800,https://example/file/1894bfbbfec69306940eb79ee3c6c8f4?bg=F4F4F5&quality=75&trim=1&height=1067&width=800,'
+					hash: 'images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
 				}
 			],
 			variants: [
@@ -441,7 +444,7 @@ export const productsFirstPageResponse = {
 			},
 			images: [
 				{
-					hash: 'https://example/file/images/bc06c53f15b5a6634e10747378fc9eb7.png?bg=F4F4F5&quality=75&trim=1&height=1067&width=800,https://example/file/images/c453b9bb1b3265d8f65a4736f7631600.png?bg=F4F4F5&quality=75&trim=1&height=1067&width=800,h'
+					hash: 'images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
 				}
 			],
 			variants: [
@@ -557,7 +560,7 @@ export const productsFirstPageResponse = {
 			},
 			images: [
 				{
-					hash: 'https://example/file/38ee8cd16ca9f4e7912ec4df24d1c753?bg=F4F4F5&quality=75&trim=1&height=1067&width=800,https://example/file/c4a36b4e67705e7de4be766e78d0a262?quality=75&height=1067&width=800,https://example/file/a95cc92'
+					hash: 'images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
 				}
 			],
 			variants: [
@@ -688,7 +691,7 @@ export const productsLastPageResponse = {
 			},
 			images: [
 				{
-					hash: 'https://example/file/6074e8f1a0b1cd81885a1769e5d0cfa1?bg=F4F4F5&quality=75&trim=1&height=1067&width=800,https://example/file/56755a972fefe61b91380e94df8481e8?quality=75&height=1067&width=800,https://example/file/4f61adf'
+					hash: 'images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
 				}
 			],
 			variants: [
@@ -804,7 +807,7 @@ export const productsLastPageResponse = {
 			},
 			images: [
 				{
-					hash: 'https://example/file/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg?brightness=0.96&quality=75&trim=1&height=1067&width=800,https://example/file/images/5464df73e16e82b6282309eac5588217.jpg?quality=75&height=1067&width=800,https://cdn.'
+					hash: 'images/68bf124a0517bffaa5fe1dc7ac8707db.jpg'
 				}
 			],
 			variants: [

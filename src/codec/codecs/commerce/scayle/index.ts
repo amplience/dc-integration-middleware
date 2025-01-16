@@ -13,6 +13,7 @@ export type CodecConfig = {
 	shop_id: StringProperty
 	tenant_space: StringProperty
 	api_version: StringProperty
+	image_base_path?: StringProperty
 }
 
 export class ScayleCodecType extends CommerceCodecType {
@@ -41,6 +42,10 @@ export class ScayleCodecType extends CommerceCodecType {
 				title: 'shop api version',
 				type: 'string',
 				minLength: 1
+			},
+			image_base_path: {
+				title: 'image base path',
+				type: 'string'
 			}
 		}
 	}
@@ -85,7 +90,7 @@ export class ScayleCodec extends CommerceCodec {
 	}
 
 	async getProducts(args: GetProductsArgs): Promise<Product[]> {
-		return (await this.getRawProducts(args)).map(mapProduct)
+		return (await this.getRawProducts(args)).map((product) => mapProduct(product, this.config))
 	}
 
 	async getRawProducts(args: GetProductsArgs): Promise<ScayleProduct[]> {
