@@ -4,6 +4,10 @@ import { formatMoneyString } from '../../../../common/util'
 import { CodecPropertyConfig } from '../../core'
 import { CodecConfig } from '.'
 
+const decimalShiftDenomination = (price: string) => {
+	return Number(price) > 0 ? Number(price) / 100 : undefined
+}
+
 export const mapProduct = (product: ScayleProduct, config: CodecPropertyConfig<CodecConfig>): Product | null => {
 	if (!product) {
 		return null
@@ -47,10 +51,10 @@ export const mapProductVariants = (variant: ScaylaProductVariant): Variant => {
 	return {
 		id: String(variant.id),
 		sku: variant.referenceKey,
-		listPrice: formatMoneyString(variant.price?.withTax, {
+		listPrice: formatMoneyString(decimalShiftDenomination(variant.price?.withTax), {
 			currency: variant.price?.currencyCode
 		}),
-		salePrice: formatMoneyString(variant.price?.withTax, {
+		salePrice: formatMoneyString(decimalShiftDenomination(variant.price?.withTax), {
 			currency: variant.price?.currencyCode
 		}),
 		attributes: {},
