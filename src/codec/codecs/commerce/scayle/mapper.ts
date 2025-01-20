@@ -53,7 +53,7 @@ export const mapProductVariants = (variant: ScaylaProductVariant): Variant => {
 		salePrice: formatMoneyString(variant.price?.withTax, {
 			currency: variant.price?.currencyCode
 		}),
-		attributes: undefined,
+		attributes: {},
 		images: variant.images
 	}
 }
