@@ -23,7 +23,7 @@ See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README
 
 ## Configuration on the vendor side
 
-The Scayle ingegration requires a "Storefront API Key", "Shop ID" and "Tenant Space".
+The Scayle integration requires a "Storefront API Key", "Shop ID" and "Tenant Space" in order to access data.
 
 ### Storefront API
 
