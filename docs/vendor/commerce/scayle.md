@@ -25,9 +25,15 @@ See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README
 
 The Scayle ingegration requires a "Storefront API Key", "Shop ID" and "Tenant Space".
 
+### Storefront API
+
 How to generate a "Storefront API Key" - [Scayle docs - Generate API Keys](https://scayle.dev/en/user-guide/settings/general/api-keys#generate-api-keys)
 
+### Shop ID
+
 How to get the "Shop ID" - [Scayle docs - Shop Country ID](https://scayle.dev/en/developer-guide/introduction/apis#country-identification)
+
+### Tenant Space
 
 The "Tenant Space" can be picked from your Scayle panel URL e.g. `https://{{tenant-space}}.panel.scayle.cloud/`
 
