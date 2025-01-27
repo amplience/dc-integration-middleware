@@ -5,12 +5,13 @@ export interface ScayleProduct {
 	attributes: ScayleProductAttibutes
 	variants: ScaylaProductVariant[]
 	images: { hash: string }[]
+	categories: ScaylaProductCategory[][]
 }
 
 export interface ScayleProductAttibutes {
 	name: ScayleProductAttribute
 	description: ScayleProductAttribute
-	category: ScaylaProductCategory
+	category: ScaylaProductAttributeCategory
 	images: { hash: string }[]
 	customData: Record<string, unknown>
 }
@@ -23,6 +24,15 @@ export interface ScayleProductAttribute {
 }
 
 export interface ScaylaProductCategory {
+	categoryId: number
+	categoryName: string
+	categorySlug: string
+	categoryUrl: string
+	categoryHidden: string
+	categoryProperties: unknown[]
+}
+
+export interface ScaylaProductAttributeCategory {
 	id: number
 	key: string
 	values: ScaylaProductCategoryValue[]

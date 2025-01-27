@@ -127,6 +127,18 @@ export const productsSingleResponse = {
 					appliedReductions: []
 				}
 			},
+			categories: [
+				[
+					{
+						categoryId: 32,
+						categoryName: 'test-category',
+						categorySlug: 'test-category',
+						categoryUrl: '/test-category',
+						categoryHidden: false,
+						categoryProperties: []
+					}
+				]
+			],
 			customData: {}
 		}
 	]
@@ -258,6 +270,18 @@ export const productsMultipleResponse = {
 					appliedReductions: []
 				}
 			},
+			categories: [
+				[
+					{
+						categoryId: 32,
+						categoryName: 'test-category',
+						categorySlug: 'test-category',
+						categoryUrl: '/test-category',
+						categoryHidden: false,
+						categoryProperties: []
+					}
+				]
+			],
 			customData: {}
 		},
 		{
@@ -374,6 +398,18 @@ export const productsMultipleResponse = {
 					appliedReductions: []
 				}
 			},
+			categories: [
+				[
+					{
+						categoryId: 32,
+						categoryName: 'test-category',
+						categorySlug: 'test-category',
+						categoryUrl: '/test-category',
+						categoryHidden: false,
+						categoryProperties: []
+					}
+				]
+			],
 			customData: {}
 		}
 	]
@@ -505,6 +541,18 @@ export const productsFirstPageResponse = {
 					appliedReductions: []
 				}
 			},
+			categories: [
+				[
+					{
+						categoryId: 32,
+						categoryName: 'test-category',
+						categorySlug: 'test-category',
+						categoryUrl: '/test-category',
+						categoryHidden: false,
+						categoryProperties: []
+					}
+				]
+			],
 			customData: {}
 		},
 		{
@@ -621,6 +669,18 @@ export const productsFirstPageResponse = {
 					appliedReductions: []
 				}
 			},
+			categories: [
+				[
+					{
+						categoryId: 32,
+						categoryName: 'test-category',
+						categorySlug: 'test-category',
+						categoryUrl: '/test-category',
+						categoryHidden: false,
+						categoryProperties: []
+					}
+				]
+			],
 			customData: {}
 		}
 	]
@@ -752,6 +812,18 @@ export const productsLastPageResponse = {
 					appliedReductions: []
 				}
 			},
+			categories: [
+				[
+					{
+						categoryId: 32,
+						categoryName: 'test-category',
+						categorySlug: 'test-category',
+						categoryUrl: '/test-category',
+						categoryHidden: false,
+						categoryProperties: []
+					}
+				]
+			],
 			customData: {}
 		},
 		{
@@ -868,6 +940,18 @@ export const productsLastPageResponse = {
 					appliedReductions: []
 				}
 			},
+			categories: [
+				[
+					{
+						categoryId: 32,
+						categoryName: 'test-category',
+						categorySlug: 'test-category',
+						categoryUrl: '/test-category',
+						categoryHidden: false,
+						categoryProperties: []
+					}
+				]
+			],
 			customData: {}
 		}
 	]
