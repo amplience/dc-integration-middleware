@@ -43,7 +43,7 @@ The integration middleware uses Scayle's [Storefront API](https://scayle.dev/en/
 
 ## How we map data
 
-To maintain consistent response types we map data returned from Scayle APIs. The following documents what Scayle API proerties get mapped to their respective integration properties.
+To maintain consistent response types we map data returned from Scayle APIs. The following documents what Scayle API properties get mapped to their respective integration properties.
 
 Example product integrations response item:
 
@@ -87,7 +87,7 @@ Examples category response item:
 
 ### Product & Product Variants mapping
 
-We use Scayles [Storefront API - List Products](https://scayle.dev/en/api-guides/storefront-api/resources/products/list-products) to map products:
+We use Scayle's [Storefront API - List Products](https://scayle.dev/en/api-guides/storefront-api/resources/products/list-products) to map products:
 
 | Integration product   | Scayle product                      | Notes                            |
 | --------------------- | ----------------------------------- | -------------------------------- |
