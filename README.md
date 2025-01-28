@@ -34,8 +34,8 @@ The `CommerceAPI` interface exposes these methods:
 
 |  |	SFCC | Big Commerce | Commercetools | Shopify | Scayle |REST |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| products | ✅ | ✅  | ✅  | ✅  | ✅  | ✅  |
-| categories | ✅  | ✅  | ✅  | ✅  | ✅  | ✅  |
+| products | ✅ | ✅  | ✅  | ✅  | ❌  | ✅  |
+| categories | ✅  | ✅  | ✅  | ✅  | ❌  | ✅  |
 | user segments | ✅  | ❌  | ✅  | ❌   | ❌  | ✅  |
 
 Concrete implementations of this interface are referred to as `Codec`s and are located in `src/codec/codecs`. Platform-specific e-Commerce implementations are found in `src/codec/codecs/commerce`.
