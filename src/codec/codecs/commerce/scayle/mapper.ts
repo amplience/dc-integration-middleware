@@ -1,5 +1,5 @@
 import { Category, Product, Variant } from '../../../../common/types'
-import { ScaylaProductCategory, ScaylaProductVariant, ScayleCategory, ScayleProduct } from './types'
+import { ScayleProductCategory, ScayleProductVariant, ScayleCategory, ScayleProduct } from './types'
 import { formatMoneyString } from '../../../../common/util'
 import { CodecPropertyConfig } from '../../core'
 import { CodecConfig } from '.'
@@ -35,7 +35,7 @@ export const mapProduct = (product: ScayleProduct, config: CodecPropertyConfig<C
 	}
 }
 
-export const mapProductCategories = (category: ScaylaProductCategory): Category => {
+export const mapProductCategories = (category: ScayleProductCategory): Category => {
 	return {
 		id: String(category.categoryId),
 		slug: category.categorySlug,
@@ -47,7 +47,7 @@ export const mapProductCategories = (category: ScaylaProductCategory): Category 
 	}
 }
 
-export const mapProductVariants = (variant: ScaylaProductVariant): Variant => {
+export const mapProductVariants = (variant: ScayleProductVariant): Variant => {
 	return {
 		id: String(variant.id),
 		sku: variant.referenceKey,
