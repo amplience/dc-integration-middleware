@@ -1,5 +1,5 @@
 import { Category, Product, Variant } from '../../../../common/types'
-import { ScaylaProductCategoryValue, ScaylaProductVariant, ScayleCategory, ScayleProduct } from './types'
+import { ScayleProductCategory, ScayleProductVariant, ScayleCategory, ScayleProduct } from './types'
 import { formatMoneyString } from '../../../../common/util'
 import { CodecPropertyConfig } from '../../core'
 import { CodecConfig } from '.'
@@ -28,26 +28,26 @@ export const mapProduct = (product: ScayleProduct, config: CodecPropertyConfig<C
 		id: String(product.id),
 		name: product.attributes?.name?.values?.label,
 		slug: product.referenceKey,
-		categories: product.attributes?.category?.values?.map(mapProductCategory) || [],
+		categories: product.categories?.flat()?.map(mapProductCategories) || [],
 		variants: product.variants?.map((variant) => mapProductVariants({ ...variant, images })) || [],
 		shortDescription: product.attributes?.description?.values?.label,
 		longDescription: product.attributes?.description?.values?.label
 	}
 }
 
-export const mapProductCategory = (categoryValue: ScaylaProductCategoryValue): Category => {
+export const mapProductCategories = (category: ScayleProductCategory): Category => {
 	return {
-		id: String(categoryValue.id),
-		slug: undefined,
-		name: categoryValue.label,
+		id: String(category.categoryId),
+		slug: category.categorySlug,
+		name: category.categoryName,
 		image: undefined,
 		children: [],
 		products: [],
-		showInMenu: true
+		showInMenu: !category.categoryHidden
 	}
 }
 
-export const mapProductVariants = (variant: ScaylaProductVariant): Variant => {
+export const mapProductVariants = (variant: ScayleProductVariant): Variant => {
 	return {
 		id: String(variant.id),
 		sku: variant.referenceKey,

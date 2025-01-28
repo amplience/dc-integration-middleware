@@ -3,14 +3,15 @@ export interface ScayleProduct {
 	masterKey: string
 	referenceKey: string
 	attributes: ScayleProductAttibutes
-	variants: ScaylaProductVariant[]
+	variants: ScayleProductVariant[]
 	images: { hash: string }[]
+	categories: ScayleProductCategory[][]
 }
 
 export interface ScayleProductAttibutes {
 	name: ScayleProductAttribute
 	description: ScayleProductAttribute
-	category: ScaylaProductCategory
+	category: ScayleProductAttributeCategory
 	images: { hash: string }[]
 	customData: Record<string, unknown>
 }
@@ -22,19 +23,28 @@ export interface ScayleProductAttribute {
 	}
 }
 
-export interface ScaylaProductCategory {
-	id: number
-	key: string
-	values: ScaylaProductCategoryValue[]
+export interface ScayleProductCategory {
+	categoryId: number
+	categoryName: string
+	categorySlug: string
+	categoryUrl: string
+	categoryHidden: string
+	categoryProperties: unknown[]
 }
 
-export interface ScaylaProductCategoryValue {
+export interface ScayleProductAttributeCategory {
+	id: number
+	key: string
+	values: ScayleProductCategoryValue[]
+}
+
+export interface ScayleProductCategoryValue {
 	id: number
 	label: string
 	value: string
 }
 
-export interface ScaylaProductVariant {
+export interface ScayleProductVariant {
 	id: number
 	referenceKey: string
 	stock: {
@@ -44,12 +54,12 @@ export interface ScaylaProductVariant {
 		isSellableWithoutStock: boolean
 		expectedAvailabilityAt: unknown
 	}
-	price: ScaylaProductVariantPrice
+	price: ScayleProductVariantPrice
 	appliedReductions: unknown[]
 	images: { url: string }[]
 }
 
-export interface ScaylaProductVariantPrice {
+export interface ScayleProductVariantPrice {
 	currencyCode: string
 	withTax: string
 	withoutTax: number
