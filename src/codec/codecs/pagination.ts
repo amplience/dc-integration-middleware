@@ -3,9 +3,9 @@ import { AxiosRequestConfig, AxiosStatic } from 'axios'
 import { logResponse } from './common'
 import { Paginated } from '../../common/graphql'
 
-export type GetPageResultCursor<T> = { data: T[], hasNext: boolean, nextCursor?: string, total?: number }
+export type GetPageResultCursor<T> = { data: T[]; hasNext: boolean; nextCursor?: string; total?: number }
 
-type GetPageResult<T> = { data: T[], total: number }
+type GetPageResult<T> = { data: T[]; total: number }
 type PropMapper = <T>(data: any) => T
 type StringPropMapper = string | PropMapper
 
@@ -20,7 +20,7 @@ function applyParams(url: string, params: any): string {
 
 	if (isRelative) {
 		// TODO: better solution?
-		url = 'http://a'+ url
+		url = 'http://a' + url
 	}
 
 	const urlObj = new URL(url)
@@ -59,11 +59,16 @@ function getPropMapper(mapper: StringPropMapper): PropMapper {
  * @param resultProp Property to extract result items from
  * @returns A generator that takes a client, url and base params and generates a function that gets a page.
  */
-export function getPageByQuery(offsetQuery: string, countQuery: string, totalProp: StringPropMapper, resultProp: StringPropMapper) {
+export function getPageByQuery(
+	offsetQuery: string,
+	countQuery: string,
+	totalProp: StringPropMapper,
+	resultProp: StringPropMapper
+) {
 	const totalPropMap = getPropMapper(totalProp)
 	const resultPropMap = getPropMapper(resultProp)
 
-	return <T>(client: OAuthRestClientInterface, url: string, params: any = {}) => 
+	return <T>(client: OAuthRestClientInterface, url: string, params: any = {}) =>
 		async (page: number, pageSize: number): Promise<GetPageResult<T>> => {
 			const allParams = {
 				...params,
@@ -73,7 +78,7 @@ export function getPageByQuery(offsetQuery: string, countQuery: string, totalPro
 
 			const newUrl = applyParams(url, allParams)
 
-			const response = await client.get({url: newUrl})
+			const response = await client.get({ url: newUrl })
 
 			logResponse('get', newUrl, response)
 
@@ -100,11 +105,17 @@ export function getPageByQuery(offsetQuery: string, countQuery: string, totalPro
  * @param offsetFunc Function for getting the offset from the page number and size
  * @returns A generator that takes a client, url and base params and generates a function that gets a page.
  */
-export function getPageByQueryAxios(offsetQuery: string, countQuery: string, totalProp: StringPropMapper, resultProp: StringPropMapper, offsetFunc?: (page: number, pageSize: number) => number) {
+export function getPageByQueryAxios(
+	offsetQuery: string,
+	countQuery: string,
+	totalProp: StringPropMapper,
+	resultProp: StringPropMapper,
+	offsetFunc?: (page: number, pageSize: number) => number
+) {
 	const totalPropMap = getPropMapper(totalProp)
 	const resultPropMap = getPropMapper(resultProp)
 
-	return <T>(axios: AxiosStatic, url: string, config: AxiosRequestConfig<any>, params: any = {}) => 
+	return <T>(axios: AxiosStatic, url: string, config: AxiosRequestConfig<any>, params: any = {}) =>
 		async (page: number, pageSize: number): Promise<GetPageResult<T>> => {
 			const allParams = {
 				...params,
@@ -141,12 +152,7 @@ export async function paginateArgs<T>(
 	const pageNum = Number(args.pageNum ?? 0)
 	const pageCount = args.pageCount == null ? args.pageCount : Number(args.pageCount)
 
-	const {result, total} = await paginate(
-		requestPage,
-		pageSize,
-		pageNum,
-		pageCount
-	)
+	const { result, total } = await paginate(requestPage, pageSize, pageNum, pageCount)
 
 	args.pageSize = pageSize
 	args.pageNum = pageNum
@@ -169,7 +175,7 @@ export const paginate = async <T>(
 	pageSize = 20,
 	pageNum = 0,
 	pageCount?: number
-): Promise<{result: T[], total: number}> => {
+): Promise<{ result: T[]; total: number }> => {
 	const result: T[] = []
 
 	if (pageCount === undefined) {
@@ -182,9 +188,9 @@ export const paginate = async <T>(
 	let finalTotal = 0
 
 	for (let i = 0; i < pageCount; i++) {
-		const {data, total} = await requestPage(pageNum + i, pageSize)
+		const { data, total } = await requestPage(pageNum + i, pageSize)
 		finalTotal = total
-		
+
 		// There's a possibility that the implementation has returned more than one page.
 		// Allow multiple pages to be completed at a time.
 		const pagesReturned = Math.floor(data.length / pageSize)
@@ -196,11 +202,11 @@ export const paginate = async <T>(
 			i += pagesReturned - 1
 		}
 
-		const targetMin = Math.min(total - startOffset, targetCount)
+		const targetMin = Math.min(Math.max(0, total - startOffset), targetCount)
 		const end = targetMin - result.length
 		const toAdd = Math.min(dataCount, end)
 
-		result.push(...(data.slice(0, toAdd)))
+		result.push(...data.slice(0, toAdd))
 
 		if (result.length === targetMin) {
 			break
@@ -239,7 +245,7 @@ export async function paginateCursorArgs<T>(
 
 	// We might need to get additional pages to catch up to the requested page.
 	const fetchedExtra = cursorPage < pageNum
-	const pageCount = argsPageCount == null ? null : (fetchedExtra ? (pageNum - cursorPage) + argsPageCount : argsPageCount)
+	const pageCount = argsPageCount == null ? null : fetchedExtra ? pageNum - cursorPage + argsPageCount : argsPageCount
 
 	const resultCursor = await paginateCursor(requestPage, pageSize, cursor, pageCount)
 
@@ -247,10 +253,10 @@ export async function paginateCursorArgs<T>(
 		resultCursor.data = resultCursor.data.slice((pageNum - cursorPage) * pageSize)
 	}
 
-	args.total = resultCursor.total ?? (resultCursor.hasNext ? undefined : (pageNum * pageSize + resultCursor.data.length))
+	args.total = resultCursor.total ?? (resultCursor.hasNext ? undefined : pageNum * pageSize + resultCursor.data.length)
 	args.pageSize = pageSize
 	args.cursor = resultCursor.nextCursor
-	args.cursorPage = (argsPageCount != null) ? pageNum + argsPageCount : undefined
+	args.cursorPage = argsPageCount != null ? pageNum + argsPageCount : undefined
 
 	return resultCursor
 }
@@ -280,7 +286,7 @@ export const paginateCursor = async <T>(
 	let finalTotal: number | undefined = undefined
 
 	for (let i = 0; i < pageCount; i++) {
-		const {data, hasNext, nextCursor, total} = await requestPage(cursor, pageSize)
+		const { data, hasNext, nextCursor, total } = await requestPage(cursor, pageSize)
 		finalTotal = total
 
 		const dataCount = data.length
@@ -288,7 +294,7 @@ export const paginateCursor = async <T>(
 		const end = targetCount - result.length
 		const toAdd = Math.min(dataCount, end)
 
-		result.push(...(data.slice(0, toAdd)))
+		result.push(...data.slice(0, toAdd))
 
 		cursor = nextCursor
 
@@ -299,9 +305,7 @@ export const paginateCursor = async <T>(
 				nextCursor: cursor,
 				total
 			}
-		}
-		else if (result.length === targetCount)
-		{
+		} else if (result.length === targetCount) {
 			break
 		}
 	}
@@ -352,7 +356,7 @@ export function paginateBlankArgs<T>(args: PaginationArgs): T[] {
 	return []
 }
 
-type GqlRequestMethod = <T>(query: string, variables: any, isAdmin?: boolean) => Promise<T>;
+type GqlRequestMethod = <T>(query: string, variables: any, isAdmin?: boolean) => Promise<T>
 
 /**
  * Generate a function that gets a page from a GraphQL API.
@@ -362,16 +366,22 @@ type GqlRequestMethod = <T>(query: string, variables: any, isAdmin?: boolean) =>
  * @param isAdmin Whether the admin credentials must be used or not
  * @returns A function that gets a page from a cursor and pageSize.
  */
-export function getPageGql<T, T2>(gqlRequest: GqlRequestMethod, query: string, variables: any, getPaginated: (response: T) => Paginated<T2>, isAdmin = false) {
+export function getPageGql<T, T2>(
+	gqlRequest: GqlRequestMethod,
+	query: string,
+	variables: any,
+	getPaginated: (response: T) => Paginated<T2>,
+	isAdmin = false
+) {
 	return async (cursor: string | undefined, pageSize: number): Promise<GetPageResultCursor<T2>> => {
-		const result = await gqlRequest<T>(query, {...variables, pageSize, after: cursor}, isAdmin)
+		const result = await gqlRequest<T>(query, { ...variables, pageSize, after: cursor }, isAdmin)
 		const paginated = getPaginated(result)
 
 		if (paginated.edges.length > pageSize) {
 			paginated.edges = paginated.edges.slice(0, pageSize)
-			
+
 			return {
-				data: paginated.edges.map(edge => edge.node),
+				data: paginated.edges.map((edge) => edge.node),
 				nextCursor: paginated.edges[paginated.edges.length - 1].cursor,
 				total: paginated.collectionInfo?.totalItems,
 				hasNext: true
@@ -379,7 +389,7 @@ export function getPageGql<T, T2>(gqlRequest: GqlRequestMethod, query: string, v
 		}
 
 		return {
-			data: paginated.edges.map(edge => edge.node),
+			data: paginated.edges.map((edge) => edge.node),
 			nextCursor: paginated.pageInfo.endCursor,
 			hasNext: paginated.pageInfo.hasNextPage,
 			total: paginated.collectionInfo?.totalItems
