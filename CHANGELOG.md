@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/amplience/dc-integration-middleware/compare/v2.3.1...v2.4.0) (2025-01-28)
+
+
+### Features
+
+* adding scayle middleware integration ([#13](https://github.com/amplience/dc-integration-middleware/issues/13)) ([660c658](https://github.com/amplience/dc-integration-middleware/commit/660c658218c1178d68ace1057514245172a9f156))
+
 ## [2.3.1](https://github.com/amplience/dc-integration-middleware/compare/v2.3.0...v2.3.1) (2024-05-08)
 
 
