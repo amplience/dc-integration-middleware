@@ -166,6 +166,44 @@ exports[`scayle integration getProduct by ID 1`] = `
 }
 `;
 
+exports[`scayle integration getProduct by ID using base url override 1`] = `
+{
+  "categories": [
+    {
+      "children": [],
+      "id": "32",
+      "image": undefined,
+      "name": "test-category",
+      "products": [],
+      "showInMenu": true,
+      "slug": "test-category",
+    },
+  ],
+  "id": "1",
+  "longDescription": "",
+  "name": "Leviz T-Shirt",
+  "shortDescription": "",
+  "slug": "LEV0074002000005",
+  "variants": [
+    {
+      "attributes": {},
+      "id": "31",
+      "images": [
+        {
+          "url": "https://dc-integration-middleware-test-demo.cdn.aboutyou.cloud/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg",
+        },
+        {
+          "url": "https://dc-integration-middleware-test-demo-absolute-url.cdn.aboutyou.cloud/images/68bf124a0517bffaa5fe1dc7ac8707db.jpg",
+        },
+      ],
+      "listPrice": "€29.90",
+      "salePrice": "€29.90",
+      "sku": "LEV0074002000005_S",
+    },
+  ],
+}
+`;
+
 exports[`scayle integration getProducts by IDs 1`] = `
 [
   {

@@ -16,7 +16,8 @@ See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README
 		"shop_id": "<shop_id>",
 		"tenant_space": "<tenant_space>",
 		"api_version": "v1",
-		"image_base_path": ""
+		"image_base_path": "",
+		"api_base_url": ""
 	}
 }
 ```
@@ -25,17 +26,31 @@ See the [CORS](../../../README.md#cors-support-table) / [Server](../../../README
 
 The Scayle integration requires a "Storefront API Key", "Shop ID" and "Tenant Space" in order to access data.
 
-### Storefront API
+### Storefront API `access_token`
 
-How to generate a "Storefront API Key" - [Scayle docs - Generate API Keys](https://scayle.dev/en/user-guide/settings/general/api-keys#generate-api-keys)
+How to generate a "Storefront API Key" (access_token) - [Scayle docs - Generate API Keys](https://scayle.dev/en/user-guide/settings/general/api-keys#generate-api-keys)
 
-### Shop ID
+### Shop ID `shop_id`
 
 How to get the "Shop ID" - [Scayle docs - Shop Country ID](https://scayle.dev/en/developer-guide/introduction/apis#country-identification)
 
-### Tenant Space
+### Tenant Space `tenant_space`
 
 The "Tenant Space" can be picked from your Scayle panel URL e.g. `https://{{tenant-space}}.panel.scayle.cloud/`
+
+## Optional configuration
+
+### API Version `api_version`
+
+Overrides the default api version (default = `v1`)
+
+### Image Base Path `image_base_path`
+
+Overrides the default image path used to create image urls
+
+### API Base URL `api_base_url`
+
+Overrides the default Storefront API base URL
 
 ## Scayle API integration
 
