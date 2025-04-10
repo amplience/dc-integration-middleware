@@ -14,8 +14,7 @@ const config: CodecPropertyConfig<CodecConfig> = {
 	access_token: 'test_access_token',
 	shop_id: 'test_shop_id',
 	tenant_space: 'dc-integration-middleware-test-demo',
-	api_version: 'v1',
-	image_base_path: ''
+	api_version: 'v1'
 }
 
 const assertIsProduct = (obj) => {
@@ -48,6 +47,7 @@ const assertIsCategory = (obj) => {
 describe('scayle integration', () => {
 	let codec: CommerceCodec
 	let nockScope: Scope
+	let nockScopeBaseUrlOverride: Scope
 
 	beforeAll(async () => {
 		nock.disableNetConnect()
@@ -61,6 +61,7 @@ describe('scayle integration', () => {
 		jest.resetAllMocks()
 
 		nockScope = nock('https://dc-integration-middleware-test-demo.storefront.api.scayle.cloud/v1')
+		nockScopeBaseUrlOverride = nock('https://test-storefront-custom-base-api.scayle.cloud')
 		codec = new ScayleCodec(config)
 		await codec.init(new ScayleCodecType())
 	})
@@ -78,6 +79,32 @@ describe('scayle integration', () => {
 			.reply(200, productsSingleResponse)
 
 		const result = await codec.getProduct({
+			id: '1'
+		})
+
+		expect(result.id).toEqual('1')
+		assertIsProduct(result)
+		expect(result).toMatchSnapshot()
+	})
+
+	test('getProduct by ID using base url override', async () => {
+		nockScopeBaseUrlOverride
+			.get('/products')
+			.query({
+				shopId: 'test_shop_id',
+				with: 'variants,images,priceRange,attributes:key(description|name|category)',
+				ids: '1',
+				page: '1',
+				perPage: '20'
+			})
+			.reply(200, productsSingleResponse)
+
+		const modifiedConfig: CodecPropertyConfig<CodecConfig> = {
+			...config,
+			api_base_url: 'https://test-storefront-custom-base-api.scayle.cloud'
+		}
+		const codecBaseUrlOverride = new ScayleCodec(modifiedConfig)
+		const result = await codecBaseUrlOverride.getProduct({
 			id: '1'
 		})
 

@@ -14,6 +14,7 @@ export type CodecConfig = {
 	tenant_space: StringProperty
 	api_version: StringProperty
 	image_base_path?: StringProperty
+	api_base_url?: StringProperty
 }
 
 export class ScayleCodecType extends CommerceCodecType {
@@ -46,6 +47,10 @@ export class ScayleCodecType extends CommerceCodecType {
 			image_base_path: {
 				title: 'image base path',
 				type: 'string'
+			},
+			api_base_url: {
+				title: 'api base url override',
+				type: 'string'
 			}
 		}
 	}
@@ -73,7 +78,9 @@ export class ScayleCodec extends CommerceCodec {
 	getAxiosConfig() {
 		return {
 			method: 'get',
-			baseURL: `https://${this.config.tenant_space}.storefront.api.scayle.cloud/${this.config.api_version}`,
+			baseURL:
+				this.config.api_base_url ||
+				`https://${this.config.tenant_space}.storefront.api.scayle.cloud/${this.config.api_version}`,
 			headers: {
 				'X-Access-Token': this.config.access_token,
 				Accept: 'application/json',
