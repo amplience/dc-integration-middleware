@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/amplience/dc-integration-middleware/compare/v2.4.0...v2.5.0) (2025-04-10)
+
+
+### Features
+
+* option to override scayle storefront api base url ([#19](https://github.com/amplience/dc-integration-middleware/issues/19)) ([76088f2](https://github.com/amplience/dc-integration-middleware/commit/76088f2d4dc5462ba8b9624d401860036a85f56e))
+
 ## [2.4.0](https://github.com/amplience/dc-integration-middleware/compare/v2.3.1...v2.4.0) (2025-01-28)
 
 
