@@ -75,6 +75,7 @@ export const mapVariant = (variant: ShopifyVariant, sharedImages: ShopifyImage[]
 		salePrice: mapPrice(variant.compareAtPrice ?? variant.price ?? variant.unitPrice),
 		attributes: attributes,
 		images: (variant.image ? [...sharedImages, variant.image] : sharedImages).map(mapImage)
+		//images: sharedImages.map(mapImage)
 	}
 }
 
@@ -87,7 +88,7 @@ export const mapProduct = (product: ShopifyProduct | null): Product | null => {
 	if (product == null) return null
 
 	const sharedImages = product.images.edges
-		.filter((image) => product.variants.edges.findIndex((variant) => variant.node.image.id === image.node.id) === -1)
+		//.filter((image) => product.variants.edges.findIndex((variant) => variant.node.image.id === image.node.id) === -1)
 		.map((edge) => edge.node)
 
 	return {
