@@ -68,14 +68,17 @@ export const mapVariant = (variant: ShopifyVariant, sharedImages: ShopifyImage[]
 		attributes[option.name] = option.value
 	}
 
+	const uniqueImages = variant.image
+		? [...new Map(sharedImages.map((image) => [image.id, image])).values()]
+		: sharedImages
+
 	return {
 		id: extractID(variant.id),
 		sku: variant.sku,
 		listPrice: mapPrice(variant.price ?? variant.unitPrice),
 		salePrice: mapPrice(variant.compareAtPrice ?? variant.price ?? variant.unitPrice),
 		attributes: attributes,
-		images: (variant.image ? [...sharedImages, variant.image] : sharedImages).map(mapImage)
-		//images: sharedImages.map(mapImage)
+		images: uniqueImages.map(mapImage)
 	}
 }
 
@@ -87,9 +90,7 @@ export const mapVariant = (variant: ShopifyVariant, sharedImages: ShopifyImage[]
 export const mapProduct = (product: ShopifyProduct | null): Product | null => {
 	if (product == null) return null
 
-	const sharedImages = product.images.edges
-		//.filter((image) => product.variants.edges.findIndex((variant) => variant.node.image.id === image.node.id) === -1)
-		.map((edge) => edge.node)
+	const sharedImages = product.images.edges.map((edge) => edge.node)
 
 	return {
 		id: extractID(product.id),
