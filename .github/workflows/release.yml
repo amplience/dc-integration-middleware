@@ -8,13 +8,14 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  id-token: write
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         id: release
         with:
           release-type: node
@@ -33,11 +34,9 @@ jobs:
       - name: Install & build
         if: ${{ steps.release.outputs.release_created }}
         run: |
-          npm ci
+          npm ci --ignore-scripts
           npm run build --if-present
 
       - name: Publish to npm
         if: ${{ steps.release.outputs.release_created }}
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

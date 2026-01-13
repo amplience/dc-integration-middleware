@@ -1,19 +1,6 @@
-import { 
-	Category, 
-	CustomerGroup, 
-	Product, 
-	Variant,
-	Image
-} from '../../../../common/types'
+import { Category, CustomerGroup, Product, Variant, Image } from '../../../../common/types'
 import { formatMoneyString } from '../../../../common/util'
-import { 
-	ShopifyCollection, 
-	ShopifyImage, 
-	ShopifyPrice, 
-	ShopifyProduct, 
-	ShopifySegment, 
-	ShopifyVariant 
-} from './types'
+import { ShopifyCollection, ShopifyImage, ShopifyPrice, ShopifyProduct, ShopifySegment, ShopifyVariant } from './types'
 import { Dictionary } from 'lodash'
 
 /**
@@ -61,11 +48,12 @@ export const mapCategory = (collection: ShopifyCollection): Category => {
  * @param image The Shopify image
  * @returns The common image
  */
-export const mapImage = (image: ShopifyImage): Image => ({
-	id: extractID(image.id),
-	url: image.url,
-	altText: image.altText
-} as Image)
+export const mapImage = (image: ShopifyImage): Image =>
+	({
+		id: extractID(image.id),
+		url: image.url,
+		altText: image.altText
+	}) as Image
 
 /**
  * Map a Shopify product variant to the common product variant type.
@@ -79,14 +67,18 @@ export const mapVariant = (variant: ShopifyVariant, sharedImages: ShopifyImage[]
 	for (const option of variant.selectedOptions) {
 		attributes[option.name] = option.value
 	}
-	
+
+	const uniqueImages = variant.image
+		? [...new Map(sharedImages.map((image) => [image.id, image])).values()]
+		: sharedImages
+
 	return {
 		id: extractID(variant.id),
 		sku: variant.sku,
 		listPrice: mapPrice(variant.price ?? variant.unitPrice),
 		salePrice: mapPrice(variant.compareAtPrice ?? variant.price ?? variant.unitPrice),
 		attributes: attributes,
-		images: (variant.image ? [variant.image, ...sharedImages] : sharedImages).map(mapImage)
+		images: uniqueImages.map(mapImage)
 	}
 }
 
@@ -98,16 +90,14 @@ export const mapVariant = (variant: ShopifyVariant, sharedImages: ShopifyImage[]
 export const mapProduct = (product: ShopifyProduct | null): Product | null => {
 	if (product == null) return null
 
-	const sharedImages = product.images.edges.filter(image => 
-		product.variants.edges.findIndex(variant => variant.node.image.id === image.node.id) === -1
-	).map(edge => edge.node)
+	const sharedImages = product.images.edges.map((edge) => edge.node)
 
 	return {
 		id: extractID(product.id),
 		name: product.title,
 		slug: product.handle,
-		categories: product.collections.edges.map(collection => mapCategory(collection.node)),
-		variants: product.variants.edges.map(variant => mapVariant(variant.node, sharedImages)),
+		categories: product.collections.edges.map((collection) => mapCategory(collection.node)),
+		variants: product.variants.edges.map((variant) => mapVariant(variant.node, sharedImages)),
 		shortDescription: product.description,
 		longDescription: product.description
 	}
