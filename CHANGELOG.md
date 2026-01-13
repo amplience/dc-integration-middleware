@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/amplience/dc-integration-middleware/compare/v2.5.0...v3.0.0) (2026-01-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* prioritise main shopify images ([#21](https://github.com/amplience/dc-integration-middleware/issues/21))
+
+### Features
+
+* prioritise main shopify images ([#21](https://github.com/amplience/dc-integration-middleware/issues/21)) ([493a71b](https://github.com/amplience/dc-integration-middleware/commit/493a71ba100a25e2672c8f85c01473980dc14315))
+
 ## [2.5.0](https://github.com/amplience/dc-integration-middleware/compare/v2.4.0...v2.5.0) (2025-04-10)
 
 
